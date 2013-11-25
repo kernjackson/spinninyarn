@@ -22,6 +22,13 @@
 		489185AD1843EA8900D66EE6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4891858C1843EA8900D66EE6 /* UIKit.framework */; };
 		489185B51843EA8900D66EE6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 489185B31843EA8900D66EE6 /* InfoPlist.strings */; };
 		489185B71843EA8900D66EE6 /* spinninyarnTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185B61843EA8900D66EE6 /* spinninyarnTests.m */; };
+		489185C61843F10600D66EE6 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185C51843F10600D66EE6 /* MenuViewController.m */; };
+		489185C91843F11300D66EE6 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185C81843F11300D66EE6 /* SettingsViewController.m */; };
+		489185D01843F1AC00D66EE6 /* SolitaireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185CF1843F1AC00D66EE6 /* SolitaireViewController.m */; };
+		489185D31843F33100D66EE6 /* Singleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185D21843F33100D66EE6 /* Singleton.m */; };
+		489185D41843F33100D66EE6 /* Singleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185D21843F33100D66EE6 /* Singleton.m */; };
+		489185D81843F62C00D66EE6 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185D71843F62C00D66EE6 /* Settings.m */; };
+		489185D91843F62C00D66EE6 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185D71843F62C00D66EE6 /* Settings.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +62,16 @@
 		489185B21843EA8900D66EE6 /* spinninyarnTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "spinninyarnTests-Info.plist"; sourceTree = "<group>"; };
 		489185B41843EA8900D66EE6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		489185B61843EA8900D66EE6 /* spinninyarnTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = spinninyarnTests.m; sourceTree = "<group>"; };
+		489185C41843F10600D66EE6 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuViewController.h; path = Controllers/MenuViewController.h; sourceTree = "<group>"; };
+		489185C51843F10600D66EE6 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuViewController.m; path = Controllers/MenuViewController.m; sourceTree = "<group>"; };
+		489185C71843F11300D66EE6 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = Controllers/SettingsViewController.h; sourceTree = "<group>"; };
+		489185C81843F11300D66EE6 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = Controllers/SettingsViewController.m; sourceTree = "<group>"; };
+		489185CE1843F1AC00D66EE6 /* SolitaireViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SolitaireViewController.h; path = Controllers/SolitaireViewController.h; sourceTree = "<group>"; };
+		489185CF1843F1AC00D66EE6 /* SolitaireViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SolitaireViewController.m; path = Controllers/SolitaireViewController.m; sourceTree = "<group>"; };
+		489185D11843F33100D66EE6 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
+		489185D21843F33100D66EE6 /* Singleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Singleton.m; sourceTree = "<group>"; };
+		489185D61843F62C00D66EE6 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Settings.h; path = spinninyarn/Model/Settings.h; sourceTree = "<group>"; };
+		489185D71843F62C00D66EE6 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Settings.m; path = spinninyarn/Model/Settings.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +101,8 @@
 		4891857C1843EA8900D66EE6 = {
 			isa = PBXGroup;
 			children = (
+				489185D51843F3BD00D66EE6 /* Model */,
+				489185CA1843F11600D66EE6 /* Controllers */,
 				4891858E1843EA8900D66EE6 /* spinninyarn */,
 				489185B01843EA8900D66EE6 /* spinninyarnTests */,
 				489185871843EA8900D66EE6 /* Frameworks */,
@@ -153,6 +172,30 @@
 				489185B31843EA8900D66EE6 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		489185CA1843F11600D66EE6 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				489185CE1843F1AC00D66EE6 /* SolitaireViewController.h */,
+				489185CF1843F1AC00D66EE6 /* SolitaireViewController.m */,
+				489185C41843F10600D66EE6 /* MenuViewController.h */,
+				489185C51843F10600D66EE6 /* MenuViewController.m */,
+				489185C71843F11300D66EE6 /* SettingsViewController.h */,
+				489185C81843F11300D66EE6 /* SettingsViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		489185D51843F3BD00D66EE6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				489185D61843F62C00D66EE6 /* Settings.h */,
+				489185D71843F62C00D66EE6 /* Settings.m */,
+				489185D11843F33100D66EE6 /* Singleton.h */,
+				489185D21843F33100D66EE6 /* Singleton.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,8 +297,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				489185A21843EA8900D66EE6 /* ViewController.m in Sources */,
+				489185D01843F1AC00D66EE6 /* SolitaireViewController.m in Sources */,
 				489185991843EA8900D66EE6 /* AppDelegate.m in Sources */,
+				489185C91843F11300D66EE6 /* SettingsViewController.m in Sources */,
+				489185D31843F33100D66EE6 /* Singleton.m in Sources */,
 				489185951843EA8900D66EE6 /* main.m in Sources */,
+				489185D81843F62C00D66EE6 /* Settings.m in Sources */,
+				489185C61843F10600D66EE6 /* MenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,6 +312,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				489185B71843EA8900D66EE6 /* spinninyarnTests.m in Sources */,
+				489185D41843F33100D66EE6 /* Singleton.m in Sources */,
+				489185D91843F62C00D66EE6 /* Settings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
