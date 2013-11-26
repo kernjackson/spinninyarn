@@ -19,6 +19,8 @@
 
 @implementation SolitaireViewController
 
+#pragma mark setup
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -32,12 +34,33 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    farkle = [[Farkle alloc] init];
+//    NSLog(@"%@", farkle.)
+    
+    // we don't access Die.h directly, Farkle.h does
+    /*
+    die = [[Die alloc] init];
+   //
+    NSLog(@"%lu", (unsigned long)die.sideValue);
+
+    NSLog(@"%lu", (unsigned long)die.sideUp);
+    NSLog(@"%lu", (unsigned long)die.single);
+    NSLog(@"%lu", (unsigned long)die.triple);
+     */
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark Button Madness
+
+- (IBAction)diceButtonTouchUpInside:(id)sender {
+    NSLog(@"%@", sender);
+    NSLog(@"%ld", (long)[sender tag]);
 }
 
 @end

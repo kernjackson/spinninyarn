@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Farkle.h"
 
-@interface SolitaireViewController : UIViewController
+@interface SolitaireViewController : UIViewController {
+    Farkle *farkle;
+}
 
 @end

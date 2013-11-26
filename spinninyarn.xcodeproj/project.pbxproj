@@ -29,6 +29,10 @@
 		489185D41843F33100D66EE6 /* Singleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185D21843F33100D66EE6 /* Singleton.m */; };
 		489185D81843F62C00D66EE6 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185D71843F62C00D66EE6 /* Settings.m */; };
 		489185D91843F62C00D66EE6 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185D71843F62C00D66EE6 /* Settings.m */; };
+		489185DC1844067000D66EE6 /* Die.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185DB1844067000D66EE6 /* Die.m */; };
+		489185DD1844067000D66EE6 /* Die.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185DB1844067000D66EE6 /* Die.m */; };
+		489185E018440AE900D66EE6 /* Farkle.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185DF18440AE900D66EE6 /* Farkle.m */; };
+		489185E118440AE900D66EE6 /* Farkle.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185DF18440AE900D66EE6 /* Farkle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +76,10 @@
 		489185D21843F33100D66EE6 /* Singleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Singleton.m; sourceTree = "<group>"; };
 		489185D61843F62C00D66EE6 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Settings.h; path = spinninyarn/Model/Settings.h; sourceTree = "<group>"; };
 		489185D71843F62C00D66EE6 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Settings.m; path = spinninyarn/Model/Settings.m; sourceTree = "<group>"; };
+		489185DA1844067000D66EE6 /* Die.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Die.h; sourceTree = "<group>"; };
+		489185DB1844067000D66EE6 /* Die.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Die.m; sourceTree = "<group>"; };
+		489185DE18440AE900D66EE6 /* Farkle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Farkle.h; sourceTree = "<group>"; };
+		489185DF18440AE900D66EE6 /* Farkle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Farkle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +198,10 @@
 		489185D51843F3BD00D66EE6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				489185DE18440AE900D66EE6 /* Farkle.h */,
+				489185DF18440AE900D66EE6 /* Farkle.m */,
+				489185DA1844067000D66EE6 /* Die.h */,
+				489185DB1844067000D66EE6 /* Die.m */,
 				489185D61843F62C00D66EE6 /* Settings.h */,
 				489185D71843F62C00D66EE6 /* Settings.m */,
 				489185D11843F33100D66EE6 /* Singleton.h */,
@@ -298,10 +310,12 @@
 			files = (
 				489185A21843EA8900D66EE6 /* ViewController.m in Sources */,
 				489185D01843F1AC00D66EE6 /* SolitaireViewController.m in Sources */,
+				489185E018440AE900D66EE6 /* Farkle.m in Sources */,
 				489185991843EA8900D66EE6 /* AppDelegate.m in Sources */,
 				489185C91843F11300D66EE6 /* SettingsViewController.m in Sources */,
 				489185D31843F33100D66EE6 /* Singleton.m in Sources */,
 				489185951843EA8900D66EE6 /* main.m in Sources */,
+				489185DC1844067000D66EE6 /* Die.m in Sources */,
 				489185D81843F62C00D66EE6 /* Settings.m in Sources */,
 				489185C61843F10600D66EE6 /* MenuViewController.m in Sources */,
 			);
@@ -313,6 +327,8 @@
 			files = (
 				489185B71843EA8900D66EE6 /* spinninyarnTests.m in Sources */,
 				489185D41843F33100D66EE6 /* Singleton.m in Sources */,
+				489185E118440AE900D66EE6 /* Farkle.m in Sources */,
+				489185DD1844067000D66EE6 /* Die.m in Sources */,
 				489185D91843F62C00D66EE6 /* Settings.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
