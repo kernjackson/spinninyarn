@@ -82,6 +82,13 @@
 
 #pragma mark not sure if controller or model
 
+- (void)newGame {
+    Singleton *sharedManager = [Singleton sharedManager];
+    
+    sharedManager.turns = @12;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
 - (void)endTurn {
     Singleton *sharedManager = [Singleton sharedManager];
     
@@ -114,8 +121,7 @@
         [self.navigationController setNavigationBarHidden:YES animated:YES];
     } else {
         // game over
-        sharedManager.turns = @11;
-        [self.navigationController setNavigationBarHidden:NO animated:YES];
+        [self newGame];
     }
 }
 
@@ -200,6 +206,12 @@
 - (IBAction)rolled:(id)sender {
     Singleton *sharedManager = [Singleton sharedManager];
    
+    if ([sharedManager.turns integerValue] == 12) {
+        // decrement turns by 1
+        NSNumber *temp = [NSNumber numberWithInt:[sharedManager.turns intValue] -1];
+        sharedManager.turns = temp;
+    }
+    
     /*
     // this is just to test SharedManager and showing/hiding the navbar
     NSLog(@"total: %@", [sharedManager total]);
