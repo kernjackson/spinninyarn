@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Farkle.h"
 
-@interface SolitaireViewController : UIViewController {
+@interface SolitaireViewController : UIViewController <UIGestureRecognizerDelegate> {
     Farkle *farkle;
 }
 

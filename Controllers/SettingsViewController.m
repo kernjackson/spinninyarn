@@ -34,7 +34,8 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    stealing = [defaults boolForKey:@"stealingOn"];
+    stealing = [defaults boolForKey:@"stealing"];
+//    [defaults setBool:stealing forKey:@"stealing"];
     [self checkSettings];
 }
 
@@ -51,11 +52,11 @@
     
     if (stealing) {
         stealing = NO;
-        [defaults setBool:stealing forKey:@"stealingOn"];
+        [defaults setBool:stealing forKey:@"stealing"];
         NSLog(@"Switched to FALSE");
     } else {
         stealing = YES;
-        [defaults setBool:stealing forKey:@"stealingOn"];
+        [defaults setBool:stealing forKey:@"stealing"];
         NSLog(@"Switched to TRUE");
     }
 }

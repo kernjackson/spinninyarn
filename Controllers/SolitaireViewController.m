@@ -36,24 +36,42 @@
 	// Do any additional setup after loading the view.
     
     farkle = [[Farkle alloc] init];
-//    NSLog(@"%@", farkle.)
+    NSLog(@"%@", farkle);
     
-    // we don't access Die.h directly, Farkle.h does
-    /*
-    die = [[Die alloc] init];
-   //
-    NSLog(@"%lu", (unsigned long)die.sideValue);
+    
+    // Setup gesture recoginizer, and pop this view off the stack
+    UISwipeGestureRecognizer *mSwipeUpRecognizer = [[UISwipeGestureRecognizer alloc]
+                                                    initWithTarget:self
+                                                    action:@selector(popView)];
+    
+    [mSwipeUpRecognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    
+    [[self view] addGestureRecognizer:mSwipeUpRecognizer];
+}
 
-    NSLog(@"%lu", (unsigned long)die.sideUp);
-    NSLog(@"%lu", (unsigned long)die.single);
-    NSLog(@"%lu", (unsigned long)die.triple);
-     */
+#pragma mark HideNavigationBar
+
+- (void)viewWillAppear:(BOOL)animated
+{
+        [self.navigationController setNavigationBarHidden:YES animated:animated];
+        [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+        [self.navigationController setNavigationBarHidden:NO animated:animated];
+        [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)popView {
+    // Pop this view off the stack
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark Button Madness

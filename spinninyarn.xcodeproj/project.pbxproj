@@ -540,6 +540,7 @@
 				489185BC1843EA8900D66EE6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		489185BD1843EA8900D66EE6 /* Build configuration list for PBXNativeTarget "spinninyarnTests" */ = {
 			isa = XCConfigurationList;
@@ -548,6 +549,7 @@
 				489185BF1843EA8900D66EE6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

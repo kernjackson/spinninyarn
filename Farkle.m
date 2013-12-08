@@ -8,14 +8,8 @@
 
 #import "Farkle.h"
 #import "Die.h"
-//#import "Rules.h"
 
 @interface Farkle()
-
-@property (nonatomic) int score;
-@property (nonatomic) int total;
-@property (nonatomic) int subtotal;
-@property (nonatomic) int farkles;
 
 @end
 
@@ -25,6 +19,19 @@
 #define MINIMUM 300
 #define PENALTY 1000
 #define TURNS 10
+
+- (void)sixDice {
+	[rolled removeAllObjects];
+	for (int i = 0; i <= 5; i++) {
+		
+		Die *die = [[Die alloc] init];
+		[rolled insertObject:die atIndex:i];
+		//[self flipDiceButtons:i];
+	}
+	
+	// check for straight
+	// check for threePair
+}
 
 - (bool)diceHot {
 	int temp = 0;
@@ -130,7 +137,6 @@
 		return -1;
 	}
     return 0;
-    
 }
 
 @end
