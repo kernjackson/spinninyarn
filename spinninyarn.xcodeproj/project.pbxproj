@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		48610A201854C38B001BF7FF /* FarkleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48610A1F1854C38B001BF7FF /* FarkleViewController.m */; };
 		489185891843EA8900D66EE6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 489185881843EA8900D66EE6 /* Foundation.framework */; };
 		4891858B1843EA8900D66EE6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4891858A1843EA8900D66EE6 /* CoreGraphics.framework */; };
 		4891858D1843EA8900D66EE6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4891858C1843EA8900D66EE6 /* UIKit.framework */; };
@@ -15,7 +16,6 @@
 		489185991843EA8900D66EE6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185981843EA8900D66EE6 /* AppDelegate.m */; };
 		4891859C1843EA8900D66EE6 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4891859A1843EA8900D66EE6 /* Main_iPhone.storyboard */; };
 		4891859F1843EA8900D66EE6 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4891859D1843EA8900D66EE6 /* Main_iPad.storyboard */; };
-		489185A21843EA8900D66EE6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185A11843EA8900D66EE6 /* ViewController.m */; };
 		489185A41843EA8900D66EE6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 489185A31843EA8900D66EE6 /* Images.xcassets */; };
 		489185AB1843EA8900D66EE6 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 489185AA1843EA8900D66EE6 /* XCTest.framework */; };
 		489185AC1843EA8900D66EE6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 489185881843EA8900D66EE6 /* Foundation.framework */; };
@@ -24,15 +24,14 @@
 		489185B71843EA8900D66EE6 /* spinninyarnTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185B61843EA8900D66EE6 /* spinninyarnTests.m */; };
 		489185C61843F10600D66EE6 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185C51843F10600D66EE6 /* MenuViewController.m */; };
 		489185C91843F11300D66EE6 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185C81843F11300D66EE6 /* SettingsViewController.m */; };
-		489185D01843F1AC00D66EE6 /* SolitaireViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185CF1843F1AC00D66EE6 /* SolitaireViewController.m */; };
 		489185D31843F33100D66EE6 /* Singleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185D21843F33100D66EE6 /* Singleton.m */; };
 		489185D41843F33100D66EE6 /* Singleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185D21843F33100D66EE6 /* Singleton.m */; };
 		489185D81843F62C00D66EE6 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185D71843F62C00D66EE6 /* Settings.m */; };
 		489185D91843F62C00D66EE6 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185D71843F62C00D66EE6 /* Settings.m */; };
 		489185DC1844067000D66EE6 /* Die.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185DB1844067000D66EE6 /* Die.m */; };
 		489185DD1844067000D66EE6 /* Die.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185DB1844067000D66EE6 /* Die.m */; };
-		489185E018440AE900D66EE6 /* Farkle.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185DF18440AE900D66EE6 /* Farkle.m */; };
-		489185E118440AE900D66EE6 /* Farkle.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185DF18440AE900D66EE6 /* Farkle.m */; };
+		489824F11854DD0500877164 /* Farkle.m in Sources */ = {isa = PBXBuildFile; fileRef = 489824F01854DD0500877164 /* Farkle.m */; };
+		4898250F1854FE6000877164 /* RuleCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4898250E1854FE6000877164 /* RuleCardViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		48610A1E1854C38B001BF7FF /* FarkleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FarkleViewController.h; sourceTree = "<group>"; };
+		48610A1F1854C38B001BF7FF /* FarkleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FarkleViewController.m; sourceTree = "<group>"; };
 		489185851843EA8900D66EE6 /* spinninyarn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = spinninyarn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		489185881843EA8900D66EE6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4891858A1843EA8900D66EE6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -58,8 +59,6 @@
 		489185981843EA8900D66EE6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4891859B1843EA8900D66EE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		4891859E1843EA8900D66EE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		489185A01843EA8900D66EE6 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		489185A11843EA8900D66EE6 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		489185A31843EA8900D66EE6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		489185A91843EA8900D66EE6 /* spinninyarnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = spinninyarnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		489185AA1843EA8900D66EE6 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -70,16 +69,16 @@
 		489185C51843F10600D66EE6 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuViewController.m; path = Controllers/MenuViewController.m; sourceTree = "<group>"; };
 		489185C71843F11300D66EE6 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = Controllers/SettingsViewController.h; sourceTree = "<group>"; };
 		489185C81843F11300D66EE6 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = Controllers/SettingsViewController.m; sourceTree = "<group>"; };
-		489185CE1843F1AC00D66EE6 /* SolitaireViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SolitaireViewController.h; path = Controllers/SolitaireViewController.h; sourceTree = "<group>"; };
-		489185CF1843F1AC00D66EE6 /* SolitaireViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SolitaireViewController.m; path = Controllers/SolitaireViewController.m; sourceTree = "<group>"; };
 		489185D11843F33100D66EE6 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
 		489185D21843F33100D66EE6 /* Singleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Singleton.m; sourceTree = "<group>"; };
 		489185D61843F62C00D66EE6 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Settings.h; path = spinninyarn/Model/Settings.h; sourceTree = "<group>"; };
 		489185D71843F62C00D66EE6 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Settings.m; path = spinninyarn/Model/Settings.m; sourceTree = "<group>"; };
 		489185DA1844067000D66EE6 /* Die.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Die.h; sourceTree = "<group>"; };
 		489185DB1844067000D66EE6 /* Die.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Die.m; sourceTree = "<group>"; };
-		489185DE18440AE900D66EE6 /* Farkle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Farkle.h; sourceTree = "<group>"; };
-		489185DF18440AE900D66EE6 /* Farkle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Farkle.m; sourceTree = "<group>"; };
+		489824EF1854DD0500877164 /* Farkle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Farkle.h; sourceTree = "<group>"; };
+		489824F01854DD0500877164 /* Farkle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Farkle.m; sourceTree = "<group>"; };
+		4898250D1854FE6000877164 /* RuleCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RuleCardViewController.h; path = Controllers/RuleCardViewController.h; sourceTree = SOURCE_ROOT; };
+		4898250E1854FE6000877164 /* RuleCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RuleCardViewController.m; path = Controllers/RuleCardViewController.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,8 +144,6 @@
 				489185981843EA8900D66EE6 /* AppDelegate.m */,
 				4891859A1843EA8900D66EE6 /* Main_iPhone.storyboard */,
 				4891859D1843EA8900D66EE6 /* Main_iPad.storyboard */,
-				489185A01843EA8900D66EE6 /* ViewController.h */,
-				489185A11843EA8900D66EE6 /* ViewController.m */,
 				489185A31843EA8900D66EE6 /* Images.xcassets */,
 				4891858F1843EA8900D66EE6 /* Supporting Files */,
 			);
@@ -185,8 +182,10 @@
 		489185CA1843F11600D66EE6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				489185CE1843F1AC00D66EE6 /* SolitaireViewController.h */,
-				489185CF1843F1AC00D66EE6 /* SolitaireViewController.m */,
+				4898250D1854FE6000877164 /* RuleCardViewController.h */,
+				4898250E1854FE6000877164 /* RuleCardViewController.m */,
+				48610A1E1854C38B001BF7FF /* FarkleViewController.h */,
+				48610A1F1854C38B001BF7FF /* FarkleViewController.m */,
 				489185C41843F10600D66EE6 /* MenuViewController.h */,
 				489185C51843F10600D66EE6 /* MenuViewController.m */,
 				489185C71843F11300D66EE6 /* SettingsViewController.h */,
@@ -198,8 +197,8 @@
 		489185D51843F3BD00D66EE6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				489185DE18440AE900D66EE6 /* Farkle.h */,
-				489185DF18440AE900D66EE6 /* Farkle.m */,
+				489824EF1854DD0500877164 /* Farkle.h */,
+				489824F01854DD0500877164 /* Farkle.m */,
 				489185DA1844067000D66EE6 /* Die.h */,
 				489185DB1844067000D66EE6 /* Die.m */,
 				489185D61843F62C00D66EE6 /* Settings.h */,
@@ -308,16 +307,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				489185A21843EA8900D66EE6 /* ViewController.m in Sources */,
-				489185D01843F1AC00D66EE6 /* SolitaireViewController.m in Sources */,
-				489185E018440AE900D66EE6 /* Farkle.m in Sources */,
+				4898250F1854FE6000877164 /* RuleCardViewController.m in Sources */,
 				489185991843EA8900D66EE6 /* AppDelegate.m in Sources */,
+				489824F11854DD0500877164 /* Farkle.m in Sources */,
 				489185C91843F11300D66EE6 /* SettingsViewController.m in Sources */,
 				489185D31843F33100D66EE6 /* Singleton.m in Sources */,
 				489185951843EA8900D66EE6 /* main.m in Sources */,
 				489185DC1844067000D66EE6 /* Die.m in Sources */,
 				489185D81843F62C00D66EE6 /* Settings.m in Sources */,
 				489185C61843F10600D66EE6 /* MenuViewController.m in Sources */,
+				48610A201854C38B001BF7FF /* FarkleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,7 +326,6 @@
 			files = (
 				489185B71843EA8900D66EE6 /* spinninyarnTests.m in Sources */,
 				489185D41843F33100D66EE6 /* Singleton.m in Sources */,
-				489185E118440AE900D66EE6 /* Farkle.m in Sources */,
 				489185DD1844067000D66EE6 /* Die.m in Sources */,
 				489185D91843F62C00D66EE6 /* Settings.m in Sources */,
 			);

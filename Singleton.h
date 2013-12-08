@@ -9,15 +9,16 @@
 #import <Foundation/Foundation.h>
 
 @interface Singleton : NSObject {
-    NSString *someProperty;
-    
+    NSNumber *score;
+    NSNumber *total;
+    NSNumber *subtotal; // ???
+    NSNumber *farkles;
+    NSNumber *turns;
 }
-//
-@property (nonatomic, retain) NSString *someProperty;
-//
+
 @property (nonatomic, retain) NSNumber *score;
 @property (nonatomic, retain) NSNumber *total;
-@property (nonatomic, retain) NSNumber *subTotal;
+@property (nonatomic, retain) NSNumber *subtotal;
 @property (nonatomic, retain) NSNumber *farkles;
 @property (nonatomic, retain) NSNumber *turns;
 

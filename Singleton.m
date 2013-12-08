@@ -10,12 +10,10 @@
 
 @implementation Singleton
 
-@synthesize someProperty;
-
 // Farkle
 @synthesize score;
 @synthesize total;
-@synthesize subTotal;
+@synthesize subtotal; 
 @synthesize farkles;
 @synthesize turns;
 
@@ -32,14 +30,12 @@
 
 - (id)init {
     if (self = [super init]) {
-
-        someProperty = @"someProperty";
         
         score = @0;
         total = @0;
-        subTotal = @0;
+        subtotal = @0;
         farkles = @0;
-        turns = @0;
+        turns = @11; // +1 number of turns
     }
     return self;
 }
