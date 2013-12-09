@@ -19,6 +19,39 @@
 
 @implementation Farkle
 
+@synthesize score;
+@synthesize total;
+@synthesize subtotal;
+@synthesize farkles;
+@synthesize turns;
+
+@synthesize rolled;
+@synthesize locked;
+
+#pragma mark Singleton Methods
+
++ (id)sharedManager {
+    static Singleton *singleton = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        singleton = [[self alloc] init];
+    });
+    return singleton;
+}
+
+- (id)init {
+    if (self = [super init]) {
+        
+        score = @0;
+        total = @0;
+        subtotal = @0;
+        farkles = @0;
+        turns = @12; // +1 for roll, +1 for 10 through 1
+    }
+    return self;
+}
+
+
 #pragma mark Static Values
 
 + (NSArray *)pointsForTriples {
@@ -26,14 +59,40 @@
 }
 
 - (void)newDice {
-	[self.rolled removeAllObjects];
+    Singleton *sharedManager = [Singleton sharedManager];
+	[sharedManager.rolled removeAllObjects];
 	for (int i = 0; i <= 5; i++) {
 		
 		Die *die = [[Die alloc] init];
-		[self.rolled insertObject:die atIndex:i];
+		[sharedManager.rolled insertObject:die atIndex:i];
 //		[self flipDiceButtons:i];
 	}
 	// check score here
+}
+
+- (void)rollDice {
+    Singleton *sharedManager = [Singleton sharedManager];
+    //	Die *die = [[Die alloc] init];
+	for (int i = 0; i <= 5; i++) {
+		if ([[sharedManager.rolled objectAtIndex:i] isLocked]) {
+//			[[self.diceButtons objectAtIndex:i] setAlpha:.1];
+//			[[self.diceButtons objectAtIndex:i] setEnabled:NO];
+			[[sharedManager.rolled objectAtIndex:i] setScored:YES];
+			
+		} else {
+			Die *die = [[Die alloc] init];
+			[sharedManager.rolled replaceObjectAtIndex:i withObject:die];
+			// perform flip animation here
+            // possibly send a message here?
+//			[self flipDiceButtons:i];
+		}
+	}
+    //	[self setFarkles: [self farkled]];
+}
+
+- (void)disableDie:(UIButton *)sender {
+    Singleton *sharedManager = [Singleton sharedManager];
+	[[rolled objectAtIndex:[sender tag] setLocked:YES];
 }
 
 #pragma mark Sort Array

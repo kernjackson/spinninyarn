@@ -17,6 +17,9 @@
 @synthesize farkles;
 @synthesize turns;
 
+@synthesize rolled;
+@synthesize locked;
+
 #pragma mark Singleton Methods
 
 + (id)sharedManager {

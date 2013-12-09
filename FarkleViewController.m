@@ -166,18 +166,37 @@
     }
 }
 
+- (void)rollDice {
+    Singleton *sharedManager = [Singleton sharedManager];
+    Farkle *farkle = [[Farkle alloc] init];
+    [farkle rollDice];
+	for (int i = 0; i <= 5; i++) {
+		if ([[sharedManager.rolled objectAtIndex:i] isLocked]) {
+            [[self.diceButtons objectAtIndex:i] setAlpha:.1];
+            [[self.diceButtons objectAtIndex:i] setEnabled:NO];
+			
+		} else {
+            [self flipDiceButtons:i];
+		}
+	}
+    //	[self setFarkles: [self farkled]];
+}
+
 - (IBAction)selectDice:(UIButton *)sender {
+    Singleton *sharedManager = [Singleton sharedManager];
     Farkle *farkle = [[Farkle alloc] init];
 	
 	if ([sender isSelected]) {
 		[self enableDie:sender];
 //		self.subtotal = [farkle score:rolled]; // returns an integer for all locked & !scored dice
 //		self.subtotal = ([farkle score:rolled] + [self memory]); // this somehow appears to work
+        NSLog(@"enable %ld", (long)[sender tag]);
 	} else {
         
 		[self disableDie:sender];
 //		self.subtotal = [farkle score:rolled]; // returns an integer for all locked & !scored dice
 //		self.subtotal += self.memory; // memory allows for a persistent total between rolls
+        NSLog(@"disable %ld", (long)[sender tag]);
 	}
 //	self.total = self.subtotal;
 //	NSLog(@"subtotal: %d", [self subtotal]);
@@ -196,10 +215,12 @@
 }
 
 - (void)disableDie:(UIButton *)sender {
+    Farkle *farkle = [[Farkle alloc] init];
+    
 	[sender setSelected:YES];
-    //	[sender setAlpha:.4];
 	[UIView animateWithDuration:0.10 animations:^{sender.alpha = 0.4;}];
-//	[[rolled objectAtIndex:[self.diceButtons indexOfObject:sender]] setLocked:YES];
+    
+    // [self diableDie];
 }
 
 - (void)flipDiceButtons:(int)index {
