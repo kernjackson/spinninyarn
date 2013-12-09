@@ -14,11 +14,10 @@
 
 @property (nonatomic) NSUInteger sideValue;
 @property (strong, nonatomic) NSString *sideUp;
+
 @property (nonatomic, getter = isPlayed) BOOL played;
 @property (nonatomic, getter = isLocked) BOOL locked;
 @property (nonatomic, getter = isScored) BOOL scored;
-
-//- (int)match:(NSArray *)otherDice;
 
 - (id)blankDie;
 - (id)rollDie;

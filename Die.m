@@ -28,6 +28,17 @@
     return [self rollDie]; // should I just send a blankDie instead?
 }
 
+- (id)blankDie {
+	
+	[self setLocked: NO];
+	[self setScored: NO];
+	[self setPlayed: NO];
+	[self setSideValue: 0];
+	[self setSideUp: 0];
+	
+	return self;
+}
+
 - (id)rollDie {
 	
 	unsigned index = arc4random() % 6;
@@ -37,17 +48,6 @@
 	[self setPlayed:NO];
 	[self setSideValue: [ [[Die sideValues] objectAtIndex:index] integerValue] ];
 	[self setSideUp:    [  [Die sidesUp] objectAtIndex:index]];
-	
-	return self;
-}
-
-- (id)blankDie {
-	
-	[self setLocked: NO];
-	[self setScored: NO];
-	[self setPlayed: NO];
-	[self setSideValue: 0];
-	[self setSideUp: 0];
 	
 	return self;
 }

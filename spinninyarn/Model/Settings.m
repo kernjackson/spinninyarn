@@ -9,5 +9,13 @@
 #import "Settings.h"
 
 @implementation Settings
-
+/*
+@synthesize penalty;
+@synthesize minimum;
+@synthesize hotdice;
+@synthesize stealing;
+@synthesize  *playTo;
+@synthesize  *minimumScore;
+@synthesize  *difficulty;
+*/
 @end
