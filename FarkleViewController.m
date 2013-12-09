@@ -7,14 +7,10 @@
 //
 
 #import "FarkleViewController.h"
+#import "Farkle.h"
 
 @interface FarkleViewController ()
-@property (weak, nonatomic) IBOutlet UIButton *diceButton0;
-@property (weak, nonatomic) IBOutlet UIButton *diceButton1;
-@property (weak, nonatomic) IBOutlet UIButton *diceButton2;
-@property (weak, nonatomic) IBOutlet UIButton *diceButton3;
-@property (weak, nonatomic) IBOutlet UIButton *diceButton4;
-@property (weak, nonatomic) IBOutlet UIButton *diceButton5;
+
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *diceButtons;
 @property (weak, nonatomic) IBOutlet UIButton *passButton;
 @property (weak, nonatomic) IBOutlet UIButton *rollButton;
@@ -164,6 +160,25 @@
 #pragma mark Dice
 
 - (IBAction)selectDice:(UIButton *)sender {
+    Farkle *farkle = [[Farkle alloc] init];
+	
+	if ([sender isSelected]) {
+		[self enableDie:sender];
+//		self.subtotal = [farkle score:rolled]; // returns an integer for all locked & !scored dice
+//		self.subtotal = ([farkle score:rolled] + [self memory]); // this somehow appears to work
+	} else {
+        
+		[self disableDie:sender];
+//		self.subtotal = [farkle score:rolled]; // returns an integer for all locked & !scored dice
+//		self.subtotal += self.memory; // memory allows for a persistent total between rolls
+	}
+//	self.total = self.subtotal;
+//	NSLog(@"subtotal: %d", [self subtotal]);
+
+//	if (self.memory <= 0) {
+//		NSLog(@"memory: %d", [self memory]);
+//	}
+	[self updateUI];
 }
 
 - (void)enableDie:(UIButton *)sender {
@@ -171,6 +186,13 @@
 	[sender setAlpha:1];
     // call animation here
 //	[[rolled objectAtIndex:[self.diceButtons indexOfObject:sender]] setLocked:NO];
+}
+
+- (void)disableDie:(UIButton *)sender {
+	[sender setSelected:YES];
+    //	[sender setAlpha:.4];
+	[UIView animateWithDuration:0.10 animations:^{sender.alpha = 0.4;}];
+//	[[rolled objectAtIndex:[self.diceButtons indexOfObject:sender]] setLocked:YES];
 }
 
 - (void)flipDiceButtons:(int)index {
@@ -295,6 +317,11 @@
                          // self.scoreLabel.textColor = [UIColor blackColor];
                      }
                      completion:nil];
+}
+
+
+- (void)updateUI {
+    NSLog(@"updateUI");
 }
 
 @end
