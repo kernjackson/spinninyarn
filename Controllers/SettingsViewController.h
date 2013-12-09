@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Singleton.h"
 
 @interface SettingsViewController : UITableViewController {
-    BOOL stealing;
+    
 }
 
 @end

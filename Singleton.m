@@ -35,7 +35,7 @@
         total = @0;
         subtotal = @0;
         farkles = @0;
-        turns = @12; // +1 for roll and +1 for 10-1
+        turns = @12; // +1 for roll, +1 for 10 through 1
     }
     return self;
 }

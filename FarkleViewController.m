@@ -21,8 +21,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *farklesLabel;
 @property (weak, nonatomic) IBOutlet UIButton *HUD;
+@property (weak, nonatomic) IBOutlet UIProgressView *turnsProgress;
 @end
 
+#define TURNS 12
 
 @implementation FarkleViewController
 
@@ -85,7 +87,8 @@
 - (void)newGame {
     Singleton *sharedManager = [Singleton sharedManager];
     
-    sharedManager.turns = @12;
+    sharedManager.turns = @TURNS;
+    [self.turnsProgress setProgress:1.0 animated:YES];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
@@ -97,6 +100,12 @@
     // decrement turns by 1
     NSNumber *temp = [NSNumber numberWithInt:[sharedManager.turns intValue] -1];
     sharedManager.turns = temp;
+    
+    
+    // change progress bar
+    [self.turnsProgress setProgress:((float)([sharedManager.turns integerValue] -1) / 10) animated:YES];
+    NSLog(@"%f", ((float)[sharedManager.turns integerValue] / 10));
+    
     [self isGameOver];
 }
 
@@ -116,7 +125,7 @@
 
 - (void)isGameOver {
     Singleton *sharedManager = [Singleton sharedManager];
-    if (([sharedManager.turns integerValue] < 11) &&
+    if (([sharedManager.turns integerValue] < TURNS) &&
         ([sharedManager.turns integerValue] > 0)) {
         [self.navigationController setNavigationBarHidden:YES animated:YES];
     } else {
@@ -206,10 +215,11 @@
 - (IBAction)rolled:(id)sender {
     Singleton *sharedManager = [Singleton sharedManager];
    
-    if ([sharedManager.turns integerValue] == 12) {
+    if ([sharedManager.turns integerValue] == TURNS) {
         // decrement turns by 1
         NSNumber *temp = [NSNumber numberWithInt:[sharedManager.turns intValue] -1];
         sharedManager.turns = temp;
+        [self.navigationController setNavigationBarHidden:YES animated:YES];
     }
     
     /*
