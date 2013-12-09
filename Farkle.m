@@ -25,6 +25,17 @@
 	return @[@1000,@200,@300,@400,@500,@600];
 }
 
+- (void)newDice {
+	[self.rolled removeAllObjects];
+	for (int i = 0; i <= 5; i++) {
+		
+		Die *die = [[Die alloc] init];
+		[self.rolled insertObject:die atIndex:i];
+//		[self flipDiceButtons:i];
+	}
+	// check score here
+}
+
 #pragma mark Sort Array
 
 - (NSArray *)sort:(NSMutableArray *)unsorted {

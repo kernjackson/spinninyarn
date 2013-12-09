@@ -159,6 +159,13 @@
 
 #pragma mark Dice
 
+- (void)newDice {
+    // was called sixDice
+    for (int i = 0; i <= 5; i++) {
+        [self flipDiceButtons:i];
+    }
+}
+
 - (IBAction)selectDice:(UIButton *)sender {
     Farkle *farkle = [[Farkle alloc] init];
 	

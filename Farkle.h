@@ -13,6 +13,8 @@
 @property (nonatomic) BOOL doubling;
 @property (nonatomic) BOOL onesLow;
 
+@property (weak, nonatomic) NSMutableArray *rolled;
+
 - (bool)diceHot;
 - (NSArray *)sort:(NSMutableArray *)locked;
 - (NSInteger)score:(NSArray *)locked;
