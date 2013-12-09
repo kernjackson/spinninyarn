@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Singleton.h"
 
 @interface FarkleViewController : UIViewController <UIAlertViewDelegate>
 

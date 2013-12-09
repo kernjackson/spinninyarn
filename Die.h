@@ -18,7 +18,7 @@
 @property (nonatomic, getter = isLocked) BOOL locked;
 @property (nonatomic, getter = isScored) BOOL scored;
 
-- (int)match:(NSArray *)otherDice;
+//- (int)match:(NSArray *)otherDice;
 
 - (id)blankDie;
 - (id)rollDie;

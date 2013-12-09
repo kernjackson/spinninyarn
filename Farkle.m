@@ -31,7 +31,7 @@
 #pragma mark Singleton Methods
 
 + (id)sharedManager {
-    static Singleton *singleton = nil;
+    static Farkle *singleton = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         singleton = [[self alloc] init];
@@ -59,29 +59,27 @@
 }
 
 - (void)newDice {
-    Singleton *sharedManager = [Singleton sharedManager];
-	[sharedManager.rolled removeAllObjects];
+	[rolled removeAllObjects];
 	for (int i = 0; i <= 5; i++) {
-		
 		Die *die = [[Die alloc] init];
-		[sharedManager.rolled insertObject:die atIndex:i];
+		[rolled insertObject:die atIndex:i];
 //		[self flipDiceButtons:i];
 	}
 	// check score here
 }
 
 - (void)rollDice {
-    Singleton *sharedManager = [Singleton sharedManager];
+    //Singleton *sharedManager = [Singleton sharedManager];
     //	Die *die = [[Die alloc] init];
 	for (int i = 0; i <= 5; i++) {
-		if ([[sharedManager.rolled objectAtIndex:i] isLocked]) {
+		if ([[rolled objectAtIndex:i] isLocked]) {
 //			[[self.diceButtons objectAtIndex:i] setAlpha:.1];
 //			[[self.diceButtons objectAtIndex:i] setEnabled:NO];
-			[[sharedManager.rolled objectAtIndex:i] setScored:YES];
+			[[rolled objectAtIndex:i] setScored:YES];
 			
 		} else {
 			Die *die = [[Die alloc] init];
-			[sharedManager.rolled replaceObjectAtIndex:i withObject:die];
+			[rolled replaceObjectAtIndex:i withObject:die];
 			// perform flip animation here
             // possibly send a message here?
 //			[self flipDiceButtons:i];
@@ -90,9 +88,15 @@
     //	[self setFarkles: [self farkled]];
 }
 
+- (bool)diceHot {
+    return -1;
+}
+
 - (void)disableDie:(UIButton *)sender {
-    Singleton *sharedManager = [Singleton sharedManager];
-	[[rolled objectAtIndex:[sender tag] setLocked:YES];
+   // Farkle *sharedManager = [Farkle sharedManager];
+    
+    // we need this, but it currently prevents compilaton
+//	[[rolled objectAtIndex:[sender tag] setLocked:YES];
 }
 
 #pragma mark Sort Array
@@ -119,30 +123,30 @@
 
 #pragma mark Return Score
 
-- (NSInteger)score:(NSArray *)locked {
+- (NSInteger)score:(NSArray *)localLocked {
     
-    int score = 0;
+    int localScore = 0;
     // step through the entire array
     for (int i = 0; i < 6; i++) {
         
         // are there more than 6?
-        if ( [locked[0] intValue]
-            +[locked[1] intValue]
-            +[locked[2] intValue]
-            +[locked[3] intValue]
-            +[locked[4] intValue]
-            +[locked[5] intValue]
+        if ( [localLocked[0] intValue]
+            +[localLocked[1] intValue]
+            +[localLocked[2] intValue]
+            +[localLocked[3] intValue]
+            +[localLocked[4] intValue]
+            +[localLocked[5] intValue]
             > 6) {
             return -1;
         }
         
-        // score 3 or more
-        else if ([locked[i] intValue] >= 3) {
+        // localScore 3 or more
+        else if ([localLocked[i] intValue] >= 3) {
             
             // check _onesLow whether 1*4 = 2000 or 1*4 == 1100
-            score += (([[[Farkle pointsForTriples]
-                         objectAtIndex:i]
-                        intValue] * (([locked[i] intValue] -2))) );
+            localScore += (([[[Farkle pointsForTriples]
+                              objectAtIndex:i]
+                             intValue] * (([localLocked[i] intValue] -2))) );
             
             // check _doubling whether adding or doubling
             if (_doubling) {
@@ -152,57 +156,58 @@
             // check for fullhouse
             // if 3 and 2
         }
-        else if ([locked[i] intValue] == 2) {
+        else if ([localLocked[i] intValue] == 2) {
             
             // check for 3 pair here
             int counter = 0;
             for (int j = 0; j < 6; j++) {
-                if ([locked[j] intValue] == 2) {
+                if ([localLocked[j] intValue] == 2) {
                     counter++;
                 }
             }
             if (counter == 3) {
-                score = 1500;
+                localScore = 1500;
             }
             
             // 2 ones
             else if (i == 0) {
-                score += 200;
+                localScore += 200;
             }
             
             // 2 fives
             else if (i == 4) {
-                score += 100;
+                localScore += 100;
             }
-            else score += 0;
+            else localScore += 0;
         }
-        else if ([locked[i] intValue] == 1) {
+        else if ([localLocked[i] intValue] == 1) {
             
             // check for straight here
-            if (   ([locked[0] intValue] == 1)
-                && ([locked[1] intValue] == 1)
-                && ([locked[2] intValue] == 1)
-                && ([locked[3] intValue] == 1)
-                && ([locked[4] intValue] == 1)
-                && ([locked[5] intValue] == 1)
+            if (   ([localLocked[0] intValue] == 1)
+                && ([localLocked[1] intValue] == 1)
+                && ([localLocked[2] intValue] == 1)
+                && ([localLocked[3] intValue] == 1)
+                && ([localLocked[4] intValue] == 1)
+                && ([localLocked[5] intValue] == 1)
                 ) {
-                score = 2500; // overwrite the existing score
+                localScore = 2500; // overwrite the existing localScore
             }
             
             // 1 one
             if (i == 0) {
-                score += 100;
+                localScore += 100;
             }
             
             // 1 fives
             else if (i == 4) {
-                score += 50;
+                localScore += 50;
             }
-            else score += 0;
+            else localScore += 0;
         }
     }
-    return score;
+    return localScore;
 }
+
 
 
 @end

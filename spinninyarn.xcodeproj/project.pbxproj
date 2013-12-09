@@ -24,8 +24,6 @@
 		489185B71843EA8900D66EE6 /* spinninyarnTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185B61843EA8900D66EE6 /* spinninyarnTests.m */; };
 		489185C61843F10600D66EE6 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185C51843F10600D66EE6 /* MenuViewController.m */; };
 		489185C91843F11300D66EE6 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185C81843F11300D66EE6 /* SettingsViewController.m */; };
-		489185D31843F33100D66EE6 /* Singleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185D21843F33100D66EE6 /* Singleton.m */; };
-		489185D41843F33100D66EE6 /* Singleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185D21843F33100D66EE6 /* Singleton.m */; };
 		489185D81843F62C00D66EE6 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185D71843F62C00D66EE6 /* Settings.m */; };
 		489185D91843F62C00D66EE6 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185D71843F62C00D66EE6 /* Settings.m */; };
 		489185DC1844067000D66EE6 /* Die.m in Sources */ = {isa = PBXBuildFile; fileRef = 489185DB1844067000D66EE6 /* Die.m */; };
@@ -69,8 +67,6 @@
 		489185C51843F10600D66EE6 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuViewController.m; path = Controllers/MenuViewController.m; sourceTree = "<group>"; };
 		489185C71843F11300D66EE6 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = Controllers/SettingsViewController.h; sourceTree = "<group>"; };
 		489185C81843F11300D66EE6 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = Controllers/SettingsViewController.m; sourceTree = "<group>"; };
-		489185D11843F33100D66EE6 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
-		489185D21843F33100D66EE6 /* Singleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Singleton.m; sourceTree = "<group>"; };
 		489185D61843F62C00D66EE6 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Settings.h; path = spinninyarn/Model/Settings.h; sourceTree = "<group>"; };
 		489185D71843F62C00D66EE6 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Settings.m; path = spinninyarn/Model/Settings.m; sourceTree = "<group>"; };
 		489185DA1844067000D66EE6 /* Die.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Die.h; sourceTree = "<group>"; };
@@ -203,8 +199,6 @@
 				489185DB1844067000D66EE6 /* Die.m */,
 				489185D61843F62C00D66EE6 /* Settings.h */,
 				489185D71843F62C00D66EE6 /* Settings.m */,
-				489185D11843F33100D66EE6 /* Singleton.h */,
-				489185D21843F33100D66EE6 /* Singleton.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -311,7 +305,6 @@
 				489185991843EA8900D66EE6 /* AppDelegate.m in Sources */,
 				489824F11854DD0500877164 /* Farkle.m in Sources */,
 				489185C91843F11300D66EE6 /* SettingsViewController.m in Sources */,
-				489185D31843F33100D66EE6 /* Singleton.m in Sources */,
 				489185951843EA8900D66EE6 /* main.m in Sources */,
 				489185DC1844067000D66EE6 /* Die.m in Sources */,
 				489185D81843F62C00D66EE6 /* Settings.m in Sources */,
@@ -325,7 +318,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				489185B71843EA8900D66EE6 /* spinninyarnTests.m in Sources */,
-				489185D41843F33100D66EE6 /* Singleton.m in Sources */,
 				489185DD1844067000D66EE6 /* Die.m in Sources */,
 				489185D91843F62C00D66EE6 /* Settings.m in Sources */,
 			);

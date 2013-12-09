@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "Die.h"
-#import "Singleton.h"
 
 @interface Farkle : NSObject {
     NSNumber *score;

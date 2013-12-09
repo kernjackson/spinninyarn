@@ -38,8 +38,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    Singleton *sharedManager = [Singleton sharedManager];
+    Farkle *sharedManager = [Farkle sharedManager];
     if (sharedManager.turns < 0) {
         [self.navigationController setNavigationBarHidden:NO animated:YES];
     }
@@ -81,7 +80,7 @@
 #pragma mark not sure if controller or model
 
 - (void)newGame {
-    Singleton *sharedManager = [Singleton sharedManager];
+    Farkle *sharedManager = [Farkle sharedManager];
     
     sharedManager.turns = @TURNS;
     [self.turnsProgress setProgress:1.0 animated:YES];
@@ -89,7 +88,7 @@
 }
 
 - (void)endTurn {
-    Singleton *sharedManager = [Singleton sharedManager];
+    Farkle *sharedManager = [Farkle sharedManager];
     
     // [Farkle score:rolled] here
     
@@ -106,7 +105,7 @@
 }
 
 - (void)farkled {
-    Singleton *sharedManager = [Singleton sharedManager];
+    Farkle *sharedManager = [Farkle sharedManager];
     
     // Farkle.m will return 0 if player farkles
     
@@ -120,7 +119,7 @@
 }
 
 - (void)isGameOver {
-    Singleton *sharedManager = [Singleton sharedManager];
+    Farkle *sharedManager = [Farkle sharedManager];
     if (([sharedManager.turns integerValue] < TURNS) &&
         ([sharedManager.turns integerValue] > 0)) {
         [self.navigationController setNavigationBarHidden:YES animated:YES];
@@ -137,12 +136,12 @@
     [self endTurn];
     
     // debug
-    Singleton *sharedManager = [Singleton sharedManager];
+    Farkle *sharedManager = [Farkle sharedManager];
     NSLog(@"pass, turns == %@", sharedManager.turns);
 }
 
 - (void)enablePassButton {
-    Singleton *sharedManager = [Singleton sharedManager];
+    Farkle *sharedManager = [Farkle sharedManager];
 	[self.passButton setEnabled:YES];
 	[self.passButton setAlpha:1.0];
 	[self.passButton setTitle:[NSString stringWithFormat:@"+ %@", [sharedManager total]] // was %d
@@ -150,7 +149,7 @@
 }
 
 - (void)disablePassButton {
-    Singleton *sharedManager = [Singleton sharedManager];
+    Farkle *sharedManager = [Farkle sharedManager];
 	[self.passButton setEnabled:NO];
 	[self.passButton setTitle:[NSString stringWithFormat:@"%@", [sharedManager total]] // was %d
                      forState:UIControlStateNormal];
@@ -167,9 +166,8 @@
 }
 
 - (void)rollDice {
-    Singleton *sharedManager = [Singleton sharedManager];
-    Farkle *farkle = [[Farkle alloc] init];
-    [farkle rollDice];
+    Farkle *sharedManager = [Farkle sharedManager];
+    [sharedManager rollDice];
 	for (int i = 0; i <= 5; i++) {
 		if ([[sharedManager.rolled objectAtIndex:i] isLocked]) {
             [[self.diceButtons objectAtIndex:i] setAlpha:.1];
@@ -183,8 +181,7 @@
 }
 
 - (IBAction)selectDice:(UIButton *)sender {
-    Singleton *sharedManager = [Singleton sharedManager];
-    Farkle *farkle = [[Farkle alloc] init];
+//    Farkle *sharedManager = [Farkle sharedManager];
 	
 	if ([sender isSelected]) {
 		[self enableDie:sender];
@@ -215,7 +212,6 @@
 }
 
 - (void)disableDie:(UIButton *)sender {
-    Farkle *farkle = [[Farkle alloc] init];
     
 	[sender setSelected:YES];
 	[UIView animateWithDuration:0.10 animations:^{sender.alpha = 0.4;}];
@@ -263,7 +259,7 @@
 #pragma mark Roll
 
 - (IBAction)rolled:(id)sender {
-    Singleton *sharedManager = [Singleton sharedManager];
+    Farkle *sharedManager = [Farkle sharedManager];
    
     if ([sharedManager.turns integerValue] == TURNS) {
         // decrement turns by 1
