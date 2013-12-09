@@ -90,6 +90,19 @@
 //	[[rolled objectAtIndex:[sender tag] setLocked:YES];
 }
 
+// I don't think I actually need this, as we never really need to removed all objects from the array. Just set everything to zero instead.
+- (void)clearDice {
+	[rolled removeAllObjects];
+	for (int i = 0; i <= 5; i++) {
+//		[[_diceButtons objectAtIndex:i] setAlpha:1];
+//		[[self.diceButtons objectAtIndex:i] setEnabled:YES];
+//		[[self.diceButtons objectAtIndex:i] setSelected:FALSE];
+//		[[self.diceButtons objectAtIndex:i] setTitle:@""
+//                                            forState:UIControlStateNormal];
+//		[[self.diceButtons objectAtIndex:i] setEnabled:NO]; // ???
+	}
+}
+
 #pragma mark Sort & Score
 
 - (NSArray *)sort:(NSMutableArray *)unsorted {

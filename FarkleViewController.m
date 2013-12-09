@@ -164,6 +164,7 @@
     [sharedManager newDice];
     for (int i = 0; i <= 5; i++) {
         [self flipDiceButtons:i];
+        NSLog(@"flipping: %d", i);
     }
 }
 
@@ -177,9 +178,87 @@
 			
 		} else {
             [self flipDiceButtons:i];
+            NSLog(@"flipping: %d", i);
 		}
 	}
     //	[self setFarkles: [self farkled]];
+}
+
+- (void)roll {
+    Farkle *sharedManager = [Farkle sharedManager];
+	[sharedManager setFarkled:NO];
+	//[self newGame]; // this shouldn't be here
+	Farkle *farkle = [[Farkle alloc] init];
+    // check count?
+/*
+	if ((sharedManager.count == 0) || ([sharedManager diceHot])) {
+		[sharedManager clearDice];
+		[sharedManager newDice];
+	} else [self rollDice];
+*/
+	for (int i = 0; i <= 5; i++) {
+		if (![[sharedManager.rolled objectAtIndex:i] isLocked]) {
+			// change the title of the button to the current sideup of the die
+			[[self.diceButtons objectAtIndex:i] setTitle:[[sharedManager.rolled objectAtIndex:i] sideUp]
+                                                forState:UIControlStateNormal];
+            
+            /*
+             // all this is required to load images on buttons
+             NSString *shoppingListButtonImageName = @"die3black";
+             UIImage *slImage = [UIImage imageNamed:shoppingListButtonImageName];
+             [[self.diceButtons objectAtIndex:i] setImage:slImage forState:UIControlStateNormal];
+             */
+		} else if ([[sharedManager.rolled objectAtIndex:i] isLocked]) {
+			[[sharedManager.rolled objectAtIndex:i] setScored:YES];
+		} // else [[locked objectAtIndex:i] setScored:YES];
+	}
+//	if ([sharedManager farkled:rolled] == 0) {
+    
+        NSNumber *bNumber = [NSNumber numberWithInt:[sharedManager.farkles intValue] + 1];
+ //		sharedManager.farkles++;
+        [sharedManager setFarkled:YES];
+		[sharedManager setMemory:0]; // ???
+		[self flashScreen];
+		// disable all dice
+		for (int i = 0; i <= 5; i++) {
+            //		if (![[rolled objectAtIndex:i] isLocked]) {
+            [[self.diceButtons objectAtIndex:i] setSelected:YES];
+            [[self.diceButtons objectAtIndex:i] setAlpha:.4];
+            [[self.diceButtons objectAtIndex:i] setEnabled:NO]; // how does this not disable the buttons?
+//            [[sharedManager.rolled objectAtIndex:i] setLocked:YES];
+            
+            //		}
+			[self.rollButton setEnabled:YES];
+			[self.rollButton setAlpha:1.0];
+		}
+        //		[self pulseRollButton];
+//		[self setSubtotal:0];
+//		[self setTotal:0];
+//		--self.turn; // moved this up to rollButton
+        
+		if (sharedManager.turns <= 0) {
+			
+//			[self gameOver];
+			/*
+             // prevent the user from clicking the HUD for 1.6 seconds
+             [NSTimer scheduledTimerWithTimeInterval:1.6
+             target:self
+             selector:@selector(enableHUD:)
+             userInfo:nil
+             repeats:NO];
+             */
+		} else
+            NSLog(@"farkles: %@", sharedManager.farkles);
+		
+        sharedManager.farkles = 0;
+        
+        NSLog(@"turns: %@", sharedManager.turns);
+		//	[self updateUI];
+		
+	//}
+    
+	//[self setFarkled:YES];
+	
 }
 
 - (IBAction)selectDice:(UIButton *)sender {
@@ -221,6 +300,19 @@
     // [self diableDie];
 }
 
+- (void)clearDice {
+    Farkle *sharedManager = [Farkle sharedManager];
+	[sharedManager.rolled removeAllObjects];
+	for (int i = 0; i <= 5; i++) {
+		[[_diceButtons objectAtIndex:i] setAlpha:1];
+		[[self.diceButtons objectAtIndex:i] setEnabled:YES];
+		[[self.diceButtons objectAtIndex:i] setSelected:FALSE];
+		[[self.diceButtons objectAtIndex:i] setTitle:@""
+                                            forState:UIControlStateNormal];
+		[[self.diceButtons objectAtIndex:i] setEnabled:NO]; // ???
+	}
+}
+
 - (void)flipDiceButtons:(int)index {
 	if (index == 1) {
         
@@ -229,6 +321,7 @@
                            options:UIViewAnimationOptionTransitionFlipFromBottom |
          UIViewAnimationOptionAllowUserInteraction animations:^{
          } completion:nil];
+        NSLog(@"index: %d", index);
 	}
 	if (index == 2) {
 		
@@ -237,6 +330,7 @@
                            options:UIViewAnimationOptionTransitionFlipFromTop |
 		 UIViewAnimationOptionAllowUserInteraction animations:^{
 		 } completion:nil];
+        NSLog(@"index: %d", index);
 	}
 	if ((index == 3) || (index == 4)) {
 		
@@ -245,6 +339,7 @@
                            options:UIViewAnimationOptionTransitionFlipFromLeft |
 		 UIViewAnimationOptionAllowUserInteraction animations:^{
 		 } completion:nil];
+        NSLog(@"index: %d", index);
 	}
 	if ((index == 5) || (index == 6)) {
 		
@@ -254,7 +349,8 @@
 		 UIViewAnimationOptionAllowUserInteraction
                         animations:^{
                         } completion:nil];
-	}
+        NSLog(@"index: %d", index);
+	} else NSLog(@"flipDiceButtons: error %d", index);
 }
 
 
@@ -284,8 +380,8 @@
 		NSLog(@"subtotal < 50");
 	}
 	
-	sharedManager.memory = sharedManager.total;
-	NSLog(@"memory: %@", sharedManager.memory);
+	//sharedManager.memory = sharedManager.total;
+	//NSLog(@"memory: %@", sharedManager.memory);
 	[self rollDice]; // was just [self roll];
     /*
 	for (int i = 0; i <= 5; i++) {
@@ -299,29 +395,15 @@
     //	[self.rollButton setAlpha:1.0]; // is this what was pusling the rollButton?
 	
 	[self updateUI];
-	/*
-	if (self.farkled == YES) {
+/*
+	if (sharedManager.farkled isEqual:YES) {
 		[self.rollButton setEnabled:YES];
 		[self.rollButton setAlpha:1.0];
 	} else {
 		[self.rollButton setEnabled:NO]; // this is the desired behavior, but results in no rollButton on farkle tues july 23 12:29
 		[self.rollButton setAlpha:0.0];
 	}
-    */
-    
-    /*
-    // this is just to test SharedManager and showing/hiding the navbar
-    NSLog(@"total: %@", [sharedManager total]);
-    if ([sharedManager.total isEqual:@0]) {
-        [self.navigationController setNavigationBarHidden:NO animated:YES];
-        sharedManager.total = @1;
-    } else {
-        sharedManager.total = @0;
-        [self.navigationController setNavigationBarHidden:YES animated:YES];
-    }
-    */
-    
-    
+*/
 }
 
 #pragma mark HUD

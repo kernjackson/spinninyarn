@@ -15,6 +15,7 @@
     NSNumber *subtotal; // ???
     NSNumber *memory;  // ???
     NSNumber *farkles;
+    BOOL farkled; // There's got to be a better way to do this ???
     NSNumber *turns;
     
     NSMutableArray *rolled;
@@ -26,6 +27,7 @@
 @property (nonatomic, retain) NSNumber *subtotal; // ???
 @property (nonatomic, retain) NSNumber *memory; // ???
 @property (nonatomic, retain) NSNumber *farkles;
+@property (nonatomic) BOOL farkled; // There's got to be a better way to do this ???
 @property (nonatomic, retain) NSNumber *turns;
 
 @property (nonatomic, retain) NSMutableArray *rolled;

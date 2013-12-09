@@ -810,8 +810,9 @@
                             </button>
                             <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" ambiguous="YES" restorationIdentifier="" contentHorizontalAlignment="right" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eU3-o4-G0u">
                                 <rect key="frame" x="0.0" y="237" width="106" height="106"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="100"/>
-                                <state key="normal">
+                                <state key="normal" title="0">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -826,7 +827,7 @@
                                 <rect key="frame" x="107" y="237" width="106" height="106"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="100"/>
-                                <state key="normal">
+                                <state key="normal" title="1">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -839,12 +840,13 @@
                             </button>
                             <button autoresizesSubviews="NO" opaque="NO" tag="2" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lgx-0A-tpX">
                                 <rect key="frame" x="214" y="237" width="106" height="106"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="106" id="3nB-s6-QEf"/>
                                     <constraint firstAttribute="width" constant="106" id="Yut-V0-7RP"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="100"/>
-                                <state key="normal">
+                                <state key="normal" title="2">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -857,11 +859,12 @@
                             </button>
                             <button autoresizesSubviews="NO" opaque="NO" tag="3" contentMode="scaleToFill" ambiguous="YES" restorationIdentifier="" contentHorizontalAlignment="right" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1BI-JQ-FnV">
                                 <rect key="frame" x="0.0" y="338" width="106" height="106"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="106" id="Fdj-YF-PaC"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="100"/>
-                                <state key="normal">
+                                <state key="normal" title="3">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -874,8 +877,9 @@
                             </button>
                             <button autoresizesSubviews="NO" opaque="NO" tag="4" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" restorationIdentifier="" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="seb-bW-993">
                                 <rect key="frame" x="107" y="338" width="106" height="106"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="100"/>
-                                <state key="normal">
+                                <state key="normal" title="4">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -888,11 +892,12 @@
                             </button>
                             <button autoresizesSubviews="NO" opaque="NO" tag="5" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="otZ-TH-cDg">
                                 <rect key="frame" x="214" y="338" width="106" height="106"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="106" id="vey-gp-MB0"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="100"/>
-                                <state key="normal">
+                                <state key="normal" title="5">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -951,7 +956,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </progressView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="otZ-TH-cDg" firstAttribute="baseline" secondItem="1BI-JQ-FnV" secondAttribute="baseline" id="5pi-kf-h1M"/>
