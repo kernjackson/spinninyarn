@@ -13,6 +13,7 @@
     NSNumber *score;
     NSNumber *total;
     NSNumber *subtotal; // ???
+    NSNumber *memory;  // ???
     NSNumber *farkles;
     NSNumber *turns;
     
@@ -22,7 +23,8 @@
 
 @property (nonatomic, retain) NSNumber *score;
 @property (nonatomic, retain) NSNumber *total;
-@property (nonatomic, retain) NSNumber *subtotal; // Do we need this?
+@property (nonatomic, retain) NSNumber *subtotal; // ???
+@property (nonatomic, retain) NSNumber *memory; // ???
 @property (nonatomic, retain) NSNumber *farkles;
 @property (nonatomic, retain) NSNumber *turns;
 
@@ -34,11 +36,12 @@
 @property (nonatomic) BOOL doubling;
 @property (nonatomic) BOOL onesLow;
 
-
-- (bool)diceHot;
-- (NSArray *)sort:(NSMutableArray *)locked;
-- (NSInteger)score:(NSArray *)locked;
-
+#pragma mark Dice
+- (void)newDice;
 - (void)rollDice;
+- (bool)diceHot;
+
+- (NSArray *)sort:(NSMutableArray *)unsorted;
+- (NSInteger)score:(NSArray *)unscored;
 
 @end

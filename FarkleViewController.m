@@ -160,6 +160,8 @@
 
 - (void)newDice {
     // was called sixDice
+    Farkle *sharedManager = [Farkle sharedManager];
+    [sharedManager newDice];
     for (int i = 0; i <= 5; i++) {
         [self flipDiceButtons:i];
     }
@@ -267,6 +269,45 @@
         sharedManager.turns = temp;
         [self.navigationController setNavigationBarHidden:YES animated:YES];
     }
+    
+    // if no match is ongoing expose GameCenter UI to create a new match
+	//[[GCTurnBasedMatchHelper sharedInstance]
+	// findMatchWithMinPlayers:2 maxPlayers:2 viewController:self];
+	
+	/*
+     if (self.turn == TURNS) {
+     --self.turn;
+     }
+     */
+	
+	if (([sharedManager.subtotal integerValue] < 50) ) {
+		NSLog(@"subtotal < 50");
+	}
+	
+	sharedManager.memory = sharedManager.total;
+	NSLog(@"memory: %@", sharedManager.memory);
+	[self rollDice]; // was just [self roll];
+    /*
+	for (int i = 0; i <= 5; i++) {
+		if (![[rolled objectAtIndex:i] isLocked]) {
+			[[self.diceButtons objectAtIndex:i] setEnabled:YES];
+		}
+	}
+    */
+    // we can disable it here once we figure out how to enable/disable rollButton based on subtotal
+    //	[self.rollButton setEnabled:NO];
+    //	[self.rollButton setAlpha:1.0]; // is this what was pusling the rollButton?
+	
+	[self updateUI];
+	/*
+	if (self.farkled == YES) {
+		[self.rollButton setEnabled:YES];
+		[self.rollButton setAlpha:1.0];
+	} else {
+		[self.rollButton setEnabled:NO]; // this is the desired behavior, but results in no rollButton on farkle tues july 23 12:29
+		[self.rollButton setAlpha:0.0];
+	}
+    */
     
     /*
     // this is just to test SharedManager and showing/hiding the navbar
