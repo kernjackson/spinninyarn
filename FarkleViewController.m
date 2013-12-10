@@ -390,7 +390,6 @@
         else if ([[farkle.rolledDice objectAtIndex:i] isLocked]) {
 			[[farkle.rolledDice objectAtIndex:i] setScored:YES];
 		}
-    NSLog(@"updateUI");
     }
     
     // new code

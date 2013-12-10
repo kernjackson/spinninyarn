@@ -47,7 +47,7 @@
         total = @0;
         subtotal = @0;
         farkles = @0;
-        turns = @12; // +1 for roll, +1 for 10 through 1
+        turns = @10; // +1 for roll, +1 for 10 through 1
         
         //NSMutableArray *rolled = [[NSMutableArray alloc] init];
         
@@ -147,7 +147,7 @@
 - (void)rollDice {
     
     // This should be in the inherited class Solitaire
-    if ([turns isEqualToNumber:@11]) {
+    if ([self isNewGame]) {
         rolledDice = [self newDice];
     }
     
