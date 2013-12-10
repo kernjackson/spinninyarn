@@ -40,6 +40,8 @@
 
 #pragma mark gameLoop
 - (void)gameLoop;
+- (bool)isNewGame;
+- (bool)isGameOver;
 
 #pragma mark Dice
 - (NSMutableArray *)newDice; // this should be private?

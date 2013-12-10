@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIProgressView *turnsProgress;
 @end
 
-#define TURNS 12
+#define TURNS 10
 
 @implementation FarkleViewController
 
@@ -37,13 +37,10 @@
 {
     [super viewDidLoad];
     
-    
+    [self toggleNavBar];
     
 	// Do any additional setup after loading the view.
-    Farkle *sharedManager = [Farkle sharedManager];
-    if (sharedManager.turns < 0) {
-        [self.navigationController setNavigationBarHidden:NO animated:YES];
-    }
+    
 //    sharedManager.total = @1;
     
     // Setup gesture recoginizer
@@ -186,13 +183,10 @@
     
     //[self disableRollButton];
     
-    // this should be in the specific Controller that inherhits of extends this controller?
-    if ([sharedManager.turns integerValue] == TURNS) {
-        // decrement turns by 1
-        NSNumber *temp = [NSNumber numberWithInt:[sharedManager.turns intValue] -1];
-        sharedManager.turns = temp;
-        [self.navigationController setNavigationBarHidden:YES animated:YES];
-    }
+    [self toggleNavBar]; // move to updateUI
+    
+    NSNumber *temp = [NSNumber numberWithInt:[sharedManager.turns intValue] -1];
+    sharedManager.turns = temp;
     
 	if (([sharedManager.subtotal integerValue] < 50) ) {
 		NSLog(@"subtotal < 50");
@@ -319,6 +313,17 @@
     
     //[self.rollButton setEnabled:YES];
 	//[self.rollButton setAlpha:1.0];
+}
+
+#pragma mark Navigation Bar
+
+- (void)toggleNavBar {
+    Farkle *sharedManager = [Farkle sharedManager];
+    
+    // not working correctly
+    if ([sharedManager isNewGame] || [sharedManager isGameOver]) {
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
+    } else [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 #pragma mark HUD
