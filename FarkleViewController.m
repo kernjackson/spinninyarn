@@ -15,7 +15,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *passButton;
 @property (weak, nonatomic) IBOutlet UIButton *rollButton;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
-@property (weak, nonatomic) IBOutlet UILabel *farklesLabel;
 @property (weak, nonatomic) IBOutlet UIButton *HUD;
 @property (weak, nonatomic) IBOutlet UIProgressView *turnsProgress;
 @end
@@ -378,8 +377,9 @@
 
 
 - (void)updateUI {
-    
+    ///////////////////////////////////
     // old updateUI code
+    ///////////////////////////////////
     Farkle *farkle = [Farkle sharedManager];
     for (int i = 0; i <= 5; i++) {
         if (![[farkle.rolledDice objectAtIndex:i] isLocked]) {
@@ -388,17 +388,20 @@
             NSLog(@"sideUp: %@", [[farkle.rolledDice objectAtIndex:i] sideUp]);
         }
         else if ([[farkle.rolledDice objectAtIndex:i] isLocked]) {
-			[[farkle.rolledDice objectAtIndex:i] setScored:YES];
+			[[farkle.rolledDice objectAtIndex:i] setScored:YES]; // is this in the wrong place?
 		}
     }
-    
+    ///////////////////////////////////
     // new code
+    ///////////////////////////////////
     [self toggleNavBar];
     
-    // change progress bar
+    // update progress bar
     [self.turnsProgress setProgress:((float)([farkle.turns integerValue] ) / 10) animated:YES];
     NSLog(@"%f", ((float)[farkle.turns integerValue] / 10));
     
+    [self.scoreLabel setText:[NSString stringWithFormat:@"%@", [farkle score]]];
+    [self.passButton setTitle:[NSString stringWithFormat:@"%@", [farkle subtotal]] forState:UIControlStateNormal]; // not really sure if I need both total, and subtotal???
 }
 
 @end
