@@ -42,7 +42,7 @@
     
 	// Do any additional setup after loading the view.
     
-//    sharedManager.total = @1;
+//    farkle.total = @1;
     
     // Setup gesture recoginizer
     UISwipeGestureRecognizer *mSwipeUpRecognizer = [[UISwipeGestureRecognizer alloc]
@@ -82,34 +82,34 @@
 #pragma mark not sure if controller or model
 
 - (void)newGame {
-    Farkle *sharedManager = [Farkle sharedManager];
+    Farkle *farkle = [Farkle sharedManager];
     
-    sharedManager.turns = @TURNS;
+    farkle.turns = @TURNS;
     [self.turnsProgress setProgress:1.0 animated:YES];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)endTurn {
-    Farkle *sharedManager = [Farkle sharedManager];
+    Farkle *farkle = [Farkle sharedManager];
     
     // [Farkle score:rolled] here
     
     // decrement turns by 1
-    NSNumber *temp = [NSNumber numberWithInt:[sharedManager.turns intValue] -1];
-    sharedManager.turns = temp;
+    NSNumber *temp = [NSNumber numberWithInt:[farkle.turns intValue] -1];
+    farkle.turns = temp;
     
-    [sharedManager gameLoop];
+    [farkle gameLoop];
     [self updateUI];
 }
 
 - (void)farkled {
-    Farkle *sharedManager = [Farkle sharedManager];
+    Farkle *farkle = [Farkle sharedManager];
     
     // Farkle.m will return 0 if player farkles
     
     // decrement turns by 1
-    NSNumber *temp = [NSNumber numberWithInt:[sharedManager.turns intValue] -1];
-    sharedManager.turns = temp;
+    NSNumber *temp = [NSNumber numberWithInt:[farkle.turns intValue] -1];
+    farkle.turns = temp;
 }
 
 - (void)didWin {
@@ -117,9 +117,9 @@
 }
 
 - (void)isGameOver {
-    Farkle *sharedManager = [Farkle sharedManager];
-    if (([sharedManager.turns integerValue] < TURNS) &&
-        ([sharedManager.turns integerValue] > 0)) {
+    Farkle *farkle = [Farkle sharedManager];
+    if (([farkle.turns integerValue] < TURNS) &&
+        ([farkle.turns integerValue] > 0)) {
         [self.navigationController setNavigationBarHidden:YES animated:YES];
     } else {
         // game over
@@ -132,17 +132,17 @@
 
 
 - (void)enablePassButton {
-    Farkle *sharedManager = [Farkle sharedManager];
+    Farkle *farkle = [Farkle sharedManager];
 	[self.passButton setEnabled:YES];
 	[self.passButton setAlpha:1.0];
-	[self.passButton setTitle:[NSString stringWithFormat:@"+ %@", [sharedManager total]] // was %d
+	[self.passButton setTitle:[NSString stringWithFormat:@"+ %@", [farkle total]] // was %d
                      forState:UIControlStateNormal];
 }
 
 - (void)disablePassButton {
-    Farkle *sharedManager = [Farkle sharedManager];
+    Farkle *farkle = [Farkle sharedManager];
 	[self.passButton setEnabled:NO];
-	[self.passButton setTitle:[NSString stringWithFormat:@"%@", [sharedManager total]] // was %d
+	[self.passButton setTitle:[NSString stringWithFormat:@"%@", [farkle total]] // was %d
                      forState:UIControlStateNormal];
 	self.passButton.alpha = .4;
 }
@@ -151,8 +151,8 @@
 
 - (void)newDice {
     // was called sixDice
-    Farkle *sharedManager = [Farkle sharedManager];
-    [sharedManager newDice];
+    Farkle *farkle = [Farkle sharedManager];
+    [farkle newDice];
     for (int i = 0; i <= 5; i++) {
         [self flipDiceButtons:i];
         NSLog(@"flipping: %d", i);
@@ -160,11 +160,11 @@
 }
 
 - (void)rollDice {
-    Farkle *sharedManager = [Farkle sharedManager];
+    Farkle *farkle = [Farkle sharedManager];
     //[self newDice];
-    [sharedManager rollDice];
+    [farkle rollDice];
 	for (int i = 0; i <= 5; i++) {
-		if ([[sharedManager.rolledDice objectAtIndex:i] isLocked]) {
+		if ([[farkle.rolledDice objectAtIndex:i] isLocked]) {
             [[self.diceButtons objectAtIndex:i] setAlpha:.1];
             [[self.diceButtons objectAtIndex:i] setEnabled:NO];
 			
@@ -199,31 +199,31 @@
 }
 
 - (IBAction)passed:(id)sender {
-    Farkle *sharedManager = [Farkle sharedManager];
+    Farkle *farkle = [Farkle sharedManager];
     
     // [self disablePass];
     [self endTurn]
     
 /*
     // decrement turns
-    NSNumber *temp = [NSNumber numberWithInt:[sharedManager.turns intValue] - 1];
-    sharedManager.turns = temp;
+    NSNumber *temp = [NSNumber numberWithInt:[farkle.turns intValue] - 1];
+    farkle.turns = temp;
 */
     ;
     // set passButton to @"0"
     // disable passButton
-    // [sharedManager gameLoop:@"passed"];
+    // [farkle gameLoop:@"passed"];
     
-    //[sharedManager gameLoop];
+    //[farkle gameLoop];
     
-    NSLog(@"passed() turns: %@", sharedManager.turns);
+    NSLog(@"passed() turns: %@", farkle.turns);
 }
 
 - (void)enableDie:(UIButton *)sender {
     
-    Farkle *sharedManager = [Farkle sharedManager];
+    Farkle *farkle = [Farkle sharedManager];
 
-    [[sharedManager.rolledDice objectAtIndex:[self.diceButtons indexOfObject:sender]] setLocked:NO];
+    [[farkle.rolledDice objectAtIndex:[self.diceButtons indexOfObject:sender]] setLocked:NO];
 	[sender setSelected:NO];
 	[sender setAlpha:1];
     // call animation here?
@@ -231,16 +231,16 @@
 
 - (void)disableDie:(UIButton *)sender {
     
-    Farkle *sharedManager = [Farkle sharedManager];
+    Farkle *farkle = [Farkle sharedManager];
     
-    [[sharedManager.rolledDice objectAtIndex:[self.diceButtons indexOfObject:sender]] setLocked:YES];
+    [[farkle.rolledDice objectAtIndex:[self.diceButtons indexOfObject:sender]] setLocked:YES];
 	[sender setSelected:YES];
 	[UIView animateWithDuration:0.10 animations:^{sender.alpha = 0.4;}];
 }
 
 - (void)clearDice {
-    Farkle *sharedManager = [Farkle sharedManager];
-	[sharedManager.rolledDice removeAllObjects];
+    Farkle *farkle = [Farkle sharedManager];
+	[farkle.rolledDice removeAllObjects];
 	for (int i = 0; i <= 5; i++) {
 		[[_diceButtons objectAtIndex:i] setAlpha:1];
 		[[self.diceButtons objectAtIndex:i] setEnabled:YES];
@@ -308,10 +308,10 @@
 #pragma mark Navigation Bar
 
 - (void)toggleNavBar {
-    Farkle *sharedManager = [Farkle sharedManager];
+    Farkle *farkle = [Farkle sharedManager];
     
     // not working correctly
-    if ([sharedManager isNewGame] || [sharedManager isGameOver]) {
+    if ([farkle isNewGame] || [farkle isGameOver]) {
         [self.navigationController setNavigationBarHidden:NO animated:YES];
     } else [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
@@ -380,15 +380,15 @@
 - (void)updateUI {
     
     // old updateUI code
-    Farkle *sharedManager = [Farkle sharedManager];
+    Farkle *farkle = [Farkle sharedManager];
     for (int i = 0; i <= 5; i++) {
-        if (![[sharedManager.rolledDice objectAtIndex:i] isLocked]) {
-            [[self.diceButtons objectAtIndex:i] setTitle:[[sharedManager.rolledDice objectAtIndex:i] sideUp]
+        if (![[farkle.rolledDice objectAtIndex:i] isLocked]) {
+            [[self.diceButtons objectAtIndex:i] setTitle:[[farkle.rolledDice objectAtIndex:i] sideUp]
                                         forState:UIControlStateNormal];
-            NSLog(@"sideUp: %@", [[sharedManager.rolledDice objectAtIndex:i] sideUp]);
+            NSLog(@"sideUp: %@", [[farkle.rolledDice objectAtIndex:i] sideUp]);
         }
-        else if ([[sharedManager.rolledDice objectAtIndex:i] isLocked]) {
-			[[sharedManager.rolledDice objectAtIndex:i] setScored:YES];
+        else if ([[farkle.rolledDice objectAtIndex:i] isLocked]) {
+			[[farkle.rolledDice objectAtIndex:i] setScored:YES];
 		}
     NSLog(@"updateUI");
     }
@@ -397,8 +397,8 @@
     [self toggleNavBar];
     
     // change progress bar
-    [self.turnsProgress setProgress:((float)([sharedManager.turns integerValue] ) / 10) animated:YES];
-    NSLog(@"%f", ((float)[sharedManager.turns integerValue] / 10));
+    [self.turnsProgress setProgress:((float)([farkle.turns integerValue] ) / 10) animated:YES];
+    NSLog(@"%f", ((float)[farkle.turns integerValue] / 10));
     
 }
 
