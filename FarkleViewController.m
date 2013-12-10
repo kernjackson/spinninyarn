@@ -50,6 +50,8 @@
                                                     action:@selector(popView)];
     [mSwipeUpRecognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
     [[self view] addGestureRecognizer:mSwipeUpRecognizer];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -96,12 +98,8 @@
     NSNumber *temp = [NSNumber numberWithInt:[sharedManager.turns intValue] -1];
     sharedManager.turns = temp;
     
-    
-    // change progress bar
-    [self.turnsProgress setProgress:((float)([sharedManager.turns integerValue] -1) / 10) animated:YES];
-    NSLog(@"%f", ((float)[sharedManager.turns integerValue] / 10));
-    
-    [self isGameOver];
+    [sharedManager gameLoop];
+    [self updateUI];
 }
 
 - (void)farkled {
@@ -131,14 +129,7 @@
 
 #pragma mark Pass
 
-- (IBAction)pass:(id)sender {
-    
-    [self endTurn];
-    
-    // debug
-    Farkle *sharedManager = [Farkle sharedManager];
-    NSLog(@"pass, turns == %@", sharedManager.turns);
-}
+
 
 - (void)enablePassButton {
     Farkle *sharedManager = [Farkle sharedManager];
@@ -170,9 +161,10 @@
 
 - (void)rollDice {
     Farkle *sharedManager = [Farkle sharedManager];
+    //[self newDice];
     [sharedManager rollDice];
 	for (int i = 0; i <= 5; i++) {
-		if ([[sharedManager.rolled objectAtIndex:i] isLocked]) {
+		if ([[sharedManager.rolledDice objectAtIndex:i] isLocked]) {
             [[self.diceButtons objectAtIndex:i] setAlpha:.1];
             [[self.diceButtons objectAtIndex:i] setEnabled:NO];
 			
@@ -186,7 +178,7 @@
 
 - (void)roll {
     Farkle *sharedManager = [Farkle sharedManager];
-	[sharedManager setFarkled:NO];
+	//[sharedManager setFarkled:NO];
 	//[self newGame]; // this shouldn't be here
 	Farkle *farkle = [[Farkle alloc] init];
     // check count?
@@ -197,9 +189,9 @@
 	} else [self rollDice];
 */
 	for (int i = 0; i <= 5; i++) {
-		if (![[sharedManager.rolled objectAtIndex:i] isLocked]) {
+		if (![[sharedManager.rolledDice objectAtIndex:i] isLocked]) {
 			// change the title of the button to the current sideup of the die
-			[[self.diceButtons objectAtIndex:i] setTitle:[[sharedManager.rolled objectAtIndex:i] sideUp]
+			[[self.diceButtons objectAtIndex:i] setTitle:[[sharedManager.rolledDice objectAtIndex:i] sideUp]
                                                 forState:UIControlStateNormal];
             
             /*
@@ -208,15 +200,15 @@
              UIImage *slImage = [UIImage imageNamed:shoppingListButtonImageName];
              [[self.diceButtons objectAtIndex:i] setImage:slImage forState:UIControlStateNormal];
              */
-		} else if ([[sharedManager.rolled objectAtIndex:i] isLocked]) {
-			[[sharedManager.rolled objectAtIndex:i] setScored:YES];
+		} else if ([[sharedManager.rolledDice objectAtIndex:i] isLocked]) {
+			[[sharedManager.rolledDice objectAtIndex:i] setScored:YES];
 		} // else [[locked objectAtIndex:i] setScored:YES];
 	}
 //	if ([sharedManager farkled:rolled] == 0) {
     
         NSNumber *bNumber = [NSNumber numberWithInt:[sharedManager.farkles intValue] + 1];
  //		sharedManager.farkles++;
-        [sharedManager setFarkled:YES];
+       // [sharedManager setFarkled:YES];
 		[sharedManager setMemory:0]; // ???
 		[self flashScreen];
 		// disable all dice
@@ -261,48 +253,81 @@
 	
 }
 
-- (IBAction)selectDice:(UIButton *)sender {
-//    Farkle *sharedManager = [Farkle sharedManager];
-	
-	if ([sender isSelected]) {
-		[self enableDie:sender];
-//		self.subtotal = [farkle score:rolled]; // returns an integer for all locked & !scored dice
-//		self.subtotal = ([farkle score:rolled] + [self memory]); // this somehow appears to work
-        NSLog(@"enable %ld", (long)[sender tag]);
-	} else {
-        
-		[self disableDie:sender];
-//		self.subtotal = [farkle score:rolled]; // returns an integer for all locked & !scored dice
-//		self.subtotal += self.memory; // memory allows for a persistent total between rolls
-        NSLog(@"disable %ld", (long)[sender tag]);
-	}
-//	self.total = self.subtotal;
-//	NSLog(@"subtotal: %d", [self subtotal]);
+#pragma mark Actions
 
-//	if (self.memory <= 0) {
-//		NSLog(@"memory: %d", [self memory]);
-//	}
+- (IBAction)rolled:(id)sender {
+    
+    Farkle *sharedManager = [Farkle sharedManager];
+    
+    //[self disableRollButton];
+    
+    // this should be in the specific Controller that inherhits of extends this controller?
+    if ([sharedManager.turns integerValue] == TURNS) {
+        // decrement turns by 1
+        NSNumber *temp = [NSNumber numberWithInt:[sharedManager.turns intValue] -1];
+        sharedManager.turns = temp;
+        [self.navigationController setNavigationBarHidden:YES animated:YES];
+    }
+    
+	if (([sharedManager.subtotal integerValue] < 50) ) {
+		NSLog(@"subtotal < 50");
+	}
+	
+	[self rollDice]; // was just [self roll];
+//    [sharedManager gameLoop]; // call this next to check game condition
 	[self updateUI];
 }
 
+
+- (IBAction)selectDice:(UIButton *)sender {
+		
+	if ([sender isSelected]) {
+		[self enableDie:sender];
+	} else {
+        [self disableDie:sender];
+	}
+	[self updateUI];
+}
+
+- (IBAction)passed:(id)sender {
+    Farkle *sharedManager = [Farkle sharedManager];
+/*
+    // decrement turns
+    NSNumber *temp = [NSNumber numberWithInt:[sharedManager.turns intValue] - 1];
+    sharedManager.turns = temp;
+*/
+    [self endTurn];
+    // set passButton to @"0"
+    // disable passButton
+    // [sharedManager gameLoop:@"passed"];
+    
+    //[sharedManager gameLoop];
+    
+    NSLog(@"passed() turns: %@", sharedManager.turns);
+}
+
 - (void)enableDie:(UIButton *)sender {
+    
+    Farkle *sharedManager = [Farkle sharedManager];
+
+    [[sharedManager.rolledDice objectAtIndex:[self.diceButtons indexOfObject:sender]] setLocked:NO];
 	[sender setSelected:NO];
 	[sender setAlpha:1];
-    // call animation here
-//	[[rolled objectAtIndex:[self.diceButtons indexOfObject:sender]] setLocked:NO];
+    // call animation here?
 }
 
 - (void)disableDie:(UIButton *)sender {
     
+    Farkle *sharedManager = [Farkle sharedManager];
+    
+    [[sharedManager.rolledDice objectAtIndex:[self.diceButtons indexOfObject:sender]] setLocked:YES];
 	[sender setSelected:YES];
 	[UIView animateWithDuration:0.10 animations:^{sender.alpha = 0.4;}];
-    
-    // [self diableDie];
 }
 
 - (void)clearDice {
     Farkle *sharedManager = [Farkle sharedManager];
-	[sharedManager.rolled removeAllObjects];
+	[sharedManager.rolledDice removeAllObjects];
 	for (int i = 0; i <= 5; i++) {
 		[[_diceButtons objectAtIndex:i] setAlpha:1];
 		[[self.diceButtons objectAtIndex:i] setEnabled:YES];
@@ -313,9 +338,11 @@
 	}
 }
 
+
+// possbily change this to flip just the labels
 - (void)flipDiceButtons:(int)index {
-	if (index == 1) {
-        
+	if (index == 0) {
+
         [UIView transitionWithView:[self.diceButtons objectAtIndex:index]
                           duration:0.25
                            options:UIViewAnimationOptionTransitionFlipFromBottom |
@@ -323,7 +350,7 @@
          } completion:nil];
         NSLog(@"index: %d", index);
 	}
-	if (index == 2) {
+	if (index == 1) {
 		
 		[UIView transitionWithView:[self.diceButtons objectAtIndex:index]
                           duration:0.25
@@ -332,7 +359,7 @@
 		 } completion:nil];
         NSLog(@"index: %d", index);
 	}
-	if ((index == 3) || (index == 4)) {
+	if ((index == 2) || (index == 3)) {
 		
 		[UIView transitionWithView:[self.diceButtons objectAtIndex:index]
                           duration:0.25
@@ -341,7 +368,7 @@
 		 } completion:nil];
         NSLog(@"index: %d", index);
 	}
-	if ((index == 5) || (index == 6)) {
+	if ((index == 4) || (index == 5)) {
 		
 		[UIView transitionWithView:[self.diceButtons objectAtIndex:index]
                           duration:0.25
@@ -356,54 +383,13 @@
 
 #pragma mark Roll
 
-- (IBAction)rolled:(id)sender {
-    Farkle *sharedManager = [Farkle sharedManager];
-   
-    if ([sharedManager.turns integerValue] == TURNS) {
-        // decrement turns by 1
-        NSNumber *temp = [NSNumber numberWithInt:[sharedManager.turns intValue] -1];
-        sharedManager.turns = temp;
-        [self.navigationController setNavigationBarHidden:YES animated:YES];
-    }
+- (void)disableRollButton {
+	
+	[self.rollButton setEnabled:NO];
+	[self.rollButton setAlpha:0.0];
     
-    // if no match is ongoing expose GameCenter UI to create a new match
-	//[[GCTurnBasedMatchHelper sharedInstance]
-	// findMatchWithMinPlayers:2 maxPlayers:2 viewController:self];
-	
-	/*
-     if (self.turn == TURNS) {
-     --self.turn;
-     }
-     */
-	
-	if (([sharedManager.subtotal integerValue] < 50) ) {
-		NSLog(@"subtotal < 50");
-	}
-	
-	//sharedManager.memory = sharedManager.total;
-	//NSLog(@"memory: %@", sharedManager.memory);
-	[self rollDice]; // was just [self roll];
-    /*
-	for (int i = 0; i <= 5; i++) {
-		if (![[rolled objectAtIndex:i] isLocked]) {
-			[[self.diceButtons objectAtIndex:i] setEnabled:YES];
-		}
-	}
-    */
-    // we can disable it here once we figure out how to enable/disable rollButton based on subtotal
-    //	[self.rollButton setEnabled:NO];
-    //	[self.rollButton setAlpha:1.0]; // is this what was pusling the rollButton?
-	
-	[self updateUI];
-/*
-	if (sharedManager.farkled isEqual:YES) {
-		[self.rollButton setEnabled:YES];
-		[self.rollButton setAlpha:1.0];
-	} else {
-		[self.rollButton setEnabled:NO]; // this is the desired behavior, but results in no rollButton on farkle tues july 23 12:29
-		[self.rollButton setAlpha:0.0];
-	}
-*/
+    //[self.rollButton setEnabled:YES];
+	//[self.rollButton setAlpha:1.0];
 }
 
 #pragma mark HUD
@@ -468,7 +454,27 @@
 
 
 - (void)updateUI {
+    
+    // old updateUI code
+    Farkle *sharedManager = [Farkle sharedManager];
+    for (int i = 0; i <= 5; i++) {
+        if (![[sharedManager.rolledDice objectAtIndex:i] isLocked]) {
+            [[self.diceButtons objectAtIndex:i] setTitle:[[sharedManager.rolledDice objectAtIndex:i] sideUp]
+                                        forState:UIControlStateNormal];
+            NSLog(@"sideUp: %@", [[sharedManager.rolledDice objectAtIndex:i] sideUp]);
+        }
+        else if ([[sharedManager.rolledDice objectAtIndex:i] isLocked]) {
+			[[sharedManager.rolledDice objectAtIndex:i] setScored:YES];
+		}
     NSLog(@"updateUI");
+    }
+    
+    // new code
+    
+    // change progress bar
+    [self.turnsProgress setProgress:((float)([sharedManager.turns integerValue] -1) / 10) animated:YES];
+    NSLog(@"%f", ((float)[sharedManager.turns integerValue] / 10));
+    
 }
 
 @end

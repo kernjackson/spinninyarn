@@ -26,8 +26,8 @@
 @synthesize farkles;
 @synthesize turns;
 
-@synthesize rolled;
-@synthesize locked;
+@synthesize rolledDice;
+@synthesize lockedDice;
 
 #pragma mark Initialize
 
@@ -48,6 +48,9 @@
         subtotal = @0;
         farkles = @0;
         turns = @12; // +1 for roll, +1 for 10 through 1
+        
+        //NSMutableArray *rolled = [[NSMutableArray alloc] init];
+        
     }
     return self;
 }
@@ -56,24 +59,99 @@
 	return @[@1000,@200,@300,@400,@500,@600];
 }
 
+- (void)gameLoop {
+    if ([self isNewGame]) // can this go inside the next if?
+        NSLog(@"[self newGame]");
+    else if ([self isGameOver])
+        NSLog(@"[self gameOver]");
+    else NSLog(@"Do game loop stuff here");
+}
+
+- (bool)isNewGame {
+    if ([turns intValue] == 11) {
+        NSNumber *temp = [NSNumber numberWithInt:[turns intValue] -1];
+        turns = temp;
+        return YES;
+    } else return NO;
+}
+
+- (bool)isGameOver {
+    if ([turns intValue] == 1 ) {
+        turns = @10;
+        return YES;
+    } else return NO;
+}
+
+- (int)whoOne {
+    return -1;
+}
+
+/*
+- (int)gameLoop {
+    
+    // is it a new game?
+    if ([turns intValue] > 10) {
+        // newGame
+    }
+    // did Player Win?
+    else if ([score intValue] >= 10000) {
+        // playerWon
+    }
+    // did Player Lose?
+    else if ([turns intValue] < 0) {
+        // playerLost
+    }
+    else {
+        
+    }
+    
+    
+    
+    return -1;
+}
+*/
 #pragma mark Dice
 
+- (NSMutableArray *)newDice {
+    NSMutableArray *newDice = [[NSMutableArray alloc] init];
+    for (int i = 0; i <= 5; i++) {
+		Die *die = [[Die alloc] init];
+        //        [rolled insertObject:die atIndex:i];
+        [newDice addObject:die];
+        NSLog(@"die: %@", [die sideUp]);
+        NSLog(@"rolled: %@", [[newDice objectAtIndex:i] sideUp]);
+        //		[rolled insertObject:die atIndex:i];
+	}
+    return newDice;
+}
+/*
 - (void)newDice {
-	[rolled removeAllObjects];
+    NSMutableArray *rolled = [[NSMutableArray alloc] init];
+//	[self.rolled removeAllObjects];
 	for (int i = 0; i <= 5; i++) {
 		Die *die = [[Die alloc] init];
-		[rolled insertObject:die atIndex:i];
+//        [rolled insertObject:die atIndex:i];
+        [rolled addObject:die];
+        NSLog(@"die: %@", [die sideUp]);
+        NSLog(@"rolled: %@", [rolled objectAtIndex:i]);
+//		[rolled insertObject:die atIndex:i];
 	}
 	// check score here?
 }
-
+*/
 - (void)rollDice {
+    
+    // This should be in the inherited class Solitaire
+    if ([turns isEqualToNumber:@11]) {
+        rolledDice = [self newDice];
+    }
+    
 	for (int i = 0; i <= 5; i++) {
-		if ([[rolled objectAtIndex:i] isLocked]) {
-			[[rolled objectAtIndex:i] setScored:YES];
+		if ([[rolledDice objectAtIndex:i] isLocked]) {
+			[[rolledDice objectAtIndex:i] setScored:YES];
 		} else {
 			Die *die = [[Die alloc] init];
-			[rolled replaceObjectAtIndex:i withObject:die];
+			[rolledDice replaceObjectAtIndex:i withObject:die];
 		}
 	}
     //	[self setFarkles: [self farkled]];
@@ -83,16 +161,20 @@
     return -1;
 }
 
-- (void)disableDie:(UIButton *)sender {
+- (void)enableDie:(int)sender {
+    
+}
+
+- (void)disableDie:(int)tag {
    // Farkle *sharedManager = [Farkle sharedManager];
     
     // we need this, but it currently prevents compilaton
-//	[[rolled objectAtIndex:[sender tag] setLocked:YES];
+//	[rolled objectAtIndex:tag setLocked:YES];
 }
 
 // I don't think I actually need this, as we never really need to removed all objects from the array. Just set everything to zero instead.
 - (void)clearDice {
-	[rolled removeAllObjects];
+	[rolledDice removeAllObjects];
 	for (int i = 0; i <= 5; i++) {
 //		[[_diceButtons objectAtIndex:i] setAlpha:1];
 //		[[self.diceButtons objectAtIndex:i] setEnabled:YES];
@@ -214,13 +296,13 @@
 
 - (void)logRolled {
     for (int i = 0; i < 6; i++) {
-        NSLog(@"%@", rolled[i]);
+        NSLog(@"%@", rolledDice[i]);
     }
 }
 
 - (void)logLocked {
     for (int i = 0; i < 6; i++) {
-        NSLog(@"%@", locked[i]);
+        NSLog(@"%@", lockedDice[i]);
     }
 }
 

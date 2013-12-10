@@ -15,11 +15,11 @@
     NSNumber *subtotal; // ???
     NSNumber *memory;  // ???
     NSNumber *farkles;
-    BOOL farkled; // There's got to be a better way to do this ???
+   //BOOL farkled; // There's got to be a better way to do this ???
     NSNumber *turns;
     
-    NSMutableArray *rolled;
-    NSMutableArray *locked;
+//    NSMutableArray *rolled;
+//    NSMutableArray *locked;
 }
 
 @property (nonatomic, retain) NSNumber *score;
@@ -27,19 +27,22 @@
 @property (nonatomic, retain) NSNumber *subtotal; // ???
 @property (nonatomic, retain) NSNumber *memory; // ???
 @property (nonatomic, retain) NSNumber *farkles;
-@property (nonatomic) BOOL farkled; // There's got to be a better way to do this ???
+//@property (nonatomic) BOOL farkled; // There's got to be a better way to do this ???
 @property (nonatomic, retain) NSNumber *turns;
 
-@property (nonatomic, retain) NSMutableArray *rolled;
-@property (nonatomic, retain) NSMutableArray *locked;
+@property (nonatomic, retain) NSMutableArray *rolledDice;
+@property (nonatomic, retain) NSMutableArray *lockedDice;
 
 + (id)sharedManager;
 
 @property (nonatomic) BOOL doubling;
 @property (nonatomic) BOOL onesLow;
 
+#pragma mark gameLoop
+- (void)gameLoop;
+
 #pragma mark Dice
-- (void)newDice;
+- (NSMutableArray *)newDice; // this should be private?
 - (void)rollDice;
 - (bool)diceHot;
 
