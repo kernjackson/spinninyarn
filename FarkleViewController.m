@@ -36,8 +36,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self updateUI];
     
-    [self toggleNavBar];
+    
     
 	// Do any additional setup after loading the view.
     
@@ -179,21 +180,10 @@
 
 - (IBAction)rolled:(id)sender {
     
-    Farkle *sharedManager = [Farkle sharedManager];
-    
-    //[self disableRollButton];
-    
-    [self toggleNavBar]; // move to updateUI
-    
-    NSNumber *temp = [NSNumber numberWithInt:[sharedManager.turns intValue] -1];
-    sharedManager.turns = temp;
-    
-	if (([sharedManager.subtotal integerValue] < 50) ) {
-		NSLog(@"subtotal < 50");
-	}
-	
-	[self rollDice]; // was just [self roll];
-//    [sharedManager gameLoop]; // call this next to check game condition
+    Farkle *farkle = [Farkle sharedManager];
+
+	[self rollDice];
+    [farkle gameLoop];
 	[self updateUI];
 }
 
@@ -404,9 +394,10 @@
     }
     
     // new code
+    [self toggleNavBar];
     
     // change progress bar
-    [self.turnsProgress setProgress:((float)([sharedManager.turns integerValue] -1) / 10) animated:YES];
+    [self.turnsProgress setProgress:((float)([sharedManager.turns integerValue] ) / 10) animated:YES];
     NSLog(@"%f", ((float)[sharedManager.turns integerValue] / 10));
     
 }

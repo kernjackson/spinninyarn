@@ -808,7 +808,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="" contentHorizontalAlignment="right" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eU3-o4-G0u">
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="Die1" contentHorizontalAlignment="right" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eU3-o4-G0u">
                                 <rect key="frame" x="0.0" y="177" width="106" height="106"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="100"/>
@@ -823,7 +823,7 @@
                                     <action selector="selectDice:" destination="dWC-Zc-SpH" eventType="touchUpInside" id="Zwm-te-JUe"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGv-dF-qe8">
+                            <button autoresizesSubviews="NO" opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="Die2" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGv-dF-qe8">
                                 <rect key="frame" x="107" y="177" width="106" height="106"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="100"/>
@@ -838,7 +838,7 @@
                                     <action selector="selectDice:" destination="dWC-Zc-SpH" eventType="touchUpInside" id="edL-g3-HLJ"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lgx-0A-tpX">
+                            <button autoresizesSubviews="NO" opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="Die3" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lgx-0A-tpX">
                                 <rect key="frame" x="214" y="177" width="106" height="106"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="100"/>
@@ -853,7 +853,7 @@
                                     <action selector="selectDice:" destination="dWC-Zc-SpH" eventType="touchUpInside" id="1Cm-5h-aKm"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="" contentHorizontalAlignment="right" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1BI-JQ-FnV">
+                            <button autoresizesSubviews="NO" opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="Die4" contentHorizontalAlignment="right" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1BI-JQ-FnV">
                                 <rect key="frame" x="0.0" y="284" width="106" height="106"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="100"/>
@@ -868,7 +868,7 @@
                                     <action selector="selectDice:" destination="dWC-Zc-SpH" eventType="touchUpInside" id="CMF-jd-I2F"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="seb-bW-993">
+                            <button autoresizesSubviews="NO" opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="Die5" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="seb-bW-993">
                                 <rect key="frame" x="107" y="284" width="106" height="106"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="100"/>
@@ -883,7 +883,7 @@
                                     <action selector="selectDice:" destination="dWC-Zc-SpH" eventType="touchUpInside" id="n2J-hK-FMx"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="otZ-TH-cDg">
+                            <button autoresizesSubviews="NO" opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="Die6" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="otZ-TH-cDg">
                                 <rect key="frame" x="214" y="284" width="106" height="106"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="100"/>
@@ -898,13 +898,13 @@
                                     <action selector="selectDice:" destination="dWC-Zc-SpH" eventType="touchUpInside" id="8LP-ly-JhD"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="8" contentMode="left" verticalCompressionResistancePriority="749" fixedFrame="YES" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRF-Sk-GBw">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="8" contentMode="left" verticalCompressionResistancePriority="749" fixedFrame="YES" restorationIdentifier="score" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRF-Sk-GBw">
                                 <rect key="frame" x="14" y="16" width="292" height="73"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="90"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" tag="6" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kl3-a5-J9G">
+                            <button opaque="NO" tag="6" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="pass" contentHorizontalAlignment="right" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kl3-a5-J9G">
                                 <rect key="frame" x="20" y="83" width="286" height="73"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="90"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -919,13 +919,7 @@
                                     <action selector="passed:" destination="dWC-Zc-SpH" eventType="touchUpInside" id="Zca-jK-xxX"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEv-Zv-MhN">
-                                <rect key="frame" x="8" y="54" width="42" height="20"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" tag="7" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iJ3-qO-gQM">
+                            <button opaque="NO" tag="7" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="roll" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iJ3-qO-gQM">
                                 <rect key="frame" x="0.0" y="391" width="320" height="89"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="90"/>

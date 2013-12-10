@@ -62,24 +62,29 @@
 - (void)gameLoop {
     if ([self isNewGame]) // can this go inside the next if?
         NSLog(@"[self newGame]");
-    else if ([self isGameOver])
+    else if ([self isGameOver]) {
         NSLog(@"[self gameOver]");
+        [self newGame];
+    }
     else NSLog(@"Do game loop stuff here");
 }
 
 - (bool)isNewGame {
-    if ([turns intValue] == 11) {
-        NSNumber *temp = [NSNumber numberWithInt:[turns intValue] -1];
-        turns = temp;
+    if ([turns  isEqual: @10]) {
+//        NSNumber *temp = [NSNumber numberWithInt:[turns intValue] -1];
+//        turns = temp;
         return YES;
     } else return NO;
 }
 
 - (bool)isGameOver {
-    if ([turns intValue] == 1 ) {
-        turns = @10;
+    if ([turns  isEqual: @0] ) {
         return YES;
     } else return NO;
+}
+
+- (void)newGame {
+    turns = @10;
 }
 
 - (int)whoOne {
