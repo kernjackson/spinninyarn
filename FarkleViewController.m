@@ -24,7 +24,6 @@
 
 @implementation FarkleViewController
 
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -37,6 +36,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    
+    
 	// Do any additional setup after loading the view.
     Farkle *sharedManager = [Farkle sharedManager];
     if (sharedManager.turns < 0) {
@@ -176,83 +178,6 @@
     //	[self setFarkles: [self farkled]];
 }
 
-- (void)roll {
-    Farkle *sharedManager = [Farkle sharedManager];
-	//[sharedManager setFarkled:NO];
-	//[self newGame]; // this shouldn't be here
-	Farkle *farkle = [[Farkle alloc] init];
-    // check count?
-/*
-	if ((sharedManager.count == 0) || ([sharedManager diceHot])) {
-		[sharedManager clearDice];
-		[sharedManager newDice];
-	} else [self rollDice];
-*/
-	for (int i = 0; i <= 5; i++) {
-		if (![[sharedManager.rolledDice objectAtIndex:i] isLocked]) {
-			// change the title of the button to the current sideup of the die
-			[[self.diceButtons objectAtIndex:i] setTitle:[[sharedManager.rolledDice objectAtIndex:i] sideUp]
-                                                forState:UIControlStateNormal];
-            
-            /*
-             // all this is required to load images on buttons
-             NSString *shoppingListButtonImageName = @"die3black";
-             UIImage *slImage = [UIImage imageNamed:shoppingListButtonImageName];
-             [[self.diceButtons objectAtIndex:i] setImage:slImage forState:UIControlStateNormal];
-             */
-		} else if ([[sharedManager.rolledDice objectAtIndex:i] isLocked]) {
-			[[sharedManager.rolledDice objectAtIndex:i] setScored:YES];
-		} // else [[locked objectAtIndex:i] setScored:YES];
-	}
-//	if ([sharedManager farkled:rolled] == 0) {
-    
-        NSNumber *bNumber = [NSNumber numberWithInt:[sharedManager.farkles intValue] + 1];
- //		sharedManager.farkles++;
-       // [sharedManager setFarkled:YES];
-		[sharedManager setMemory:0]; // ???
-		[self flashScreen];
-		// disable all dice
-		for (int i = 0; i <= 5; i++) {
-            //		if (![[rolled objectAtIndex:i] isLocked]) {
-            [[self.diceButtons objectAtIndex:i] setSelected:YES];
-            [[self.diceButtons objectAtIndex:i] setAlpha:.4];
-            [[self.diceButtons objectAtIndex:i] setEnabled:NO]; // how does this not disable the buttons?
-//            [[sharedManager.rolled objectAtIndex:i] setLocked:YES];
-            
-            //		}
-			[self.rollButton setEnabled:YES];
-			[self.rollButton setAlpha:1.0];
-		}
-        //		[self pulseRollButton];
-//		[self setSubtotal:0];
-//		[self setTotal:0];
-//		--self.turn; // moved this up to rollButton
-        
-		if (sharedManager.turns <= 0) {
-			
-//			[self gameOver];
-			/*
-             // prevent the user from clicking the HUD for 1.6 seconds
-             [NSTimer scheduledTimerWithTimeInterval:1.6
-             target:self
-             selector:@selector(enableHUD:)
-             userInfo:nil
-             repeats:NO];
-             */
-		} else
-            NSLog(@"farkles: %@", sharedManager.farkles);
-		
-        sharedManager.farkles = 0;
-        
-        NSLog(@"turns: %@", sharedManager.turns);
-		//	[self updateUI];
-		
-	//}
-    
-	//[self setFarkled:YES];
-	
-}
-
 #pragma mark Actions
 
 - (IBAction)rolled:(id)sender {
@@ -291,12 +216,16 @@
 
 - (IBAction)passed:(id)sender {
     Farkle *sharedManager = [Farkle sharedManager];
+    
+    // [self disablePass];
+    [self endTurn]
+    
 /*
     // decrement turns
     NSNumber *temp = [NSNumber numberWithInt:[sharedManager.turns intValue] - 1];
     sharedManager.turns = temp;
 */
-    [self endTurn];
+    ;
     // set passButton to @"0"
     // disable passButton
     // [sharedManager gameLoop:@"passed"];
