@@ -67,8 +67,26 @@
         [self newGame];
     }
     else {
+        
+        /////////////////////////////////
         // need to calculate the score on rolled somewhere, maybe here?
-        NSLog(@"subtotal: %ld", (long)[self score:[self sort:rolledDice]]);
+        NSMutableArray *unsorted = [[NSMutableArray alloc] init];
+        for (int i = 0; i < 6; i++) {
+            [unsorted addObject:@0];
+        }
+        // calculate score for rolled
+        for (int i = 0; i < 6; i++) {
+            if ((![[rolledDice objectAtIndex:i] isLocked]) &&
+                (![[rolledDice objectAtIndex:i] isScored]))
+            {
+                [unsorted insertObject:[[rolledDice objectAtIndex:i] sideValue] atIndex:i];
+            }
+        }
+        NSLog(@"subtotal: %ld", (long)[self score:[self sort:unsorted]]);
+        /////////////////////////////////
+
+        
+        //NSLog(@"subtotal: %ld", (long)[self score:[self sort:rolledDice]]);
         [self logLocked];
     }
 }
@@ -204,7 +222,6 @@
     } // increment at each position for each die value
     for (int position = 0; position < 6; position++) {
         for (int value = 0; value < 6; value++) {
-            // this was using isEqualTo:
             if ([unsorted[position] isEqual:[NSNumber numberWithInt:value+1]]) {
                 NSNumber *count = [NSNumber numberWithInt:[sorted[value] intValue] + 1];
                 [sorted removeObjectAtIndex:value];
@@ -290,7 +307,7 @@
                 scored += 100;
             }
             
-            // 1 fives
+            // 1 five
             else if (i == 4) {
                 scored += 50;
             }
@@ -304,25 +321,21 @@
 
 
 - (void)logRolled {
-    NSLog(@"rolled: %@ %@ %@ %@ %@ %@",
-          [[rolledDice objectAtIndex:0] sideUp],
-          [[rolledDice objectAtIndex:1] sideUp],
-          [[rolledDice objectAtIndex:2] sideUp],
-          [[rolledDice objectAtIndex:3] sideUp],
-          [[rolledDice objectAtIndex:4] sideUp],
-          [[rolledDice objectAtIndex:5] sideUp]
-          );
+    for (int i = 0; i < 6; i++) {
+        if ((![[rolledDice objectAtIndex:i] isLocked]) &&
+            (![[rolledDice objectAtIndex:i] isScored])) {
+            NSLog(@"rolled: %@", [[rolledDice objectAtIndex:i] sideUp]);
+        }
+    }
 }
 
 - (void)logLocked {
-    NSLog(@"locked: %@ %@ %@ %@ %@ %@",
-          [[rolledDice objectAtIndex:0] sideUp],
-          [[lockedDice objectAtIndex:1] sideUp],
-          [[lockedDice objectAtIndex:2] sideUp],
-          [[lockedDice objectAtIndex:3] sideUp],
-          [[lockedDice objectAtIndex:4] sideUp],
-          [[lockedDice objectAtIndex:5] sideUp]
-          );
+    
+    for (int i = 0; i < 6; i++) {
+        if ([[rolledDice objectAtIndex:i] isLocked]) {
+            NSLog(@"locked: %@", [[rolledDice objectAtIndex:i] sideUp]);
+        }
+    }
 }
 
 @end

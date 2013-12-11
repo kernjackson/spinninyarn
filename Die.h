@@ -12,7 +12,7 @@
     
 }
 
-@property (nonatomic) NSUInteger sideValue;
+@property (nonatomic) NSNumber *sideValue;
 @property (strong, nonatomic) NSString *sideUp;
 
 @property (nonatomic, getter = isPlayed) BOOL played;

@@ -18,7 +18,8 @@
 }
 
 + (NSArray *)sideValues {
-	return @[@"1",@"2",@"3",@"4",@"5",@"6"];
+//    return @[@"1",@"2",@"3",@"4",@"5",@"6"];
+	return @[@1,@2,@3,@4,@5,@6];
 }
 
 - (id)init {
@@ -46,7 +47,7 @@
 	[self setLocked:NO];
 	[self setScored:NO];
 	[self setPlayed:NO];
-	[self setSideValue: [ [[Die sideValues] objectAtIndex:index] integerValue] ];
+	[self setSideValue: [  [Die sideValues] objectAtIndex:index] ];
 	[self setSideUp:    [  [Die sidesUp] objectAtIndex:index]];
 	
 	return self;

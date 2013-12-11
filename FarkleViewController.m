@@ -251,7 +251,7 @@
 }
 
 
-// possbily change this to flip just the labels, this should probably be a switch statement
+// possbily change this to flip just the labels. This should probably be a switch statement, but I plan on eventually replacing this anyway. Either flip just the labels, replace it with 3d cubes behind, etc...
 - (void)flipDiceButtons:(int)index {
 	if (index == 0) {
 
