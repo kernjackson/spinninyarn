@@ -154,7 +154,7 @@
     [farkle newDice];
     for (int i = 0; i <= 5; i++) {
         [self flipDiceButtons:i];
-        NSLog(@"flipping: %d", i);
+//        NSLog(@"flipping: %d", i);
     }
 }
 
@@ -169,7 +169,7 @@
 			
 		} else {
             [self flipDiceButtons:i];
-            NSLog(@"flipping: %d", i);
+//            NSLog(@"flipping: %d", i);
 		}
 	}
     //	[self setFarkles: [self farkled]];
@@ -215,7 +215,7 @@
     
     //[farkle gameLoop];
     
-    NSLog(@"passed() turns: %@", farkle.turns);
+    NSLog(@"turns: %@", farkle.turns);
 }
 
 - (void)enableDie:(UIButton *)sender {
@@ -251,7 +251,7 @@
 }
 
 
-// possbily change this to flip just the labels
+// possbily change this to flip just the labels, this should probably be a switch statement
 - (void)flipDiceButtons:(int)index {
 	if (index == 0) {
 
@@ -260,7 +260,7 @@
                            options:UIViewAnimationOptionTransitionFlipFromBottom |
          UIViewAnimationOptionAllowUserInteraction animations:^{
          } completion:nil];
-        NSLog(@"index: %d", index);
+        //NSLog(@"index: %d", index);
 	}
 	if (index == 1) {
 		
@@ -269,7 +269,7 @@
                            options:UIViewAnimationOptionTransitionFlipFromTop |
 		 UIViewAnimationOptionAllowUserInteraction animations:^{
 		 } completion:nil];
-        NSLog(@"index: %d", index);
+        //NSLog(@"index: %d", index);
 	}
 	if ((index == 2) || (index == 3)) {
 		
@@ -278,7 +278,7 @@
                            options:UIViewAnimationOptionTransitionFlipFromLeft |
 		 UIViewAnimationOptionAllowUserInteraction animations:^{
 		 } completion:nil];
-        NSLog(@"index: %d", index);
+        //NSLog(@"index: %d", index);
 	}
 	if ((index == 4) || (index == 5)) {
 		
@@ -288,8 +288,8 @@
 		 UIViewAnimationOptionAllowUserInteraction
                         animations:^{
                         } completion:nil];
-        NSLog(@"index: %d", index);
-	} else NSLog(@"flipDiceButtons: error %d", index);
+        //NSLog(@"index: %d", index);
+	} //else NSLog(@"flipDiceButtons: error %d", index);
 }
 
 
@@ -328,13 +328,13 @@
                      completion:nil];
 }
 
-- (void)clearScreen:(UIColor*)color {
+- (void)clearScreen {
 	[UIView animateWithDuration:0.6
                           delay:0.0
                         options: UIViewAnimationOptionCurveEaseOut |
 	 UIViewAnimationOptionAllowUserInteraction
                      animations:^{
-                         self.HUD.backgroundColor = color;
+                         self.HUD.backgroundColor = [UIColor whiteColor];
                          self.HUD.alpha = 0.0;
                          //		 [self.HUD setTitle:[NSString stringWithFormat:@""]
                          //							 forState:UIControlStateNormal];
@@ -342,13 +342,13 @@
                      completion:nil];
 }
 
-- (void)deathScreen:(UIColor*)color {
+- (void)deathScreen {
 	[UIView animateWithDuration:1.6
                           delay:0.6
                         options: UIViewAnimationOptionCurveEaseIn |
      UIViewAnimationOptionAllowUserInteraction
                      animations:^{
-                         self.HUD.backgroundColor = color;
+                         self.HUD.backgroundColor = [UIColor redColor];
                          self.HUD.alpha = 1.0;
                          // self.HUD.tintColor = [UIColor whiteColor];
                          self.scoreLabel.textColor = [UIColor blackColor];
@@ -377,31 +377,41 @@
 
 
 - (void)updateUI {
-    ///////////////////////////////////
-    // old updateUI code
-    ///////////////////////////////////
+    
     Farkle *farkle = [Farkle sharedManager];
+    
+    [self toggleNavBar];
+    
+    // update Dice
     for (int i = 0; i <= 5; i++) {
         if (![[farkle.rolledDice objectAtIndex:i] isLocked]) {
             [[self.diceButtons objectAtIndex:i] setTitle:[[farkle.rolledDice objectAtIndex:i] sideUp]
                                         forState:UIControlStateNormal];
-            NSLog(@"sideUp: %@", [[farkle.rolledDice objectAtIndex:i] sideUp]);
+            //NSLog(@"rolled: %@", [[farkle.rolledDice objectAtIndex:i] sideUp]);
         }
         else if ([[farkle.rolledDice objectAtIndex:i] isLocked]) {
-			[[farkle.rolledDice objectAtIndex:i] setScored:YES]; // is this in the wrong place?
+			[[farkle.rolledDice objectAtIndex:i] setScored:YES];
 		}
     }
-    ///////////////////////////////////
-    // new code
-    ///////////////////////////////////
-    [self toggleNavBar];
-    
+    //NSLog(@"rolled: %@", [[farkle.rolledDice objectAtIndex:0] sideUp]);
+
     // update progress bar
     [self.turnsProgress setProgress:((float)([farkle.turns integerValue] ) / 10) animated:YES];
-    NSLog(@"%f", ((float)[farkle.turns integerValue] / 10));
+    // NSLog(@"%f", ((float)[farkle.turns integerValue] / 10));
     
+    //  update score and total
     [self.scoreLabel setText:[NSString stringWithFormat:@"%@", [farkle score]]];
-    [self.passButton setTitle:[NSString stringWithFormat:@"%@", [farkle subtotal]] forState:UIControlStateNormal]; // not really sure if I need both total, and subtotal???
+    [self.passButton setTitle:[NSString stringWithFormat:@"%@", [farkle total]] forState:UIControlStateNormal];
+    
+    // these don't seem to do anything
+    if ([farkle isNewGame]) {
+        [self clearScreen];
+    }
+    
+    if ([farkle isGameOver]) {
+        [self deathScreen];
+    }
+    
 }
 
 @end

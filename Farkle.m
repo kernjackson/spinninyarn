@@ -66,7 +66,11 @@
         NSLog(@"[self gameOver]");
         [self newGame];
     }
-    else NSLog(@"Do game loop stuff here");
+    else {
+        // need to calculate the score on rolled somewhere, maybe here?
+        NSLog(@"subtotal: %ld", (long)[self score:[self sort:rolledDice]]);
+        [self logLocked];
+    }
 }
 
 - (bool)isNewGame {
@@ -121,11 +125,7 @@
     NSMutableArray *newDice = [[NSMutableArray alloc] init];
     for (int i = 0; i <= 5; i++) {
 		Die *die = [[Die alloc] init];
-        //        [rolled insertObject:die atIndex:i];
         [newDice addObject:die];
-        NSLog(@"die: %@", [die sideUp]);
-        NSLog(@"rolled: %@", [[newDice objectAtIndex:i] sideUp]);
-        //		[rolled insertObject:die atIndex:i];
 	}
     return newDice;
 }
@@ -146,6 +146,8 @@
 */
 - (void)rollDice {
     
+    
+    
     // This should be in the inherited class Solitaire
     if ([self isNewGame]) {
         rolledDice = [self newDice];
@@ -159,6 +161,7 @@
 			[rolledDice replaceObjectAtIndex:i withObject:die];
 		}
 	}
+    [self logRolled];
     //	[self setFarkles: [self farkled]];
 }
 
@@ -299,16 +302,27 @@
 
 #pragma mark Console
 
+
 - (void)logRolled {
-    for (int i = 0; i < 6; i++) {
-        NSLog(@"%@", rolledDice[i]);
-    }
+    NSLog(@"rolled: %@ %@ %@ %@ %@ %@",
+          [[rolledDice objectAtIndex:0] sideUp],
+          [[rolledDice objectAtIndex:1] sideUp],
+          [[rolledDice objectAtIndex:2] sideUp],
+          [[rolledDice objectAtIndex:3] sideUp],
+          [[rolledDice objectAtIndex:4] sideUp],
+          [[rolledDice objectAtIndex:5] sideUp]
+          );
 }
 
 - (void)logLocked {
-    for (int i = 0; i < 6; i++) {
-        NSLog(@"%@", lockedDice[i]);
-    }
+    NSLog(@"locked: %@ %@ %@ %@ %@ %@",
+          [[rolledDice objectAtIndex:0] sideUp],
+          [[lockedDice objectAtIndex:1] sideUp],
+          [[lockedDice objectAtIndex:2] sideUp],
+          [[lockedDice objectAtIndex:3] sideUp],
+          [[lockedDice objectAtIndex:4] sideUp],
+          [[lockedDice objectAtIndex:5] sideUp]
+          );
 }
 
 @end
