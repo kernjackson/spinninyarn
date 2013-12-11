@@ -83,7 +83,8 @@
                 [unsorted insertObject:[[rolledDice objectAtIndex:i] sideValue] atIndex:i];
             }
         }
-        NSLog(@"subtotal: %ld", (long)[self score:[self sort:unsorted]]);
+        subtotal = [NSNumber numberWithInteger:[self score:[self sort:unsorted]]];
+        NSLog(@"subtotal: %@", subtotal);
         /////////////////////////////////
         // calculate score for locked
         for (int i = 0; i < 6; i++) {
@@ -92,7 +93,8 @@
                 [unsorted insertObject:[[rolledDice objectAtIndex:i] sideValue] atIndex:i];
             }
         }
-        NSLog(@"total: %ld", (long)[self score:[self sort:unsorted]]);
+        total = [NSNumber numberWithInteger:[self score:[self sort:unsorted]]];
+        NSLog(@"total: %@", total);
         /////////////////////////////////
 
         

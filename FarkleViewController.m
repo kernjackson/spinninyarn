@@ -188,12 +188,15 @@
 
 
 - (IBAction)selectDice:(UIButton *)sender {
-		
+    
+    Farkle *farkle = [Farkle sharedManager];
+    
 	if ([sender isSelected]) {
 		[self enableDie:sender];
 	} else {
         [self disableDie:sender];
 	}
+    [farkle gameLoop];
 	[self updateUI];
 }
 
