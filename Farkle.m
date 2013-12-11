@@ -19,10 +19,13 @@
 
 @implementation Farkle
 
-@synthesize score;
-@synthesize total;
-@synthesize subtotal;
-@synthesize memory;
+
+@synthesize rolledPoints;
+@synthesize lockedPoints;
+@synthesize scoredPoints;
+@synthesize totalPoints;
+
+@synthesize memory; // replaced by one of the above
 @synthesize farkles;
 @synthesize turns;
 
@@ -43,9 +46,9 @@
 - (id)init {
     if (self = [super init]) {
         
-        score = @0;
-        total = @0;
-        subtotal = @0;
+        scoredPoints = @0;
+        rolledPoints = @0;
+        lockedPoints = @0;
         farkles = @0;
         turns = @10; // +1 for roll, +1 for 10 through 1
         
@@ -73,28 +76,45 @@
         
         NSMutableArray *unsorted = [[NSMutableArray alloc] init];
         for (int i = 0; i < 6; i++) {
-            [unsorted addObject:@0];
+            [unsorted insertObject:@0 atIndex:i];
         }
         // calculate score for rolled
         for (int i = 0; i < 6; i++) {
+            // do we need to check for isLocked here or just for isScore?
             if ((![[rolledDice objectAtIndex:i] isLocked]) &&
                 (![[rolledDice objectAtIndex:i] isScored]))
             {
-                [unsorted insertObject:[[rolledDice objectAtIndex:i] sideValue] atIndex:i];
-            }
+                //[array replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:FALSE]];
+                [unsorted replaceObjectAtIndex:i withObject:[[rolledDice objectAtIndex:i] sideValue]];
+            } // else [unsorted insertObject:@0 atIndex:i];
         }
-        subtotal = [NSNumber numberWithInteger:[self score:[self sort:unsorted]]];
-        NSLog(@"subtotal: %@", subtotal);
+        
+       // NSNumber *temp = [NSNumber numberWithInt:[aNumber intValue] + 1];
+        
+        // need to somehoe increment this instead of overwriting it
+        NSInteger temp = [rolledPoints integerValue];
+        rolledPoints = [NSNumber numberWithInteger:[self score:[self sort:unsorted]]];
+        NSLog(@"rolled: %@", rolledPoints);
         /////////////////////////////////
         // calculate score for locked
+        // do I need to clear the array to @0's here?
+
+        // need to set locked dice to score before doing this, but where?
+        
         for (int i = 0; i < 6; i++) {
-            if ([[rolledDice objectAtIndex:i] isLocked])
-            {
-                [unsorted insertObject:[[rolledDice objectAtIndex:i] sideValue] atIndex:i];
-            }
+            [unsorted replaceObjectAtIndex:i withObject:@0];
         }
-        total = [NSNumber numberWithInteger:[self score:[self sort:unsorted]]];
-        NSLog(@"total: %@", total);
+        
+        for (int i = 0; i < 6; i++) {
+            if (( [[rolledDice objectAtIndex:i] isLocked]) &&
+                (![[rolledDice objectAtIndex:i] isScored]))
+            {
+                [unsorted replaceObjectAtIndex:i withObject:[[rolledDice objectAtIndex:i] sideValue]];
+                //[unsorted insertObject:[[rolledDice objectAtIndex:i] sideValue] atIndex:i];
+            } // else [unsorted insertObject:@0 atIndex:i];
+        }
+        lockedPoints = [NSNumber numberWithInteger:[self score:[self sort:unsorted]]];
+        NSLog(@"locked: %@", lockedPoints);
         /////////////////////////////////
 
         

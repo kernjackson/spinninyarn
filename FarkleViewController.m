@@ -134,45 +134,16 @@
     Farkle *farkle = [Farkle sharedManager];
 	[self.passButton setEnabled:YES];
 	[self.passButton setAlpha:1.0];
-	[self.passButton setTitle:[NSString stringWithFormat:@"+ %@", [farkle total]] // was %d
+	[self.passButton setTitle:[NSString stringWithFormat:@"+ %@", [farkle totalPoints]] // was %d
                      forState:UIControlStateNormal];
 }
 
 - (void)disablePassButton {
     Farkle *farkle = [Farkle sharedManager];
 	[self.passButton setEnabled:NO];
-	[self.passButton setTitle:[NSString stringWithFormat:@"%@", [farkle total]] // was %d
+	[self.passButton setTitle:[NSString stringWithFormat:@"%@", [farkle totalPoints]] // was %d
                      forState:UIControlStateNormal];
 	self.passButton.alpha = .4;
-}
-
-#pragma mark Dice
-
-- (void)newDice {
-    // was called sixDice
-    Farkle *farkle = [Farkle sharedManager];
-    [farkle newDice];
-    for (int i = 0; i <= 5; i++) {
-        [self flipDiceButtons:i];
-//        NSLog(@"flipping: %d", i);
-    }
-}
-
-- (void)rollDice {
-    Farkle *farkle = [Farkle sharedManager];
-    //[self newDice];
-    [farkle rollDice];
-	for (int i = 0; i <= 5; i++) {
-		if ([[farkle.rolledDice objectAtIndex:i] isLocked]) {
-            [[self.diceButtons objectAtIndex:i] setAlpha:.1];
-            [[self.diceButtons objectAtIndex:i] setEnabled:NO];
-			
-		} else {
-            [self flipDiceButtons:i];
-//            NSLog(@"flipping: %d", i);
-		}
-	}
-    //	[self setFarkles: [self farkled]];
 }
 
 #pragma mark Actions
@@ -219,6 +190,35 @@
     //[farkle gameLoop];
     
     NSLog(@"turns: %@", farkle.turns);
+}
+
+#pragma mark Dice
+
+- (void)newDice {
+    // was called sixDice
+    Farkle *farkle = [Farkle sharedManager];
+    [farkle newDice];
+    for (int i = 0; i <= 5; i++) {
+        [self flipDiceButtons:i];
+        //        NSLog(@"flipping: %d", i);
+    }
+}
+
+- (void)rollDice {
+    Farkle *farkle = [Farkle sharedManager];
+    //[self newDice];
+    [farkle rollDice];
+	for (int i = 0; i <= 5; i++) {
+		if ([[farkle.rolledDice objectAtIndex:i] isLocked]) {
+            [[self.diceButtons objectAtIndex:i] setAlpha:.1];
+            [[self.diceButtons objectAtIndex:i] setEnabled:NO];
+			
+		} else {
+            [self flipDiceButtons:i];
+            //            NSLog(@"flipping: %d", i);
+		}
+	}
+    //	[self setFarkles: [self farkled]];
 }
 
 - (void)enableDie:(UIButton *)sender {
@@ -403,8 +403,9 @@
     // NSLog(@"%f", ((float)[farkle.turns integerValue] / 10));
     
     //  update score and total
-    [self.scoreLabel setText:[NSString stringWithFormat:@"%@", [farkle score]]];
-    [self.passButton setTitle:[NSString stringWithFormat:@"%@", [farkle total]] forState:UIControlStateNormal];
+    [self.scoreLabel setText:[NSString stringWithFormat:@"%@", [farkle scoredPoints]]];
+    // doesn't this label need to be both locked and scored?
+    [self.passButton setTitle:[NSString stringWithFormat:@"%@", [farkle lockedPoints]] forState:UIControlStateNormal];
     
     // these don't seem to do anything
     if ([farkle isNewGame]) {
