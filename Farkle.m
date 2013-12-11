@@ -19,6 +19,7 @@
 
 @implementation Farkle
 
+@synthesize test;
 
 @synthesize rolledPoints;
 @synthesize lockedPoints;
@@ -46,9 +47,11 @@
 - (id)init {
     if (self = [super init]) {
         
+        test = 0;
         scoredPoints = @0;
         rolledPoints = @0;
         lockedPoints = @0;
+        
         farkles = @0;
         turns = @10; // +1 for roll, +1 for 10 through 1
         
@@ -63,6 +66,14 @@
 }
 
 - (void)gameLoop {
+/*
+    NSInteger test = 0;
+    test = [rolledPoints integerValue];
+    NSLog(@"test: %ld", (long)test);
+    test += test;
+    NSLog(@"test: %ld", (long)test);
+*/
+
     if ([self isNewGame]) // can this go inside the next if?
         NSLog(@"[self newGame]");
     else if ([self isGameOver]) {
@@ -92,22 +103,22 @@
        // NSNumber *temp = [NSNumber numberWithInt:[aNumber intValue] + 1];
         
         // need to somehoe increment this instead of overwriting it
-        NSInteger temp = [rolledPoints integerValue];
+        //NSInteger temp = [rolledPoints integerValue];
         rolledPoints = [NSNumber numberWithInteger:[self score:[self sort:unsorted]]];
+        //rolledPoints = [self score:[self sort:unsorted]];
         NSLog(@"rolled: %@", rolledPoints);
         /////////////////////////////////
         // calculate score for locked
         // do I need to clear the array to @0's here?
 
         // need to set locked dice to score before doing this, but where?
-        
+   
         for (int i = 0; i < 6; i++) {
             [unsorted replaceObjectAtIndex:i withObject:@0];
         }
-        
+    
         for (int i = 0; i < 6; i++) {
-            if (( [[rolledDice objectAtIndex:i] isLocked]) &&
-                (![[rolledDice objectAtIndex:i] isScored]))
+            if ([[rolledDice objectAtIndex:i] isLocked])
             {
                 [unsorted replaceObjectAtIndex:i withObject:[[rolledDice objectAtIndex:i] sideValue]];
                 //[unsorted insertObject:[[rolledDice objectAtIndex:i] sideValue] atIndex:i];

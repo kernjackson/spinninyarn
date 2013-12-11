@@ -14,6 +14,9 @@
     NSNumber *lockedPoints;
     NSNumber *scoredPoints;
     NSNumber *totalPoints;
+    
+    
+    
      // ???
     NSNumber *memory;  // ???
     NSNumber *farkles;
@@ -24,6 +27,7 @@
 //    NSMutableArray *locked;
 }
 
+@property(nonatomic,assign) NSInteger test;
 
 @property (nonatomic, retain) NSNumber *rolledPoints;
 @property (nonatomic, retain) NSNumber *lockedPoints;

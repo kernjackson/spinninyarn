@@ -151,7 +151,10 @@
 - (IBAction)rolled:(id)sender {
     
     Farkle *farkle = [Farkle sharedManager];
-
+    
+    NSLog(@"%d", farkle.test);
+    farkle.test++;
+    
 	[self rollDice];
     [farkle gameLoop];
 	[self updateUI];
@@ -162,6 +165,8 @@
     
     Farkle *farkle = [Farkle sharedManager];
     
+    
+    NSLog(@"%d", farkle.test);
 	if ([sender isSelected]) {
 		[self enableDie:sender];
 	} else {
