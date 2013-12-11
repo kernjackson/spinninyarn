@@ -69,7 +69,8 @@
     else {
         
         /////////////////////////////////
-        // need to calculate the score on rolled somewhere, maybe here?
+        // need to calculate the score for rolled, locked and ¿scored?
+        
         NSMutableArray *unsorted = [[NSMutableArray alloc] init];
         for (int i = 0; i < 6; i++) {
             [unsorted addObject:@0];
@@ -83,6 +84,15 @@
             }
         }
         NSLog(@"subtotal: %ld", (long)[self score:[self sort:unsorted]]);
+        /////////////////////////////////
+        // calculate score for locked
+        for (int i = 0; i < 6; i++) {
+            if ([[rolledDice objectAtIndex:i] isLocked])
+            {
+                [unsorted insertObject:[[rolledDice objectAtIndex:i] sideValue] atIndex:i];
+            }
+        }
+        NSLog(@"total: %ld", (long)[self score:[self sort:unsorted]]);
         /////////////////////////////////
 
         
