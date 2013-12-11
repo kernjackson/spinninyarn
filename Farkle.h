@@ -10,12 +10,12 @@
 #import "Die.h"
 
 @interface Farkle : NSObject {
-    NSNumber *rolledPoints;
-    NSNumber *lockedPoints;
-    NSNumber *scoredPoints;
-    NSNumber *totalPoints;
     
-    
+    //NSNumber *rolledPoints;
+    NSInteger rolledPoints;
+    NSInteger lockedPoints;
+    NSInteger scoredPoints;
+    NSInteger totalPoints;
     
      // ???
     NSNumber *memory;  // ???
@@ -27,12 +27,10 @@
 //    NSMutableArray *locked;
 }
 
-@property(nonatomic,assign) NSInteger test;
-
-@property (nonatomic, retain) NSNumber *rolledPoints;
-@property (nonatomic, retain) NSNumber *lockedPoints;
-@property (nonatomic, retain) NSNumber *scoredPoints;
-@property (nonatomic, retain) NSNumber *totalPoints;
+@property (nonatomic, assign) NSInteger rolledPoints;
+@property (nonatomic, assign) NSInteger lockedPoints;
+@property (nonatomic, assign) NSInteger scoredPoints;
+@property (nonatomic, assign) NSInteger totalPoints;
 
 @property (nonatomic, retain) NSNumber *memory; // ???
 @property (nonatomic, retain) NSNumber *farkles;

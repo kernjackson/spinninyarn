@@ -134,14 +134,14 @@
     Farkle *farkle = [Farkle sharedManager];
 	[self.passButton setEnabled:YES];
 	[self.passButton setAlpha:1.0];
-	[self.passButton setTitle:[NSString stringWithFormat:@"+ %@", [farkle totalPoints]] // was %d
+	[self.passButton setTitle:[NSString stringWithFormat:@"+ %ld", (long)[farkle totalPoints]] // was %d
                      forState:UIControlStateNormal];
 }
 
 - (void)disablePassButton {
     Farkle *farkle = [Farkle sharedManager];
 	[self.passButton setEnabled:NO];
-	[self.passButton setTitle:[NSString stringWithFormat:@"%@", [farkle totalPoints]] // was %d
+	[self.passButton setTitle:[NSString stringWithFormat:@"%ld", (long)[farkle totalPoints]] // was %d
                      forState:UIControlStateNormal];
 	self.passButton.alpha = .4;
 }
@@ -151,9 +151,6 @@
 - (IBAction)rolled:(id)sender {
     
     Farkle *farkle = [Farkle sharedManager];
-    
-    NSLog(@"%d", farkle.test);
-    farkle.test++;
     
 	[self rollDice];
     [farkle gameLoop];
@@ -165,9 +162,7 @@
     
     Farkle *farkle = [Farkle sharedManager];
     
-    
-    NSLog(@"%d", farkle.test);
-	if ([sender isSelected]) {
+    if ([sender isSelected]) {
 		[self enableDie:sender];
 	} else {
         [self disableDie:sender];
@@ -408,9 +403,9 @@
     // NSLog(@"%f", ((float)[farkle.turns integerValue] / 10));
     
     //  update score and total
-    [self.scoreLabel setText:[NSString stringWithFormat:@"%@", [farkle scoredPoints]]];
+    [self.scoreLabel setText:[NSString stringWithFormat:@"%ld", (long)[farkle scoredPoints]]];
     // doesn't this label need to be both locked and scored?
-    [self.passButton setTitle:[NSString stringWithFormat:@"%@", [farkle lockedPoints]] forState:UIControlStateNormal];
+    [self.passButton setTitle:[NSString stringWithFormat:@"%ld", (long)[farkle lockedPoints]] forState:UIControlStateNormal];
     
     // these don't seem to do anything
     if ([farkle isNewGame]) {

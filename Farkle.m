@@ -19,8 +19,6 @@
 
 @implementation Farkle
 
-@synthesize test;
-
 @synthesize rolledPoints;
 @synthesize lockedPoints;
 @synthesize scoredPoints;
@@ -47,10 +45,9 @@
 - (id)init {
     if (self = [super init]) {
         
-        test = 0;
-        scoredPoints = @0;
-        rolledPoints = @0;
-        lockedPoints = @0;
+        scoredPoints = 0;
+        rolledPoints = 0;
+        lockedPoints = 0;
         
         farkles = @0;
         turns = @10; // +1 for roll, +1 for 10 through 1
@@ -104,9 +101,9 @@
         
         // need to somehoe increment this instead of overwriting it
         //NSInteger temp = [rolledPoints integerValue];
-        rolledPoints = [NSNumber numberWithInteger:[self score:[self sort:unsorted]]];
+        rolledPoints = [self score:[self sort:unsorted]];
         //rolledPoints = [self score:[self sort:unsorted]];
-        NSLog(@"rolled: %@", rolledPoints);
+        NSLog(@"rolled: %ld", (long)rolledPoints);
         /////////////////////////////////
         // calculate score for locked
         // do I need to clear the array to @0's here?
@@ -118,14 +115,15 @@
         }
     
         for (int i = 0; i < 6; i++) {
-            if ([[rolledDice objectAtIndex:i] isLocked])
+            if (( s[[rolledDice objectAtIndex:i] isLocked]) &&
+                (![[rolledDice objectAtIndex:i] isScored]))
             {
                 [unsorted replaceObjectAtIndex:i withObject:[[rolledDice objectAtIndex:i] sideValue]];
                 //[unsorted insertObject:[[rolledDice objectAtIndex:i] sideValue] atIndex:i];
             } // else [unsorted insertObject:@0 atIndex:i];
         }
-        lockedPoints = [NSNumber numberWithInteger:[self score:[self sort:unsorted]]];
-        NSLog(@"locked: %@", lockedPoints);
+        lockedPoints = [self score:[self sort:unsorted]];
+        NSLog(@"locked: %ld", (long)lockedPoints);
         /////////////////////////////////
 
         
