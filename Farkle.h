@@ -17,6 +17,15 @@
     NSInteger scoredPoints;
     NSInteger totalPoints;
     
+    BOOL isNewGame;
+    
+    
+/*
+    BOOL newGame; // don't think I need this
+    BOOL canRoll;
+    BOOL canPass;
+    BOOL farkled;
+*/    
      // ???
     NSNumber *memory;  // ???
     NSNumber *farkles;
@@ -32,9 +41,10 @@
 @property (nonatomic, assign) NSInteger scoredPoints;
 @property (nonatomic, assign) NSInteger totalPoints;
 
+@property (nonatomic, assign) BOOL isNewGame;
+
 @property (nonatomic, retain) NSNumber *memory; // ???
 @property (nonatomic, retain) NSNumber *farkles;
-//@property (nonatomic) BOOL farkled; // There's got to be a better way to do this ???
 @property (nonatomic, retain) NSNumber *turns;
 
 @property (nonatomic, retain) NSMutableArray *rolledDice;
@@ -47,13 +57,16 @@
 
 #pragma mark gameLoop
 - (void)gameLoop;
-- (bool)isNewGame;
-- (bool)isGameOver;
+//- (BOOL)isNewGame;
+- (BOOL)isGameOver;
+- (BOOL)canRoll;
+- (BOOL)canPass;
+- (bool)areDiceHot;
 
 #pragma mark Dice
 - (NSMutableArray *)newDice; // this should be private?
 - (void)rollDice;
-- (bool)diceHot;
+
 
 - (NSArray *)sort:(NSMutableArray *)unsorted;
 - (NSInteger)score:(NSArray *)unscored;

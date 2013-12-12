@@ -24,6 +24,8 @@
 @synthesize scoredPoints;
 @synthesize totalPoints;
 
+@synthesize isNewGame;
+
 @synthesize memory; // replaced by one of the above
 @synthesize farkles;
 @synthesize turns;
@@ -49,6 +51,8 @@
         rolledPoints = 0;
         lockedPoints = 0;
         
+        isNewGame = YES;
+        
         farkles = @0;
         turns = @10; // +1 for roll, +1 for 10 through 1
         
@@ -71,10 +75,17 @@
     NSLog(@"test: %ld", (long)test);
 */
 
-    if ([self isNewGame]) // can this go inside the next if?
+    if (isNewGame) { // can this go inside the next if?
+        rolledDice = [self newDice];
+        isNewGame = NO;
         NSLog(@"[self newGame]");
+    }
     else if ([self isGameOver]) {
         NSLog(@"[self gameOver]");
+        // this number is hardcoded for now, but should come from the Settings singleton
+        if (scoredPoints >= 10000) {
+            NSLog(@"Player Won");
+        } else NSLog(@"Player Lost");
         [self newGame];
     }
     else {
@@ -109,20 +120,21 @@
         // do I need to clear the array to @0's here?
 
         // need to set locked dice to score before doing this, but where?
-   
+        /*
         for (int i = 0; i < 6; i++) {
             [unsorted replaceObjectAtIndex:i withObject:@0];
         }
-    
+        */
+        
         for (int i = 0; i < 6; i++) {
-            if (( s[[rolledDice objectAtIndex:i] isLocked]) &&
+            if (( [[rolledDice objectAtIndex:i] isLocked]) &&
                 (![[rolledDice objectAtIndex:i] isScored]))
             {
                 [unsorted replaceObjectAtIndex:i withObject:[[rolledDice objectAtIndex:i] sideValue]];
                 //[unsorted insertObject:[[rolledDice objectAtIndex:i] sideValue] atIndex:i];
             } // else [unsorted insertObject:@0 atIndex:i];
         }
-        lockedPoints = [self score:[self sort:unsorted]];
+        lockedPoints += [self score:[self sort:unsorted]];
         NSLog(@"locked: %ld", (long)lockedPoints);
         /////////////////////////////////
 
@@ -132,18 +144,38 @@
     }
 }
 
-- (bool)isNewGame {
-    if ([turns  isEqual: @10]) {
+- (BOOL)isNewGame {
+   // if ([turns  isEqual: @10]) {
 //        NSNumber *temp = [NSNumber numberWithInt:[turns intValue] -1];
 //        turns = temp;
+  //      return YES;
+   // } else return NO;
+    return YES; // this should probably have it's own BOOL flag
+}
+
+- (BOOL)isGameOver {
+    if ([turns  isEqual: @0] ) {
         return YES;
     } else return NO;
 }
 
-- (bool)isGameOver {
-    if ([turns  isEqual: @0] ) {
+- (BOOL)canRoll {
+    if (lockedPoints >= 300) {
         return YES;
     } else return NO;
+}
+
+- (BOOL)canPass {
+    if (lockedPoints < 50) {
+        return NO;
+    } return YES;
+}
+
+- (bool)areDiceHot {
+    // if all dice are scored return YES
+    // else return false
+    // how do we check to see if a non scoring die has been selected?
+    return NO;
 }
 
 - (void)newGame {
@@ -154,30 +186,6 @@
     return -1;
 }
 
-/*
-- (int)gameLoop {
-    
-    // is it a new game?
-    if ([turns intValue] > 10) {
-        // newGame
-    }
-    // did Player Win?
-    else if ([score intValue] >= 10000) {
-        // playerWon
-    }
-    // did Player Lose?
-    else if ([turns intValue] < 0) {
-        // playerLost
-    }
-    else {
-        
-    }
-    
-    
-    
-    return -1;
-}
-*/
 #pragma mark Dice
 
 - (NSMutableArray *)newDice {
@@ -188,27 +196,15 @@
 	}
     return newDice;
 }
-/*
-- (void)newDice {
-    NSMutableArray *rolled = [[NSMutableArray alloc] init];
-//	[self.rolled removeAllObjects];
-	for (int i = 0; i <= 5; i++) {
-		Die *die = [[Die alloc] init];
-//        [rolled insertObject:die atIndex:i];
-        [rolled addObject:die];
-        NSLog(@"die: %@", [die sideUp]);
-        NSLog(@"rolled: %@", [rolled objectAtIndex:i]);
-//		[rolled insertObject:die atIndex:i];
-	}
-	// check score here?
-}
-*/
+
 - (void)rollDice {
     
-    
+    if (!rolledDice) {
+        [self newDice];
+    }
     
     // This should be in the inherited class Solitaire
-    if ([self isNewGame]) {
+    if (isNewGame) {
         rolledDice = [self newDice];
     }
     
@@ -224,32 +220,10 @@
     //	[self setFarkles: [self farkled]];
 }
 
-- (bool)diceHot {
-    return -1;
-}
-
-- (void)enableDie:(int)sender {
-    
-}
-
-- (void)disableDie:(int)tag {
-   // Farkle *sharedManager = [Farkle sharedManager];
-    
-    // we need this, but it currently prevents compilaton
-//	[rolled objectAtIndex:tag setLocked:YES];
-}
-
-// I don't think I actually need this, as we never really need to removed all objects from the array. Just set everything to zero instead.
-- (void)clearDice {
-	[rolledDice removeAllObjects];
-	for (int i = 0; i <= 5; i++) {
-//		[[_diceButtons objectAtIndex:i] setAlpha:1];
-//		[[self.diceButtons objectAtIndex:i] setEnabled:YES];
-//		[[self.diceButtons objectAtIndex:i] setSelected:FALSE];
-//		[[self.diceButtons objectAtIndex:i] setTitle:@""
-//                                            forState:UIControlStateNormal];
-//		[[self.diceButtons objectAtIndex:i] setEnabled:NO]; // ???
-	}
+- (void)eraseArray:(NSMutableArray *)arrayToErase {
+    for (int i = 0; i < 6; i++) {
+        [arrayToErase replaceObjectAtIndex:i withObject:0]; // would cause a crash if it was expecting an NSNumber
+    }
 }
 
 #pragma mark Sort & Score
@@ -359,7 +333,6 @@
 }
 
 #pragma mark Console
-
 
 - (void)logRolled {
     for (int i = 0; i < 6; i++) {

@@ -906,6 +906,9 @@
                             </label>
                             <button opaque="NO" tag="6" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="pass" contentHorizontalAlignment="right" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kl3-a5-J9G">
                                 <rect key="frame" x="20" y="83" width="286" height="73"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="90"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="0">

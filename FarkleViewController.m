@@ -8,6 +8,7 @@
 
 #import "FarkleViewController.h"
 #import "Farkle.h"
+#import "Settings.h"
 
 @interface FarkleViewController ()
 
@@ -35,12 +36,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
     [self updateUI];
-    
-    
-    
 	// Do any additional setup after loading the view.
-    
+
 //    farkle.total = @1;
     
     // Setup gesture recoginizer
@@ -49,8 +50,6 @@
                                                     action:@selector(popView)];
     [mSwipeUpRecognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
     [[self view] addGestureRecognizer:mSwipeUpRecognizer];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -78,14 +77,68 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark Actions
+
+- (IBAction)rolled:(id)sender {
+    
+    Farkle *farkle = [Farkle sharedManager];
+    
+    // need to check the state of newGame, and then change it so that we don't get a crash or a bunch of deactivated controls here
+    
+//	[self rollDice];
+    [farkle gameLoop];
+	[self updateUI];
+}
+
+
+- (IBAction)selectDice:(UIButton *)sender {
+    
+    Farkle *farkle = [Farkle sharedManager];
+    
+    if ([sender isSelected]) {
+		[self enableDie:sender];
+	} else {
+        [self disableDie:sender];
+	}
+    [farkle gameLoop];
+	[self updateUI];
+}
+
+- (IBAction)passed:(id)sender {
+    
+    Farkle *farkle = [Farkle sharedManager];
+    
+    [self disablePassButton];
+    // possible way to move more to the model
+    //farkle.canPass = NO;
+    // not sure where else to put this logic. Is it possible or even recommended to put it in the model?
+    farkle.scoredPoints += farkle.lockedPoints;
+    farkle.lockedPoints = 0;
+    
+    [self endTurn]
+    
+    /*
+     // decrement turns
+     NSNumber *temp = [NSNumber numberWithInt:[farkle.turns intValue] - 1];
+     farkle.turns = temp;
+     */
+    ;
+    // set passButton to @"0"
+    // disable passButton
+    // [farkle gameLoop:@"passed"];
+    
+    //[farkle gameLoop];
+    
+    NSLog(@"turns: %@", farkle.turns);
+}
+
 #pragma mark not sure if controller or model
 
 - (void)newGame {
     Farkle *farkle = [Farkle sharedManager];
-    
-    farkle.turns = @TURNS;
-    [self.turnsProgress setProgress:1.0 animated:YES];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    //farkle.turns = @TURNS;
+//    [self.turnsProgress setProgress:1.0 animated:YES];
+//    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)endTurn {
@@ -114,7 +167,7 @@
 - (void)didWin {
     // is score > 10,000?
 }
-
+/*
 - (void)isGameOver {
     Farkle *farkle = [Farkle sharedManager];
     if (([farkle.turns integerValue] < TURNS) &&
@@ -125,7 +178,7 @@
         [self newGame];
     }
 }
-
+*/
 #pragma mark Pass
 
 
@@ -134,6 +187,7 @@
     Farkle *farkle = [Farkle sharedManager];
 	[self.passButton setEnabled:YES];
 	[self.passButton setAlpha:1.0];
+    [self.passButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
 	[self.passButton setTitle:[NSString stringWithFormat:@"+ %ld", (long)[farkle totalPoints]] // was %d
                      forState:UIControlStateNormal];
 }
@@ -141,55 +195,10 @@
 - (void)disablePassButton {
     Farkle *farkle = [Farkle sharedManager];
 	[self.passButton setEnabled:NO];
+    [self.passButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 	[self.passButton setTitle:[NSString stringWithFormat:@"%ld", (long)[farkle totalPoints]] // was %d
                      forState:UIControlStateNormal];
 	self.passButton.alpha = .4;
-}
-
-#pragma mark Actions
-
-- (IBAction)rolled:(id)sender {
-    
-    Farkle *farkle = [Farkle sharedManager];
-    
-	[self rollDice];
-    [farkle gameLoop];
-	[self updateUI];
-}
-
-
-- (IBAction)selectDice:(UIButton *)sender {
-    
-    Farkle *farkle = [Farkle sharedManager];
-    
-    if ([sender isSelected]) {
-		[self enableDie:sender];
-	} else {
-        [self disableDie:sender];
-	}
-    [farkle gameLoop];
-	[self updateUI];
-}
-
-- (IBAction)passed:(id)sender {
-    Farkle *farkle = [Farkle sharedManager];
-    
-    // [self disablePass];
-    [self endTurn]
-    
-/*
-    // decrement turns
-    NSNumber *temp = [NSNumber numberWithInt:[farkle.turns intValue] - 1];
-    farkle.turns = temp;
-*/
-    ;
-    // set passButton to @"0"
-    // disable passButton
-    // [farkle gameLoop:@"passed"];
-    
-    //[farkle gameLoop];
-    
-    NSLog(@"turns: %@", farkle.turns);
 }
 
 #pragma mark Dice
@@ -295,27 +304,18 @@
 	} //else NSLog(@"flipDiceButtons: error %d", index);
 }
 
-
 #pragma mark Roll
 
 - (void)disableRollButton {
 	
 	[self.rollButton setEnabled:NO];
 	[self.rollButton setAlpha:0.0];
-    
-    //[self.rollButton setEnabled:YES];
-	//[self.rollButton setAlpha:1.0];
 }
 
-#pragma mark Navigation Bar
-
-- (void)toggleNavBar {
-    Farkle *farkle = [Farkle sharedManager];
-    
-    // not working correctly
-    if ([farkle isNewGame] || [farkle isGameOver]) {
-        [self.navigationController setNavigationBarHidden:NO animated:YES];
-    } else [self.navigationController setNavigationBarHidden:YES animated:YES];
+- (void)enableRollButton {
+	
+	[self.rollButton setEnabled:YES];
+	[self.rollButton setAlpha:1.0];
 }
 
 #pragma mark HUD
@@ -383,39 +383,79 @@
     
     Farkle *farkle = [Farkle sharedManager];
     
-    [self toggleNavBar];
-    
     // update Dice
     for (int i = 0; i <= 5; i++) {
         if (![[farkle.rolledDice objectAtIndex:i] isLocked]) {
             [[self.diceButtons objectAtIndex:i] setTitle:[[farkle.rolledDice objectAtIndex:i] sideUp]
                                         forState:UIControlStateNormal];
-            //NSLog(@"rolled: %@", [[farkle.rolledDice objectAtIndex:i] sideUp]);
         }
         else if ([[farkle.rolledDice objectAtIndex:i] isLocked]) {
 			[[farkle.rolledDice objectAtIndex:i] setScored:YES];
 		}
     }
-    //NSLog(@"rolled: %@", [[farkle.rolledDice objectAtIndex:0] sideUp]);
 
-    // update progress bar
+    // update progress bar with number of turns left
     [self.turnsProgress setProgress:((float)([farkle.turns integerValue] ) / 10) animated:YES];
-    // NSLog(@"%f", ((float)[farkle.turns integerValue] / 10));
     
-    //  update score and total
+    //  update scoreLabel with scoredPoints
     [self.scoreLabel setText:[NSString stringWithFormat:@"%ld", (long)[farkle scoredPoints]]];
-    // doesn't this label need to be both locked and scored?
+    
+    // update passButton with lockedPoints. Doesn't this label need to be both locked and scored?
     [self.passButton setTitle:[NSString stringWithFormat:@"%ld", (long)[farkle lockedPoints]] forState:UIControlStateNormal];
     
+    // toggle NavBar
+    if ([farkle isNewGame] || [farkle isGameOver]) {
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
+    } else [self.navigationController setNavigationBarHidden:YES animated:YES];
+
+    // toggle PassButton
+    if ([farkle canPass]) {
+        [self enablePassButton];
+    } else [self disablePassButton];
+
+    // toggle RollButton, is this backwards?
+    if ([farkle canRoll]) {
+        [self disableRollButton];
+    } else [self enableRollButton];
     // these don't seem to do anything
+    
+    // is it a new game?
     if ([farkle isNewGame]) {
         [self clearScreen];
     }
-    
+    // is Game Over?
     if ([farkle isGameOver]) {
         [self deathScreen];
     }
+}
+/*
+#pragma mark Toggle Controls
+
+- (void)toggleNavBar {
+    Farkle *farkle = [Farkle sharedManager];
     
+    // not working correctly
+    if ([farkle isNewGame] || [farkle isGameOver]) {
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
+    } else [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
+- (void)togglePassButton {
+    
+    Farkle *farkle = [Farkle sharedManager];
+    
+    if ([farkle canPass]) {
+        [self enablePassButton];
+    } else [self disablePassButton];
+}
+
+- (void)toggleRollButton {
+    
+    Farkle *farkle = [Farkle sharedManager];
+    
+    if (![farkle canRoll]) {
+        [self disableRollButton];
+    } else [self enableRollButton];
+}
+*/
 @end
