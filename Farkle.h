@@ -16,10 +16,12 @@
     NSInteger lockedPoints;
     NSInteger scoredPoints;
     NSInteger totalPoints;
+    NSInteger previousPoints;
     
     BOOL isNewGame;
     
-    
+    BOOL canPass;
+    BOOL canRoll;
 /*
     BOOL newGame; // don't think I need this
     BOOL canRoll;
@@ -40,8 +42,11 @@
 @property (nonatomic, assign) NSInteger lockedPoints;
 @property (nonatomic, assign) NSInteger scoredPoints;
 @property (nonatomic, assign) NSInteger totalPoints;
+@property (nonatomic, assign) NSInteger previousPoints;
 
 @property (nonatomic, assign) BOOL isNewGame;
+@property (nonatomic, assign) BOOL canPass;
+@property (nonatomic, assign) BOOL canRoll;
 
 @property (nonatomic, retain) NSNumber *memory; // ???
 @property (nonatomic, retain) NSNumber *farkles;

@@ -73,7 +73,12 @@
  */
     [self updateControls];
 }
-
+/*
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self updateControls];
+}
+*/
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -207,22 +212,23 @@
 #pragma mark UpdateSettings
 
 - (IBAction)ClearSettings:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:@"Reset to Factory Defaults?"
-                          message:@"This action can not be undone."
-                          delegate:self
-                          cancelButtonTitle:@"Cancel"
-                          otherButtonTitles:@"Reset", nil];
-    [alert show];
-    }
 
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1) {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Cancel"
+                                               destructiveButtonTitle:@"Reset to Defaults"
+                                                    otherButtonTitles:nil];
+    
+    [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
+
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
         [self factoryDefaults];
         [self updateControls];
     }
-}
+ }
 
 - (void)factoryDefaults {
     // reset all settings to factory default
@@ -232,6 +238,7 @@
     minimum = YES;
     hotdice = YES;
     stealing = YES;
+    
     playTo = @2;
     minimumScore = @1;
     difficulty = @1;
@@ -240,6 +247,10 @@
     [defaults setBool:minimum forKey:@"minimum"];
     [defaults setBool:hotdice forKey:@"hotdice"];
     [defaults setBool:stealing forKey:@"stealing"];
+    
+    [defaults setObject:playTo forKey:@"playTo"];
+    [defaults setObject:minimumScore forKey:@"minimumScore"];
+    [defaults setObject:difficulty forKey:@"difficulty"];
 }
 
 - (void)updateControls {
@@ -292,11 +303,7 @@
     }
     if ([playTo isEqual:@2])
     {
-        self.playToSegment.selectedSegmentIndex = 3;
-    }
-    if ([playTo isEqual:@3])
-    {
-        self.playToSegment.selectedSegmentIndex = 3;
+        self.playToSegment.selectedSegmentIndex = 2;
     } else NSLog(@"playTo: %@",playTo);
     
     // minimumScore
@@ -312,7 +319,11 @@
     if ([minimumScore isEqual:@2])
     {
         self.minimumSegment.selectedSegmentIndex = 2;
-    } else NSLog(@"minimumScore: %@",minimumScore);
+    }
+    if ([minimumScore isEqual:@3])
+    {
+        self.minimumSegment.selectedSegmentIndex = 3;
+    }else NSLog(@"minimumScore: %@",minimumScore);
     
     // difficulty
     self.difficultySegment.selectedSegmentIndex = [difficulty integerValue];

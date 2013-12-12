@@ -23,8 +23,11 @@
 @synthesize lockedPoints;
 @synthesize scoredPoints;
 @synthesize totalPoints;
+@synthesize previousPoints;
 
 @synthesize isNewGame;
+@synthesize canPass;
+@synthesize canRoll;
 
 @synthesize memory; // replaced by one of the above
 @synthesize farkles;
@@ -90,6 +93,11 @@
     }
     else {
         
+        
+        previousPoints = lockedPoints;
+        NSLog(@"%ld", (long)previousPoints);
+        
+        
         /////////////////////////////////
         // need to calculate the score for rolled, locked and ¿scored?
         
@@ -110,7 +118,7 @@
         
        // NSNumber *temp = [NSNumber numberWithInt:[aNumber intValue] + 1];
         
-        // need to somehoe increment this instead of overwriting it
+        // increment this instead of overwriting it?
         //NSInteger temp = [rolledPoints integerValue];
         rolledPoints = [self score:[self sort:unsorted]];
         //rolledPoints = [self score:[self sort:unsorted]];
@@ -120,11 +128,11 @@
         // do I need to clear the array to @0's here?
 
         // need to set locked dice to score before doing this, but where?
-        /*
+       
         for (int i = 0; i < 6; i++) {
             [unsorted replaceObjectAtIndex:i withObject:@0];
         }
-        */
+        
         
         for (int i = 0; i < 6; i++) {
             if (( [[rolledDice objectAtIndex:i] isLocked]) &&
@@ -134,13 +142,17 @@
                 //[unsorted insertObject:[[rolledDice objectAtIndex:i] sideValue] atIndex:i];
             } // else [unsorted insertObject:@0 atIndex:i];
         }
-        lockedPoints += [self score:[self sort:unsorted]];
+        lockedPoints += [self score:[self sort:unsorted]]; // was +=
         NSLog(@"locked: %ld", (long)lockedPoints);
         /////////////////////////////////
 
         
         //NSLog(@"subtotal: %ld", (long)[self score:[self sort:rolledDice]]);
         [self logLocked];
+        
+        canRoll = [self canRoll];
+        canPass = [self canPass];
+    
     }
 }
 

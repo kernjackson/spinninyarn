@@ -85,7 +85,7 @@
     
     // need to check the state of newGame, and then change it so that we don't get a crash or a bunch of deactivated controls here
     
-//	[self rollDice];
+	[self rollDice];
     [farkle gameLoop];
 	[self updateUI];
 }
@@ -188,17 +188,19 @@
 	[self.passButton setEnabled:YES];
 	[self.passButton setAlpha:1.0];
     [self.passButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-	[self.passButton setTitle:[NSString stringWithFormat:@"+ %ld", (long)[farkle totalPoints]] // was %d
-                     forState:UIControlStateNormal];
+//	[self.passButton setTitle:[NSString stringWithFormat:@"+ %ld", (long)[farkle totalPoints]] // was %d
+ //                    forState:UIControlStateNormal];
+ //   NSLog(@"+ %ld", (long)[farkle totalPoints]);
 }
 
 - (void)disablePassButton {
     Farkle *farkle = [Farkle sharedManager];
 	[self.passButton setEnabled:NO];
     [self.passButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-	[self.passButton setTitle:[NSString stringWithFormat:@"%ld", (long)[farkle totalPoints]] // was %d
-                     forState:UIControlStateNormal];
+//	[self.passButton setTitle:[NSString stringWithFormat:@"%ld", (long)[farkle totalPoints]] // was %d
+//                     forState:UIControlStateNormal];
 	self.passButton.alpha = .4;
+//    NSLog(@"%ld", (long)[farkle totalPoints]);
 }
 
 #pragma mark Dice
@@ -387,7 +389,7 @@
     for (int i = 0; i <= 5; i++) {
         if (![[farkle.rolledDice objectAtIndex:i] isLocked]) {
             [[self.diceButtons objectAtIndex:i] setTitle:[[farkle.rolledDice objectAtIndex:i] sideUp]
-                                        forState:UIControlStateNormal];
+                                                forState:UIControlStateNormal];
         }
         else if ([[farkle.rolledDice objectAtIndex:i] isLocked]) {
 			[[farkle.rolledDice objectAtIndex:i] setScored:YES];
@@ -396,12 +398,6 @@
 
     // update progress bar with number of turns left
     [self.turnsProgress setProgress:((float)([farkle.turns integerValue] ) / 10) animated:YES];
-    
-    //  update scoreLabel with scoredPoints
-    [self.scoreLabel setText:[NSString stringWithFormat:@"%ld", (long)[farkle scoredPoints]]];
-    
-    // update passButton with lockedPoints. Doesn't this label need to be both locked and scored?
-    [self.passButton setTitle:[NSString stringWithFormat:@"%ld", (long)[farkle lockedPoints]] forState:UIControlStateNormal];
     
     // toggle NavBar
     if ([farkle isNewGame] || [farkle isGameOver]) {
@@ -414,10 +410,10 @@
     } else [self disablePassButton];
 
     // toggle RollButton, is this backwards?
-    if ([farkle canRoll]) {
-        [self disableRollButton];
-    } else [self enableRollButton];
-    // these don't seem to do anything
+    if (([farkle canRoll]) ||
+        ([farkle isNewGame]))  {
+        [self enableRollButton];
+    } else [self disableRollButton];
     
     // is it a new game?
     if ([farkle isNewGame]) {
@@ -427,6 +423,14 @@
     if ([farkle isGameOver]) {
         [self deathScreen];
     }
+    
+    //  update scoreLabel with scoredPoints
+    [self.scoreLabel setText:[NSString stringWithFormat:@"%ld", (long)[farkle scoredPoints]]];
+    
+    // update passButton with lockedPoints. Doesn't this label need to be both locked and scored?
+    [self.passButton setTitle:[NSString stringWithFormat:@"%ld", (long)[farkle lockedPoints]] forState:UIControlStateNormal];
+    
+    
 }
 /*
 #pragma mark Toggle Controls
