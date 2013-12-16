@@ -57,7 +57,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-/*
+
 #pragma mark Nav Bar
 
 - (void)viewWillAppear:(BOOL)animated
@@ -71,7 +71,7 @@
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     [super viewWillDisappear:animated];
 }
-*/
+
 - (void)popView {
     // Pop this view off the stack
     [self.navigationController popViewControllerAnimated:YES];
@@ -398,7 +398,7 @@
 
     // update progress bar with number of turns left
     [self.turnsProgress setProgress:((float)([farkle.turns integerValue] ) / 10) animated:YES];
-    
+/*
     // toggle NavBar
     if ([farkle isNewGame] || [farkle isGameOver]) {
         [self.navigationController setNavigationBarHidden:NO animated:YES];
@@ -414,7 +414,7 @@
         ([farkle isNewGame]))  {
         [self enableRollButton];
     } else [self disableRollButton];
-    
+*/
     // is it a new game?
     if ([farkle isNewGame]) {
         [self clearScreen];

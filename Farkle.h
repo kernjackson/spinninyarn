@@ -54,6 +54,7 @@
 
 @property (nonatomic, retain) NSMutableArray *rolledDice;
 @property (nonatomic, retain) NSMutableArray *lockedDice;
+@property (nonatomic, retain) NSMutableArray *scoredDice;
 
 + (id)sharedManager;
 

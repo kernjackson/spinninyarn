@@ -35,6 +35,7 @@
 
 @synthesize rolledDice;
 @synthesize lockedDice;
+@synthesize scoredDice;
 
 #pragma mark Initialize
 
@@ -69,6 +70,15 @@
 	return @[@1000,@200,@300,@400,@500,@600];
 }
 
+- (void)passed {
+    
+}
+
+- (void)rolled {
+
+    
+}
+
 - (void)gameLoop {
 /*
     NSInteger test = 0;
@@ -93,10 +103,9 @@
     }
     else {
         
-        
+        // will this be depreciated?
         previousPoints = lockedPoints;
         NSLog(@"%ld", (long)previousPoints);
-        
         
         /////////////////////////////////
         // need to calculate the score for rolled, locked and ¿scored?
@@ -128,8 +137,10 @@
         // do I need to clear the array to @0's here?
 
         // need to set locked dice to score before doing this, but where?
-       
+
+        
         for (int i = 0; i < 6; i++) {
+        
             [unsorted replaceObjectAtIndex:i withObject:@0];
         }
         
@@ -139,6 +150,7 @@
                 (![[rolledDice objectAtIndex:i] isScored]))
             {
                 [unsorted replaceObjectAtIndex:i withObject:[[rolledDice objectAtIndex:i] sideValue]];
+                [lockedDice replaceObjectAtIndex:i withObject:[[rolledDice objectAtIndex:i] sideValue]];
                 //[unsorted insertObject:[[rolledDice objectAtIndex:i] sideValue] atIndex:i];
             } // else [unsorted insertObject:@0 atIndex:i];
         }
@@ -172,7 +184,7 @@
 }
 
 - (BOOL)canRoll {
-    if (lockedPoints >= 300) {
+    if (lockedPoints >= 300) { // NSDefaults minimumScore
         return YES;
     } else return NO;
 }
@@ -180,7 +192,7 @@
 - (BOOL)canPass {
     if (lockedPoints < 50) {
         return NO;
-    } return YES;
+    } else return YES;
 }
 
 - (bool)areDiceHot {
