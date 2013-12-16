@@ -220,7 +220,7 @@
     //[self newDice];
     [farkle rollDice];
 	for (int i = 0; i <= 5; i++) {
-		if ([[farkle.rolledDice objectAtIndex:i] isLocked]) {
+		if ([[farkle.dice objectAtIndex:i] isLocked]) {
             [[self.diceButtons objectAtIndex:i] setAlpha:.1];
             [[self.diceButtons objectAtIndex:i] setEnabled:NO];
 			
@@ -236,7 +236,7 @@
     
     Farkle *farkle = [Farkle sharedManager];
 
-    [[farkle.rolledDice objectAtIndex:[self.diceButtons indexOfObject:sender]] setLocked:NO];
+    [[farkle.dice objectAtIndex:[self.diceButtons indexOfObject:sender]] setLocked:NO];
 	[sender setSelected:NO];
 	[sender setAlpha:1];
     // call animation here?
@@ -246,14 +246,14 @@
     
     Farkle *farkle = [Farkle sharedManager];
     
-    [[farkle.rolledDice objectAtIndex:[self.diceButtons indexOfObject:sender]] setLocked:YES];
+    [[farkle.dice objectAtIndex:[self.diceButtons indexOfObject:sender]] setLocked:YES];
 	[sender setSelected:YES];
 	[UIView animateWithDuration:0.10 animations:^{sender.alpha = 0.4;}];
 }
 
 - (void)clearDice {
     Farkle *farkle = [Farkle sharedManager];
-	[farkle.rolledDice removeAllObjects];
+	[farkle.dice removeAllObjects];
 	for (int i = 0; i <= 5; i++) {
 		[[_diceButtons objectAtIndex:i] setAlpha:1];
 		[[self.diceButtons objectAtIndex:i] setEnabled:YES];
@@ -387,12 +387,12 @@
     
     // update Dice
     for (int i = 0; i <= 5; i++) {
-        if (![[farkle.rolledDice objectAtIndex:i] isLocked]) {
-            [[self.diceButtons objectAtIndex:i] setTitle:[[farkle.rolledDice objectAtIndex:i] sideUp]
+        if (![[farkle.dice objectAtIndex:i] isLocked]) {
+            [[self.diceButtons objectAtIndex:i] setTitle:[[farkle.dice objectAtIndex:i] sideUp]
                                                 forState:UIControlStateNormal];
         }
-        else if ([[farkle.rolledDice objectAtIndex:i] isLocked]) {
-			[[farkle.rolledDice objectAtIndex:i] setScored:YES];
+        else if ([[farkle.dice objectAtIndex:i] isLocked]) {
+			[[farkle.dice objectAtIndex:i] setScored:YES];
 		}
     }
 

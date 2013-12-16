@@ -15,6 +15,10 @@
 
 + (NSArray *)pointsForTriples;
 
+@property (nonatomic, retain) NSMutableArray *rolledDice;
+@property (nonatomic, retain) NSMutableArray *lockedDice;
+@property (nonatomic, retain) NSMutableArray *scoredDice;
+
 @end
 
 @implementation Farkle
@@ -32,6 +36,8 @@
 @synthesize memory; // replaced by one of the above
 @synthesize farkles;
 @synthesize turns;
+
+@synthesize dice;
 
 @synthesize rolledDice;
 @synthesize lockedDice;
@@ -70,16 +76,43 @@
 	return @[@1000,@200,@300,@400,@500,@600];
 }
 
-- (void)passed {
-    
-}
 
 - (void)rolled {
+    if (isNewGame) {
+        isNewGame = NO;
+        
+    }
+    // scoredDice += lockedDice
+    // clear lockedDice
+    //
+}
 
+- (void)passed {
+    // scoredDice += lockedDice
+}
+
+
+- (void)gameLoop {
+    if (isNewGame) { // can this go inside the next if?
+        dice = [self newDice];
+        isNewGame = NO;
+        NSLog(@"[self newGame]");
+    }
+    else if ([self isGameOver]) {
+        NSLog(@"[self gameOver]");
+        // this number is hardcoded for now, but should come from the Settings singleton
+        if (scoredPoints >= 10000) {
+            NSLog(@"Player Won");
+        } else NSLog(@"Player Lost");
+        [self newGame];
+    }
+    else {
+        
+    }
     
 }
 
-- (void)gameLoop {
+- (void)oldGameLoop {
 /*
     NSInteger test = 0;
     test = [rolledPoints integerValue];
@@ -89,7 +122,7 @@
 */
 
     if (isNewGame) { // can this go inside the next if?
-        rolledDice = [self newDice];
+        dice = [self newDice];
         isNewGame = NO;
         NSLog(@"[self newGame]");
     }
