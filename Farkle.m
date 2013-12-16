@@ -107,7 +107,7 @@
         [self newGame];
     }
     else {
-        
+        rolledDice = [self sort:dice];
     }
     
 }
@@ -285,7 +285,7 @@
 
 #pragma mark Sort & Score
 
-- (NSArray *)sort:(NSMutableArray *)unsorted {
+- (NSMutableArray *)sort:(NSMutableArray *)unsorted {
     
     NSMutableArray *sorted = [[NSMutableArray alloc] init];
     // Initialize the array
@@ -304,7 +304,7 @@
     return sorted;
 }
 
-- (NSInteger)score:(NSArray *)unscored {
+- (NSInteger)score:(NSMutableArray *)unscored {
     
     int scored = 0;
     // step through the entire array
