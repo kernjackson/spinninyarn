@@ -11,13 +11,29 @@
 
 #define APP_DELEGATE (AppDelegate *)[[UIApplication sharedApplication] delegate]
 
-@interface Farkle()
+@interface Farkle() {
+
+NSInteger rolledPoints;
+NSInteger lockedPoints;
+NSInteger scoredPoints;
+NSInteger totalPoints;
+NSInteger previousPoints;
+    
+}
 
 + (NSArray *)pointsForTriples;
+
+@property (nonatomic, assign) NSInteger rolledPoints;
+@property (nonatomic, assign) NSInteger lockedPoints;
+@property (nonatomic, assign) NSInteger scoredPoints;
+@property (nonatomic, assign) NSInteger totalPoints;
+@property (nonatomic, assign) NSInteger previousPoints;
 
 @property (nonatomic, retain) NSMutableArray *rolledDice;
 @property (nonatomic, retain) NSMutableArray *lockedDice;
 @property (nonatomic, retain) NSMutableArray *scoredDice;
+
+@property (nonatomic, retain) NSMutableArray *oldDice;
 
 @end
 
@@ -32,6 +48,9 @@
 @synthesize isNewGame;
 @synthesize canPass;
 @synthesize canRoll;
+
+@synthesize scoreTitle;
+@synthesize passTitle;
 
 @synthesize memory; // replaced by one of the above
 @synthesize farkles;
@@ -57,6 +76,9 @@
 - (id)init {
     if (self = [super init]) {
         
+        scoreTitle = @0;
+        passTitle = @0;
+        
         scoredPoints = 0;
         rolledPoints = 0;
         lockedPoints = 0;
@@ -76,23 +98,90 @@
 	return @[@1000,@200,@300,@400,@500,@600];
 }
 
+- (void)clearArray:(NSMutableArray *)arrayToClear {
+    for (int i = 0; i < 6; i++) {
+        [arrayToClear insertObject:@0 atIndex:i];
+    }
+}
+
+#pragma mark Actions
 
 - (void)rolled {
+
     if (isNewGame) {
         isNewGame = NO;
-        
+        NSLog(@"isNewGame");
     }
+    if (self.isGameOver) {
+        NSLog(@"isGameOver");
+    } else {
+        //rolledDice = [self sort:dice];
+        //rolledPoints = [self score:rolledDice];
+        rolledPoints = [self scoreRolled];
+        lockedPoints = [self scoreLocked];
+        scoredPoints = [self scoreScored];
+        [self logPoints];
+        
+        for (int i = 0; i < 6; i++) {
+            NSLog(@"rolledDice %@", rolledDice[i]);
+        }
+        [self didFarkle];
+    }
+    
+    scoredPoints += lockedPoints;
     // scoredDice += lockedDice
     // clear lockedDice
     //
 }
 
 - (void)passed {
-    // scoredDice += lockedDice
+    [self decrementTurn];
+    scoredPoints += lockedPoints;
+    scoreTitle = [NSNumber numberWithInteger:scoredPoints];
+    lockedPoints = 0;
+    passTitle = @0;
+    
+    
+    rolledPoints = [self scoreRolled];
+    lockedPoints = [self scoreLocked];
+    scoredPoints = [self scoreScored];
+    [self logPoints];
+///    [self clearArray:dice];
 }
 
 
-- (void)gameLoop {
+
+- (void)toggleDie {
+    // We set the dice to locked in the controller?
+    
+    //lockedPoints = [self score:[self sort:lockedDice]];
+    //NSLog(@"lockedPoints: %ld", (long)lockedPoints);
+ /*
+    lockedPoints = [self scoreLocked];
+    NSLog(@"lockedPoints %ld", (long)lockedPoints);
+    
+    passTitle = [NSNumber numberWithInteger:(long)lockedPoints];
+    NSLog(@"toggleDie: %@", passTitle);
+    
+    
+    lockedDice = dice;
+*/
+    
+    rolledPoints = [self scoreRolled];
+    lockedPoints = [self scoreLocked];
+    scoredPoints = [self scoreScored];
+    [self logPoints];
+    
+}
+
+- (void)endTurn {
+    //self.playerTurns--;
+    [self isGameOver];
+}
+
+#pragma mark Game Loop
+
+- (void)newgameLoop {
     if (isNewGame) { // can this go inside the next if?
         dice = [self newDice];
         isNewGame = NO;
@@ -107,12 +196,41 @@
         [self newGame];
     }
     else {
-        rolledDice = [self sort:dice];
+        [self clearArray:rolledDice];
+        for (int i = 0; i < 6; i++) {
+            // do we need to check for isLocked here or just for isScore?
+            if ((![[dice objectAtIndex:i] isLocked]) &&
+                (![[dice objectAtIndex:i] isScored]))
+            {
+                //[array replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:FALSE]];
+                [rolledDice replaceObjectAtIndex:i withObject:[[dice objectAtIndex:i] sideValue]];
+            } // else [unsorted insertObject:@0 atIndex:i];
+        }
+
     }
     
 }
 
-- (void)oldGameLoop {
+- (void)decrementTurn {
+    // decrement turns
+    NSNumber *temp = [NSNumber numberWithInt:[self.turns intValue] -1];
+    self.turns = temp;
+}
+
+- (void)yetAnother {
+    // if isNewGame?
+    // if isGameOver?
+    // else
+    // sort dice
+    // score diceRolled
+        // if int diceRolled == 0, didFarkle = YES
+        // else
+            // if (!dice.scored) && (dice.locked)
+                // setScored = YES
+            // if (
+}
+
+- (void)gameLoop {
 /*
     NSInteger test = 0;
     test = [rolledPoints integerValue];
@@ -168,15 +286,12 @@
         /////////////////////////////////
         // calculate score for locked
         // do I need to clear the array to @0's here?
-
         // need to set locked dice to score before doing this, but where?
 
-        
         for (int i = 0; i < 6; i++) {
         
             [unsorted replaceObjectAtIndex:i withObject:@0];
         }
-        
         
         for (int i = 0; i < 6; i++) {
             if (( [[rolledDice objectAtIndex:i] isLocked]) &&
@@ -190,16 +305,16 @@
         lockedPoints += [self score:[self sort:unsorted]]; // was +=
         NSLog(@"locked: %ld", (long)lockedPoints);
         /////////////////////////////////
-
         
         //NSLog(@"subtotal: %ld", (long)[self score:[self sort:rolledDice]]);
         [self logLocked];
         
         canRoll = [self canRoll];
         canPass = [self canPass];
-    
     }
 }
+
+#pragma mark Check Game State
 
 - (BOOL)isNewGame {
    // if ([turns  isEqual: @10]) {
@@ -226,6 +341,7 @@
     if (lockedPoints < 50) {
         return NO;
     } else return YES;
+    // return YES;
 }
 
 - (bool)areDiceHot {
@@ -243,6 +359,13 @@
     return -1;
 }
 
+- (BOOL)didFarkle {
+    if (rolledPoints == 0) {
+        return YES;
+    }
+      return NO;
+}
+
 #pragma mark Dice
 
 - (NSMutableArray *)newDice {
@@ -256,21 +379,21 @@
 
 - (void)rollDice {
     
-    if (!rolledDice) {
-        [self newDice];
+    if (!dice) {
+        dice = [self newDice];
     }
     
     // This should be in the inherited class Solitaire
     if (isNewGame) {
-        rolledDice = [self newDice];
+        dice = [self newDice];
     }
     
 	for (int i = 0; i <= 5; i++) {
-		if ([[rolledDice objectAtIndex:i] isLocked]) {
-			[[rolledDice objectAtIndex:i] setScored:YES];
+		if ([[dice objectAtIndex:i] isLocked]) {
+			[[dice objectAtIndex:i] setScored:YES];
 		} else {
 			Die *die = [[Die alloc] init];
-			[rolledDice replaceObjectAtIndex:i withObject:die];
+			[dice replaceObjectAtIndex:i withObject:die];
 		}
 	}
     [self logRolled];
@@ -285,8 +408,70 @@
 
 #pragma mark Sort & Score
 
-- (NSMutableArray *)sort:(NSMutableArray *)unsorted {
-    
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+- (NSInteger)scoreRolled {
+    // make a temporary array
+    NSMutableArray *temp = [[NSMutableArray alloc] init];
+    // and initialize it
+    for (int i = 0; i < 6; i++) {
+        [temp insertObject:@0 atIndex:i];
+    }
+    // calculate score for rolled
+    for (int i = 0; i < 6; i++) {
+        // is it neither locked or scored?
+        if ((![[dice objectAtIndex:i] isLocked]) &&
+            (![[dice objectAtIndex:i] isScored]))
+        {
+            [temp replaceObjectAtIndex:i withObject:[[dice objectAtIndex:i] sideValue]];
+        } // else [temp insertObject:@0 atIndex:i];
+    }
+    return rolledPoints = [self score:[self sort:temp]];
+}
+
+- (NSInteger)scoreLocked {
+    // make a temporary array
+    NSMutableArray *temp = [[NSMutableArray alloc] init];
+    // and initialize it
+    for (int i = 0; i < 6; i++) {
+        [temp insertObject:@0 atIndex:i];
+    }
+    // calculate score for rolled
+    for (int i = 0; i < 6; i++) {
+        // is it neither locked or scored?
+        if (( [[dice objectAtIndex:i] isLocked]) &&
+            (![[dice objectAtIndex:i] isScored]))
+        {
+            [temp replaceObjectAtIndex:i withObject:[[dice objectAtIndex:i] sideValue]];
+        } // else [temp insertObject:@0 atIndex:i];
+    }
+    return lockedPoints = [self score:[self sort:temp]];
+}
+
+- (NSInteger)scoreScored {
+    // make a temporary array
+    NSMutableArray *temp = [[NSMutableArray alloc] init];
+    // and initialize it
+    for (int i = 0; i < 6; i++) {
+        [temp insertObject:@0 atIndex:i];
+    }
+    // calculate score for rolled
+    for (int i = 0; i < 6; i++) {
+        // is it neither locked or scored?
+        if (( [[dice objectAtIndex:i] isLocked]) &&
+            ( [[dice objectAtIndex:i] isScored]))
+        {
+            [temp replaceObjectAtIndex:i withObject:[[dice objectAtIndex:i] sideValue]];
+        } // else [temp insertObject:@0 atIndex:i];
+    }
+    return scoredPoints = [self score:[self sort:temp]];
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// 121345 == 211110, 443564 == 001311, etc
+- (NSArray *)sort:(NSMutableArray *)unsorted {
     NSMutableArray *sorted = [[NSMutableArray alloc] init];
     // Initialize the array
     for (int i = 0; i < 6; i++) {
@@ -294,17 +479,18 @@
     } // increment at each position for each die value
     for (int position = 0; position < 6; position++) {
         for (int value = 0; value < 6; value++) {
-            if ([unsorted[position] isEqual:[NSNumber numberWithInt:value+1]]) {
+            if (unsorted[position] == [NSNumber numberWithInt:value+1]) {
+          //  if ([[unsorted[position] sideValue] isEqual:[NSNumber numberWithInt:value+1]]) {
                 NSNumber *count = [NSNumber numberWithInt:[sorted[value] intValue] + 1];
-                [sorted removeObjectAtIndex:value];
-                [sorted insertObject:count atIndex:value];
+                //NSLog(@"count: %@", count);
+                [sorted replaceObjectAtIndex:value withObject:count];
             }
         }
     }
     return sorted;
 }
 
-- (NSInteger)score:(NSMutableArray *)unscored {
+- (NSInteger)score:(NSArray *)unscored {
     
     int scored = 0;
     // step through the entire array
@@ -393,9 +579,9 @@
 
 - (void)logRolled {
     for (int i = 0; i < 6; i++) {
-        if ((![[rolledDice objectAtIndex:i] isLocked]) &&
-            (![[rolledDice objectAtIndex:i] isScored])) {
-            NSLog(@"rolled: %@", [[rolledDice objectAtIndex:i] sideUp]);
+        if ((![[dice objectAtIndex:i] isLocked]) &&
+            (![[dice objectAtIndex:i] isScored])) {
+            NSLog(@"rolled: %@", [[dice objectAtIndex:i] sideUp]);
         }
     }
 }
@@ -403,10 +589,18 @@
 - (void)logLocked {
     
     for (int i = 0; i < 6; i++) {
-        if ([[rolledDice objectAtIndex:i] isLocked]) {
-            NSLog(@"locked: %@", [[rolledDice objectAtIndex:i] sideUp]);
+        if ([[dice objectAtIndex:i] isLocked]) {
+            NSLog(@"locked: %@", [[dice objectAtIndex:i] sideUp]);
         }
     }
+}
+
+- (void)logPoints {
+    NSLog(@"=====================================");
+    NSLog(@"rolledPoints %ld", (long)rolledPoints);
+    NSLog(@"lockedPoints %ld", (long)lockedPoints);
+    NSLog(@"scoredPoints %ld", (long)scoredPoints);
+    NSLog(@"=====================================");
 }
 
 @end

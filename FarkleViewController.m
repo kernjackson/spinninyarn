@@ -50,6 +50,8 @@
                                                     action:@selector(popView)];
     [mSwipeUpRecognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
     [[self view] addGestureRecognizer:mSwipeUpRecognizer];
+    
+    //[[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -85,8 +87,12 @@
     
     // need to check the state of newGame, and then change it so that we don't get a crash or a bunch of deactivated controls here
     
+    
+    
 	[self rollDice];
-    [farkle gameLoop];
+    [farkle rolled];
+    
+    //[farkle gameLoop];
 	[self updateUI];
 }
 
@@ -100,7 +106,8 @@
 	} else {
         [self disableDie:sender];
 	}
-    [farkle gameLoop];
+    //[farkle gameLoop];
+    [farkle toggleDie];
 	[self updateUI];
 }
 
@@ -108,21 +115,24 @@
     
     Farkle *farkle = [Farkle sharedManager];
     
-    [self disablePassButton];
+//    [self disablePassButton];
     // possible way to move more to the model
     //farkle.canPass = NO;
     // not sure where else to put this logic. Is it possible or even recommended to put it in the model?
-    farkle.scoredPoints += farkle.lockedPoints;
-    farkle.lockedPoints = 0;
+    //farkle.scoredPoints += farkle.lockedPoints;
+    //farkle.lockedPoints = 0;
     
-    [self endTurn]
+    [farkle passed];
+    
+    //[self endTurn]
+    
     
     /*
      // decrement turns
      NSNumber *temp = [NSNumber numberWithInt:[farkle.turns intValue] - 1];
      farkle.turns = temp;
      */
-    ;
+    
     // set passButton to @"0"
     // disable passButton
     // [farkle gameLoop:@"passed"];
@@ -130,6 +140,7 @@
     //[farkle gameLoop];
     
     NSLog(@"turns: %@", farkle.turns);
+    [self updateUI];
 }
 
 #pragma mark not sure if controller or model
@@ -188,6 +199,9 @@
 	[self.passButton setEnabled:YES];
 	[self.passButton setAlpha:1.0];
     [self.passButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    //[self.passButton setTitle:[NSString stringWithFormat:@"+ %ld", (long)[farkle lockedPoints]]
+                     //forState:UIControlStateNormal];
+
 //	[self.passButton setTitle:[NSString stringWithFormat:@"+ %ld", (long)[farkle totalPoints]] // was %d
  //                    forState:UIControlStateNormal];
  //   NSLog(@"+ %ld", (long)[farkle totalPoints]);
@@ -249,6 +263,30 @@
     [[farkle.dice objectAtIndex:[self.diceButtons indexOfObject:sender]] setLocked:YES];
 	[sender setSelected:YES];
 	[UIView animateWithDuration:0.10 animations:^{sender.alpha = 0.4;}];
+}
+
+- (void)hideDice {
+	for (int i = 0; i <= 5; i++) {
+		[[_diceButtons objectAtIndex:i] setAlpha:0];
+		[[self.diceButtons objectAtIndex:i] setEnabled:NO];
+		[[self.diceButtons objectAtIndex:i] setSelected:FALSE];
+		[[self.diceButtons objectAtIndex:i] setTitle:@""
+                                            forState:UIControlStateNormal];
+	}
+}
+
+- (void)showDice {
+    // move to farkle
+    Farkle *farkle = [Farkle sharedManager];
+	[farkle.dice removeAllObjects];
+    //
+	for (int i = 0; i <= 5; i++) {
+		[[_diceButtons objectAtIndex:i] setAlpha:1];
+		[[self.diceButtons objectAtIndex:i] setEnabled:YES];
+		[[self.diceButtons objectAtIndex:i] setSelected:FALSE];
+		[[self.diceButtons objectAtIndex:i] setTitle:@""
+                                            forState:UIControlStateNormal];
+	}
 }
 
 - (void)clearDice {
@@ -391,13 +429,19 @@
             [[self.diceButtons objectAtIndex:i] setTitle:[[farkle.dice objectAtIndex:i] sideUp]
                                                 forState:UIControlStateNormal];
         }
+        // move to farkle
+        /*
         else if ([[farkle.dice objectAtIndex:i] isLocked]) {
 			[[farkle.dice objectAtIndex:i] setScored:YES];
 		}
+        */
     }
 
     // update progress bar with number of turns left
+    
+    
     [self.turnsProgress setProgress:((float)([farkle.turns integerValue] ) / 10) animated:YES];
+
 /*
     // toggle NavBar
     if ([farkle isNewGame] || [farkle isGameOver]) {
@@ -415,21 +459,35 @@
         [self enableRollButton];
     } else [self disableRollButton];
 */
+
+    
+    
     // is it a new game?
     if ([farkle isNewGame]) {
         [self clearScreen];
     }
     // is Game Over?
     if ([farkle isGameOver]) {
+        
+        [self hideDice];
         [self deathScreen];
     }
     
-    //  update scoreLabel with scoredPoints
-    [self.scoreLabel setText:[NSString stringWithFormat:@"%ld", (long)[farkle scoredPoints]]];
+    if ([farkle didFarkle]) {
+        [self flashScreen];
+        // make dice unselecteable, but still visible
+        // change subtotal to 0, which should disable the pass button
+    }
     
-    // update passButton with lockedPoints. Doesn't this label need to be both locked and scored?
-    [self.passButton setTitle:[NSString stringWithFormat:@"%ld", (long)[farkle lockedPoints]] forState:UIControlStateNormal];
+    if (![farkle canPass]) {
+        [self disablePassButton];
+    } else [self enablePassButton];
     
+    [self.scoreLabel setText:[NSString stringWithFormat:@"%@", [farkle scoreTitle]]];
+    NSLog(@"scoreTitle: %ld", (long)[farkle scoreTitle]);
+    
+    [self.passButton setTitle:[NSString stringWithFormat:@"%@", [farkle passTitle]] forState:UIControlStateNormal];
+    NSLog(@"passTitle: %@", [farkle passTitle]);
     
 }
 /*

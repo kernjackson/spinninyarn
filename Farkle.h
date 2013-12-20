@@ -10,49 +10,28 @@
 #import "Die.h"
 
 @interface Farkle : NSObject {
-    
-    //NSNumber *rolledPoints;
-    NSInteger rolledPoints;
-    NSInteger lockedPoints;
-    NSInteger scoredPoints;
-    NSInteger totalPoints;
-    NSInteger previousPoints;
-    
- //   BOOL isNewGame;
-    
-//    BOOL canPass;
-//    BOOL canRoll;
-/*
-    BOOL newGame; // don't think I need this
-    BOOL canRoll;
-    BOOL canPass;
-    BOOL farkled;
-*/    
-     // ???
+
+    NSNumber *scoreTitle;
+    NSNumber *passTitle;
+
     NSNumber *memory;  // ???
     NSNumber *farkles;
-   //BOOL farkled; // There's got to be a better way to do this ???
     NSNumber *turns;
-    
-//    NSMutableArray *rolled;
-//    NSMutableArray *locked;
 }
-
-@property (nonatomic, assign) NSInteger rolledPoints;
-@property (nonatomic, assign) NSInteger lockedPoints;
-@property (nonatomic, assign) NSInteger scoredPoints;
-@property (nonatomic, assign) NSInteger totalPoints;
-@property (nonatomic, assign) NSInteger previousPoints;
 
 @property (nonatomic, assign) BOOL isNewGame;
 @property (nonatomic, assign) BOOL canPass;
 @property (nonatomic, assign) BOOL canRoll;
+
+@property (nonatomic, retain) NSNumber *scoreTitle;
+@property (nonatomic, retain) NSNumber *passTitle;
 
 @property (nonatomic, retain) NSNumber *memory; // ???
 @property (nonatomic, retain) NSNumber *farkles;
 @property (nonatomic, retain) NSNumber *turns;
 
 @property (nonatomic, retain) NSMutableArray *dice;
+
 
 + (id)sharedManager;
 
@@ -79,7 +58,7 @@
 
 - (NSMutableArray *)newDice; // this should be private?
 - (void)rollDice; // private
-- (NSArray *)sort:(NSMutableArray *)unsorted; //private
+- (NSMutableArray *)sort:(NSMutableArray *)unsorted; //private
 - (NSInteger)score:(NSArray *)unscored; // private
 
 @end
