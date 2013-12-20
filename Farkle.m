@@ -115,17 +115,24 @@ NSInteger previousPoints;
     if (self.isGameOver) {
         NSLog(@"isGameOver");
     } else {
-        //rolledDice = [self sort:dice];
-        //rolledPoints = [self score:rolledDice];
-        rolledPoints = [self scoreRolled];
-        lockedPoints = [self scoreLocked];
-        scoredPoints = [self scoreScored];
-        [self logPoints];
+        if (self.didFarkle) {
+            // clear dice, and all points but those in scoreTitle
+            NSLog(@"FARKLED");
+        } else {
         
-        for (int i = 0; i < 6; i++) {
-            NSLog(@"rolledDice %@", rolledDice[i]);
+        
+            //rolledDice = [self sort:dice];
+            //rolledPoints = [self score:rolledDice];
+            rolledPoints = [self scoreRolled];
+            lockedPoints = [self scoreLocked];
+            scoredPoints = [self scoreScored];
+            [self logPoints];
+        
+            for (int i = 0; i < 6; i++) {
+                NSLog(@"rolledDice %@", rolledDice[i]);
+            }
+            [self didFarkle];
         }
-        [self didFarkle];
     }
     
     scoredPoints += lockedPoints;
