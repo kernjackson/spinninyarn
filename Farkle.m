@@ -124,8 +124,8 @@ NSInteger previousPoints;
             //rolledDice = [self sort:dice];
             //rolledPoints = [self score:rolledDice];
             rolledPoints = [self scoreRolled];
-            lockedPoints = [self scoreLocked];
-            scoredPoints = [self scoreScored];
+//            lockedPoints = [self scoreLocked];
+//            scoredPoints = [self scoreScored];
             
             //scoredPoints += lockedPoints;
             
@@ -152,7 +152,7 @@ NSInteger previousPoints;
     passTitle = @0;
     
     
-    rolledPoints = [self scoreRolled];
+//    rolledPoints = [self scoreRolled];
     lockedPoints = [self scoreLocked];
     scoredPoints = [self scoreScored];
     [self logPoints];
@@ -177,9 +177,9 @@ NSInteger previousPoints;
     lockedDice = dice;
 */
     
-    rolledPoints = [self scoreRolled];
+//    rolledPoints = [self scoreRolled];
     lockedPoints = [self scoreLocked];
-    scoredPoints = [self scoreScored];
+//    scoredPoints = [self scoreScored];
     
     scoredPoints += lockedPoints;
     passTitle = [NSNumber numberWithInteger:scoredPoints];
@@ -585,7 +585,7 @@ NSInteger previousPoints;
                 scored += 50;
             }
             
-            // Check for non-scoring dice
+            // Check for non-scoring dice, somehow ignore for rolled?
             else if (([unscored[1] intValue] == 1) ||
                      ([unscored[1] intValue] == 2) ||
                      ([unscored[2] intValue] == 1) ||
