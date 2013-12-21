@@ -146,7 +146,9 @@ NSInteger previousPoints;
 - (void)passed {
     
     //scoredPoints += lockedPoints;
-    scoreTitle = [NSNumber numberWithInteger:(scoredPoints + lockedPoints)];
+    //previousPoints = totalPoints;
+    totalPoints += (scoredPoints + lockedPoints);
+    scoreTitle = [NSNumber numberWithInteger:(totalPoints)];
  //   lockedPoints = 0;
  //   scoredPoints = 0;
     
