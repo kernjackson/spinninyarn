@@ -133,7 +133,7 @@ NSInteger previousPoints;
             
             [self logPoints];
         
-            [self didFarkle];
+            //[self didFarkle];
         }
 //    }
     
@@ -144,18 +144,19 @@ NSInteger previousPoints;
 }
 
 - (void)passed {
-    [self endTurn];
+    
     //scoredPoints += lockedPoints;
-    scoreTitle = [NSNumber numberWithInteger:scoredPoints];
-    lockedPoints = 0;
-    scoredPoints = 0;
-    passTitle = @0;
+    scoreTitle = [NSNumber numberWithInteger:(scoredPoints + lockedPoints)];
+ //   lockedPoints = 0;
+ //   scoredPoints = 0;
+    
     
     
 //    rolledPoints = [self scoreRolled];
     lockedPoints = [self scoreLocked];
     scoredPoints = [self scoreScored];
     [self logPoints];
+    [self endTurn];
 ///    [self clearArray:dice];
 }
 
@@ -179,10 +180,10 @@ NSInteger previousPoints;
     
 //    rolledPoints = [self scoreRolled];
     lockedPoints = [self scoreLocked];
-//    scoredPoints = [self scoreScored];
+    scoredPoints = [self scoreScored];
     
-    scoredPoints += lockedPoints;
-    passTitle = [NSNumber numberWithInteger:scoredPoints];
+    //scoredPoints += lockedPoints;
+    passTitle = [NSNumber numberWithInteger:(scoredPoints + lockedPoints)];
     
     [self logPoints];
     
@@ -226,6 +227,7 @@ NSInteger previousPoints;
     self.turns = temp;
     scoredPoints = 0;
     lockedPoints = 0;
+    passTitle = @0;
 }
 
 - (void)yetAnother {
@@ -371,13 +373,13 @@ NSInteger previousPoints;
 }
 
 - (BOOL)didFarkle {
-    if (rolledPoints == 0) {
+    if ((rolledPoints == 0) && (!isNewGame)) {
         [self endTurn];
-        
         return YES;
     }
       return NO;
 }
+
 
 #pragma mark Dice
 
