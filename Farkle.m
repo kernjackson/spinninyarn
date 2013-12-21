@@ -18,6 +18,7 @@ NSInteger lockedPoints;
 NSInteger scoredPoints;
 NSInteger totalPoints;
 NSInteger previousPoints;
+NSInteger finalPoints;
     
 }
 
@@ -133,7 +134,8 @@ NSInteger previousPoints;
 - (void)passed {
     
     totalPoints = (previousPoints + lockedPoints);
-    scoreTitle = [NSNumber numberWithInteger:(totalPoints)];
+    finalPoints += totalPoints;
+    scoreTitle = [NSNumber numberWithInteger:(finalPoints)];
     
     lockedPoints = [self scoreLocked];
     scoredPoints = [self scoreScored];
@@ -159,7 +161,7 @@ NSInteger previousPoints;
     // decrement turns
     NSNumber *temp = [NSNumber numberWithInt:[self.turns intValue] -1];
     self.turns = temp;
-    rolledPoints = 0;
+    rolledPoints = -1;
     scoredPoints = 0;
     lockedPoints = 0;
     totalPoints = 0;
