@@ -76,6 +76,9 @@ NSInteger previousPoints;
 - (id)init {
     if (self = [super init]) {
         
+        // possibly check defaults here.
+        //NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        
         scoreTitle = @0;
         passTitle = @0;
         
@@ -87,6 +90,8 @@ NSInteger previousPoints;
         
         farkles = @0;
         turns = @10; // +1 for roll, +1 for 10 through 1
+        
+        
         
         //NSMutableArray *rolled = [[NSMutableArray alloc] init];
         
@@ -231,6 +236,9 @@ NSInteger previousPoints;
     lockedPoints = 0;
     passTitle = @0;
     [self clearDice];
+    if (self.isGameOver) {
+        NSLog(@"GAMEOVER");
+    }
     // clear dice here
 }
 
@@ -344,11 +352,12 @@ NSInteger previousPoints;
 
 - (BOOL)isGameOver {
     if ([turns  isEqual: @0] ) {
+        //turns = @10;
         return YES;
     } else return NO;
 }
 
-- (BOOL)canRoll {
+- (BOOL)canRoll { // add a check for non-scoring dice
     if (lockedPoints >= 50) { // NSDefaults minimumScore
         return YES;
     } else return NO;
@@ -356,7 +365,7 @@ NSInteger previousPoints;
 
 - (BOOL)canPass {
     NSInteger temp = [passTitle integerValue];
-    if (temp < 300) {
+    if (temp < 300) { // add a check for non-scoring dice
         return NO;
     } else return YES;
 }
@@ -597,7 +606,7 @@ NSInteger previousPoints;
                 scored += 50;
             }
             
-            // Check for non-scoring dice, somehow ignore for rolled?
+            // Check for non-scoring dice. it's ugly, but it works
             else if (([unscored[1] intValue] == 1) ||
                      ([unscored[1] intValue] == 2) ||
                      ([unscored[2] intValue] == 1) ||

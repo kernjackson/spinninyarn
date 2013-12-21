@@ -375,7 +375,8 @@
 - (void)flashScreen {
 	[UIView animateWithDuration:0.4
                           delay:0.2 // otherwise we will see disabled die flip
-                        options: UIViewAnimationOptionCurveEaseIn 									 animations:^{
+                        options: UIViewAnimationOptionCurveEaseIn
+                     animations:^{
                             self.HUD.backgroundColor = [UIColor redColor];
                             self.HUD.alpha = 1.0;
                             self.HUD.alpha = 0.0;
@@ -515,6 +516,7 @@
     
     if ([farkle didFarkle]) {
         [self flashScreen];
+        [self hideDice];
         // make dice unselecteable, but still visible
         // change subtotal to 0, which should disable the pass button
     }
