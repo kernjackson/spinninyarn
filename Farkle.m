@@ -224,6 +224,7 @@ NSInteger finalPoints;
     totalPoints = 0;
     scoredPoints = 0;
     lockedPoints = 0;
+    finalPoints = 0;
     passTitle = @0;
     scoreTitle = @0;
 }

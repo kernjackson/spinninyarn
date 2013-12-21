@@ -487,12 +487,6 @@
     if ([farkle isNewGame]) {
         [self clearScreen];
     }
-    // is Game Over?
-    if ([farkle isGameOver]) {
-        
-        [self hideDice];
-        [self gameOver];
-    }
     
     if ([farkle didFarkle]) {
         [self flashScreen];
@@ -500,6 +494,15 @@
         // make dice unselecteable, but still visible
         // change subtotal to 0, which should disable the pass button
     }
+    
+    // is Game Over?
+    if ([farkle isGameOver]) {
+        
+        [self hideDice];
+        [self gameOver];
+    }
+    
+    
     
     if ([farkle canPass]) {
         [self enablePassButton];
