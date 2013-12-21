@@ -479,9 +479,9 @@
         // change subtotal to 0, which should disable the pass button
     }
     
-    if (![farkle canPass]) {
-        [self disablePassButton];
-    } else [self enablePassButton];
+    if ([farkle canPass]) {
+        [self enablePassButton];
+    } else [self disablePassButton];
     
     [self.scoreLabel setText:[NSString stringWithFormat:@"%@", [farkle scoreTitle]]];
     NSLog(@"scoreTitle: %ld", (long)[farkle scoreTitle]);

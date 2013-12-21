@@ -145,9 +145,10 @@ NSInteger previousPoints;
 
 - (void)passed {
     [self decrementTurn];
-    scoredPoints += lockedPoints;
+    //scoredPoints += lockedPoints;
     scoreTitle = [NSNumber numberWithInteger:scoredPoints];
     lockedPoints = 0;
+    scoredPoints = 0;
     passTitle = @0;
     
     
@@ -373,6 +374,8 @@ NSInteger previousPoints;
 
 - (BOOL)didFarkle {
     if (rolledPoints == 0) {
+        scoredPoints = 0;
+        lockedPoints = 0;
         return YES;
     }
       return NO;
@@ -581,6 +584,22 @@ NSInteger previousPoints;
             else if (i == 4) {
                 scored += 50;
             }
+            
+            // Check for non-scoring dice
+            else if (([unscored[1] intValue] == 1) ||
+                     ([unscored[1] intValue] == 2) ||
+                     ([unscored[2] intValue] == 1) ||
+                     ([unscored[2] intValue] == 2) ||
+                     ([unscored[3] intValue] == 1) ||
+                     ([unscored[3] intValue] == 2) ||
+                     ([unscored[5] intValue] == 1) ||
+                     ([unscored[5] intValue] == 2)
+               
+                     ) {
+                NSLog(@"BOOL NON-SCORING DIE SELECTED");
+            }
+
+            
             else scored += 0;
         }
     }
