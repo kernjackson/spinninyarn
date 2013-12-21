@@ -351,10 +351,9 @@ NSInteger previousPoints;
 }
 
 - (BOOL)canPass {
-    if (lockedPoints < 300) {
+    if ((scoredPoints + lockedPoints) < 300) {
         return NO;
     } else return YES;
-    // return YES;
 }
 
 - (bool)areDiceHot {
