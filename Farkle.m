@@ -48,6 +48,7 @@ NSInteger previousPoints;
 @synthesize isNewGame;
 @synthesize canPass;
 @synthesize canRoll;
+@synthesize hotDice;
 
 @synthesize scoreTitle;
 @synthesize passTitle;
@@ -89,7 +90,7 @@ NSInteger previousPoints;
         isNewGame = YES;
         
         farkles = @0;
-        turns = @10; // +1 for roll, +1 for 10 through 1
+        turns = @11; // +1 for roll, +1 for 10 through 1
         
         
         
@@ -346,12 +347,13 @@ NSInteger previousPoints;
 #pragma mark Check Game State
 
 - (BOOL)isNewGame {
-   // if ([turns  isEqual: @10]) {
-//        NSNumber *temp = [NSNumber numberWithInt:[turns intValue] -1];
-//        turns = temp;
-  //      return YES;
-   // } else return NO;
-    return YES; // this should probably have it's own BOOL flag
+    if ([turns  isEqual: @11]) {
+        NSNumber *temp = [NSNumber numberWithInt:[turns intValue] -1];
+        turns = temp;
+        
+        return YES;
+    } else return NO;
+   // return YES; // this should probably have it's own BOOL flag
 }
 
 - (BOOL)isGameOver {
@@ -362,14 +364,20 @@ NSInteger previousPoints;
 }
 
 - (BOOL)canRoll { // add a check for non-scoring dice
-    if (lockedPoints >= 50) { // NSDefaults minimumScore
+    NSInteger temp = [passTitle integerValue];
+    if ((lockedPoints >= 50) || (isNewGame) || (temp != 0)) { // NSDefaults minimumScore
+        NSLog(@"YES: %d", lockedPoints);
         return YES;
-    } else return NO;
+    } else {
+        NSLog(@"NO: %d", lockedPoints);
+        return NO;
+    }
 }
 
 - (BOOL)canPass {
     NSInteger temp = [passTitle integerValue];
-    if (temp < 300) { // add a check for non-scoring dice
+    if ( (temp < 300) || (self.areDiceHot) )
+    { // add a check for non-scoring dice
         return NO;
     } else return YES;
 }
@@ -382,7 +390,7 @@ NSInteger previousPoints;
 }
 
 - (void)newGame {
-    turns = @10;
+    turns = @11;
     totalPoints = 0;
     scoredPoints = 0;
     lockedPoints = 0;
@@ -626,11 +634,15 @@ NSInteger previousPoints;
                      ([unscored[5] intValue] == 2)
                
                      ) {
-                NSLog(@"BOOL NON-SCORING DIE SELECTED");
+                // set diceHot here
+                hotDice = YES;
+                NSLog(@"HOTDICE %hhd", hotDice);
             }
-
-            
-            else scored += 0;
+            else {
+                scored += 0;
+                hotDice = NO;
+                NSLog(@"HOTDICE %hhd", hotDice);
+            }
         }
     }
     return scored;

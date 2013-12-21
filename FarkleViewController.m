@@ -87,8 +87,6 @@
     
     // need to check the state of newGame, and then change it so that we don't get a crash or a bunch of deactivated controls here
     
-    
-    
 	[self rollDice];
     [farkle rolled];
     [self showDice];
@@ -475,21 +473,15 @@
     if ([farkle isNewGame] || [farkle isGameOver]) {
         [self.navigationController setNavigationBarHidden:NO animated:YES];
     } else [self.navigationController setNavigationBarHidden:YES animated:YES];
-
+*/
     // toggle PassButton
     if ([farkle canPass]) {
         [self enablePassButton];
     } else [self disablePassButton];
 
     // toggle RollButton, is this backwards?
-    if (([farkle canRoll]) ||
-        ([farkle isNewGame]))  {
-        [self enableRollButton];
-    } else [self disableRollButton];
-*/
+    
 
-    
-    
     // is it a new game?
     if ([farkle isNewGame]) {
         [self clearScreen];
@@ -511,6 +503,18 @@
     if ([farkle canPass]) {
         [self enablePassButton];
     } else [self disablePassButton];
+    
+    NSLog(@"%hhd", [farkle canRoll]);
+    /*
+    if (([farkle canRoll]) ||
+        ([farkle isNewGame]))  {
+        [self enableRollButton];
+        NSLog(@"enableRollButton");
+    } else {
+        [self disableRollButton];
+        NSLog(@"disableRollButton");
+    }
+     */
     
     [self.scoreLabel setText:[NSString stringWithFormat:@"%@", [farkle scoreTitle]]];
  //   NSLog(@"scoreTitle: %ld", (long)[farkle scoreTitle]);

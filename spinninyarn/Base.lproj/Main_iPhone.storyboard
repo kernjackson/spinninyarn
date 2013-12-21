@@ -924,7 +924,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="2"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </progressView>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" restorationIdentifier="HUD" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="cgG-dM-VIM">
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="1pX-gR-HBb">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="90"/>
@@ -936,16 +936,12 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="startedNewGame:" destination="dWC-Zc-SpH" eventType="touchUpInside" id="qAf-va-VWU"/>
+                                    <action selector="startedNewGame:" destination="dWC-Zc-SpH" eventType="touchUpInside" id="ceI-Mz-QN8"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="cgG-dM-VIM" firstAttribute="top" secondItem="QiB-QM-i6c" secondAttribute="top" id="hQt-lH-sNt"/>
-                            <constraint firstAttribute="bottom" secondItem="cgG-dM-VIM" secondAttribute="bottom" id="rU8-gq-VzY"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="LXd-1y-8Ni">
                         <barButtonItem key="rightBarButtonItem" title="Rules" id="wJl-MH-khX">
@@ -956,7 +952,7 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="HUD" destination="cgG-dM-VIM" id="7Ss-ux-WWC"/>
+                        <outlet property="HUD" destination="1pX-gR-HBb" id="Hqj-Bs-isG"/>
                         <outlet property="passButton" destination="Kl3-a5-J9G" id="2w0-wN-O5t"/>
                         <outlet property="rollButton" destination="iJ3-qO-gQM" id="KFb-Vt-X6f"/>
                         <outlet property="scoreLabel" destination="FRF-Sk-GBw" id="cob-DN-dz3"/>

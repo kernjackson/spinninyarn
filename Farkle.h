@@ -17,11 +17,14 @@
     NSNumber *memory;  // ???
     NSNumber *farkles;
     NSNumber *turns;
+    
+    BOOL hotDice;
 }
 
 @property (nonatomic, assign) BOOL isNewGame;
 @property (nonatomic, assign) BOOL canPass;
 @property (nonatomic, assign) BOOL canRoll;
+@property (nonatomic, assign) BOOL hotDice;
 
 @property (nonatomic, retain) NSNumber *scoreTitle;
 @property (nonatomic, retain) NSNumber *passTitle;
@@ -31,6 +34,8 @@
 @property (nonatomic, retain) NSNumber *turns;
 
 @property (nonatomic, retain) NSMutableArray *dice;
+
+
 
 
 + (id)sharedManager;
