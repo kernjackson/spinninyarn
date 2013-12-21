@@ -97,7 +97,7 @@
 	[self updateUI];
 }
 
-
+// change the name of this to toggleDie...
 - (IBAction)selectDice:(UIButton *)sender {
     
     Farkle *farkle = [Farkle sharedManager];
@@ -155,13 +155,35 @@
     [self updateUI];
 }
 
+// Don't really like this method name
+- (IBAction)startedNewGame:(id)sender {
+    
+	[self.HUD setTitle:[NSString stringWithFormat:@"new game"]
+              forState:UIControlStateNormal];
+	[self newGame];
+}
+
 #pragma mark not sure if controller or model
 
 - (void)newGame {
     Farkle *farkle = [Farkle sharedManager];
-    //farkle.turns = @TURNS;
-//    [self.turnsProgress setProgress:1.0 animated:YES];
-//    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
+	[self.HUD setEnabled:NO];
+	[self.HUD setTitle:[NSString stringWithFormat:@""]
+              forState:UIControlStateNormal];
+	[self.rollButton setEnabled:YES];
+	[self clearScreen];
+	self.scoreLabel.textColor = [UIColor blackColor];
+	[self clearDice];
+    
+    [farkle newGame];
+    
+	[self updateUI]; // hotDice causes a crash because there is nothing in the array
+    
+    //    [self.turnsProgress setProgress:1.0 animated:YES];
+    //    [self.navigationController setNavigationBarHidden:NO animated:YES];
+	
+	//[self setTurn:TURNS];
 }
 
 - (void)endTurn {
@@ -413,24 +435,19 @@
 }
 
 - (void)gameOver {
-	//self.scoreLabel.textColor = [UIColor whiteColor];
-	
-    //	[self.HUD setTitle:[NSString stringWithFormat:@"%d", self.score]
-    /*
-     for (int i = 0; i <= 5; i++) {
-     [[rolled objectAtIndex:i] setLocked:YES];
-     }
-     */
+    
 	[self.rollButton setEnabled:NO];
 	[self.HUD setTitle:[NSString stringWithFormat:@"game over"]
               forState:UIControlStateNormal];
 	[self deathScreen];
+	// prevent the user from clicking the HUD for 1.6 seconds
 	[NSTimer scheduledTimerWithTimeInterval:1.6
                                      target:self
                                    selector:@selector(enableHUD:)
                                    userInfo:nil
                                     repeats:NO];
 }
+
 
 - (void)enableHUD:(id)sender {
 	[self.HUD setEnabled:YES];
@@ -511,7 +528,7 @@
     if ([farkle isGameOver]) {
         
         [self hideDice];
-        [self deathScreen];
+        [self gameOver];
     }
     
     if ([farkle didFarkle]) {

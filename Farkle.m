@@ -379,6 +379,11 @@ NSInteger previousPoints;
 
 - (void)newGame {
     turns = @10;
+    totalPoints = 0;
+    scoredPoints = 0;
+    lockedPoints = 0;
+    passTitle = @0;
+    scoreTitle = @0;
 }
 
 - (int)whoOne {
