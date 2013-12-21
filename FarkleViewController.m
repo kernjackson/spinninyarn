@@ -466,7 +466,7 @@
     // update progress bar with number of turns left
     
     
-    [self.turnsProgress setProgress:((float)([farkle.turns integerValue] ) / 10) animated:YES];
+    
 
 /*
     // toggle NavBar
@@ -522,7 +522,7 @@
     [self.passButton setTitle:[NSString stringWithFormat:@"%@", [farkle passTitle]] forState:UIControlStateNormal];
     [self.passButton setTitle:[NSString stringWithFormat:@"%@", [farkle passTitle]] forState:UIControlStateDisabled];
 //    NSLog(@"passTitle: %@", [farkle passTitle]);
-    
+    [self.turnsProgress setProgress:((float)([farkle.turns integerValue] ) / 10) animated:YES];
 }
 /*
 #pragma mark Toggle Controls

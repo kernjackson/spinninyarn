@@ -136,7 +136,8 @@ NSInteger previousPoints;
             //scoredPoints += lockedPoints;
             
             //passTitle = [NSNumber numberWithInteger:lockedPoints];
-            
+            //totalPoints += lockedPoints;
+            totalPoints += scoredPoints;
             [self logPoints];
         
             //[self didFarkle];
@@ -189,9 +190,10 @@ NSInteger previousPoints;
 //    rolledPoints = [self scoreRolled];
     lockedPoints = [self scoreLocked];
     scoredPoints = [self scoreScored];
+    totalPoints = (scoredPoints + lockedPoints);
     
     //scoredPoints += lockedPoints;
-    passTitle = [NSNumber numberWithInteger:(scoredPoints + lockedPoints)];
+    passTitle = [NSNumber numberWithInteger:totalPoints];
     
     [self logPoints];
     
