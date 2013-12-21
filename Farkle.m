@@ -127,9 +127,9 @@ NSInteger previousPoints;
             lockedPoints = [self scoreLocked];
             scoredPoints = [self scoreScored];
             
-            scoredPoints += lockedPoints;
+            //scoredPoints += lockedPoints;
             
-            passTitle = [NSNumber numberWithInteger:lockedPoints];
+            //passTitle = [NSNumber numberWithInteger:lockedPoints];
             
             [self logPoints];
         
@@ -179,6 +179,10 @@ NSInteger previousPoints;
     rolledPoints = [self scoreRolled];
     lockedPoints = [self scoreLocked];
     scoredPoints = [self scoreScored];
+    
+    scoredPoints += lockedPoints;
+    passTitle = [NSNumber numberWithInteger:scoredPoints];
+    
     [self logPoints];
     
 }
