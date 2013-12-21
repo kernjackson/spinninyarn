@@ -228,6 +228,8 @@ NSInteger previousPoints;
     scoredPoints = 0;
     lockedPoints = 0;
     passTitle = @0;
+    [self clearDice];
+    // clear dice here
 }
 
 - (void)yetAnother {
@@ -390,6 +392,14 @@ NSInteger previousPoints;
         [newDice addObject:die];
 	}
     return newDice;
+}
+
+// Not sure what to do here? acutally set to nil, or just some value like @0 that will hide the die and not score it
+- (void)clearDice {
+    Die *die = [[Die alloc] init];
+    for (int i = 0; i <= 5; i++) {
+        [dice replaceObjectAtIndex:i withObject:[die blankDie]];
+	}
 }
 
 - (void)rollDice {

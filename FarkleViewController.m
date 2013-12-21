@@ -140,6 +140,15 @@
     //[farkle gameLoop];
     
     NSLog(@"turns: %@", farkle.turns);
+    
+    for (int i = 0; i <= 5; i++) {
+		[[_diceButtons objectAtIndex:i] setAlpha:1];
+		[[self.diceButtons objectAtIndex:i] setEnabled:YES];
+		[[self.diceButtons objectAtIndex:i] setSelected:NO];
+		[[self.diceButtons objectAtIndex:i] setTitle:@""
+                                            forState:UIControlStateNormal];
+	}
+    
     [self updateUI];
 }
 
@@ -269,7 +278,7 @@
 	for (int i = 0; i <= 5; i++) {
 		[[_diceButtons objectAtIndex:i] setAlpha:0];
 		[[self.diceButtons objectAtIndex:i] setEnabled:NO];
-		[[self.diceButtons objectAtIndex:i] setSelected:FALSE];
+		[[self.diceButtons objectAtIndex:i] setSelected:NO];
 		[[self.diceButtons objectAtIndex:i] setTitle:@""
                                             forState:UIControlStateNormal];
 	}
@@ -283,7 +292,7 @@
 	for (int i = 0; i <= 5; i++) {
 		[[_diceButtons objectAtIndex:i] setAlpha:1];
 		[[self.diceButtons objectAtIndex:i] setEnabled:YES];
-		[[self.diceButtons objectAtIndex:i] setSelected:FALSE];
+		[[self.diceButtons objectAtIndex:i] setSelected:NO];
 		[[self.diceButtons objectAtIndex:i] setTitle:@""
                                             forState:UIControlStateNormal];
 	}
@@ -295,7 +304,7 @@
 	for (int i = 0; i <= 5; i++) {
 		[[_diceButtons objectAtIndex:i] setAlpha:1];
 		[[self.diceButtons objectAtIndex:i] setEnabled:YES];
-		[[self.diceButtons objectAtIndex:i] setSelected:FALSE];
+		[[self.diceButtons objectAtIndex:i] setSelected:NO];
 		[[self.diceButtons objectAtIndex:i] setTitle:@""
                                             forState:UIControlStateNormal];
 		[[self.diceButtons objectAtIndex:i] setEnabled:NO]; // ???
@@ -422,9 +431,13 @@
 - (void)updateUI {
     
     Farkle *farkle = [Farkle sharedManager];
-    
+
     // update Dice
     for (int i = 0; i <= 5; i++) {
+ /*       if ([[[farkle.dice objectAtIndex:i] sideValue] isEqual:@0]) {
+            NSLog(@"asdf");
+        }
+      */
         if (![[farkle.dice objectAtIndex:i] isLocked]) {
             [[self.diceButtons objectAtIndex:i] setTitle:[[farkle.dice objectAtIndex:i] sideUp]
                                                 forState:UIControlStateNormal];
@@ -487,6 +500,7 @@
  //   NSLog(@"scoreTitle: %ld", (long)[farkle scoreTitle]);
     
     [self.passButton setTitle:[NSString stringWithFormat:@"%@", [farkle passTitle]] forState:UIControlStateNormal];
+    [self.passButton setTitle:[NSString stringWithFormat:@"%@", [farkle passTitle]] forState:UIControlStateDisabled];
 //    NSLog(@"passTitle: %@", [farkle passTitle]);
     
 }
