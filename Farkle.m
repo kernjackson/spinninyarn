@@ -189,8 +189,9 @@ NSInteger previousPoints;
     
 //    rolledPoints = [self scoreRolled];
     lockedPoints = [self scoreLocked];
-    scoredPoints = [self scoreScored];
-    totalPoints = (scoredPoints + lockedPoints);
+//    scoredPoints = [self scoreScored];
+//    totalPoints = (scoredPoints + lockedPoints);
+    totalPoints += lockedPoints;
     
     //scoredPoints += lockedPoints;
     passTitle = [NSNumber numberWithInteger:totalPoints];
@@ -241,6 +242,7 @@ NSInteger previousPoints;
     self.turns = temp;
     scoredPoints = 0;
     lockedPoints = 0;
+    totalPoints = 0;
     passTitle = @0;
     [self clearDice];
     if (self.isGameOver) {
