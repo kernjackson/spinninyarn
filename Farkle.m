@@ -115,10 +115,10 @@ NSInteger previousPoints;
     if (self.isGameOver) {
         NSLog(@"isGameOver");
     } else {
-        if (self.didFarkle) {
+ //       if (self.didFarkle) {
             // clear dice, and all points but those in scoreTitle
             NSLog(@"FARKLED");
-        } else {
+//        } else {
         
         
             //rolledDice = [self sort:dice];
@@ -135,7 +135,7 @@ NSInteger previousPoints;
         
             [self didFarkle];
         }
-    }
+//    }
     
     
     // scoredDice += lockedDice
@@ -144,7 +144,7 @@ NSInteger previousPoints;
 }
 
 - (void)passed {
-    [self decrementTurn];
+    [self endTurn];
     //scoredPoints += lockedPoints;
     scoreTitle = [NSNumber numberWithInteger:scoredPoints];
     lockedPoints = 0;
@@ -188,11 +188,6 @@ NSInteger previousPoints;
     
 }
 
-- (void)endTurn {
-    //self.playerTurns--;
-    [self isGameOver];
-}
-
 #pragma mark Game Loop
 
 - (void)newgameLoop {
@@ -225,10 +220,12 @@ NSInteger previousPoints;
     
 }
 
-- (void)decrementTurn {
+- (void)endTurn {
     // decrement turns
     NSNumber *temp = [NSNumber numberWithInt:[self.turns intValue] -1];
     self.turns = temp;
+    scoredPoints = 0;
+    lockedPoints = 0;
 }
 
 - (void)yetAnother {
@@ -375,8 +372,8 @@ NSInteger previousPoints;
 
 - (BOOL)didFarkle {
     if (rolledPoints == 0) {
-        scoredPoints = 0;
-        lockedPoints = 0;
+        [self endTurn];
+        
         return YES;
     }
       return NO;
