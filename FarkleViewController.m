@@ -91,6 +91,7 @@
     
 	[self rollDice];
     [farkle rolled];
+    [self showDice];
     
     //[farkle gameLoop];
 	[self updateUI];
@@ -141,14 +142,16 @@
     
     NSLog(@"turns: %@", farkle.turns);
     
+    [self clearDice];
+ /*
     for (int i = 0; i <= 5; i++) {
 		[[_diceButtons objectAtIndex:i] setAlpha:1];
-		[[self.diceButtons objectAtIndex:i] setEnabled:YES];
+		[[self.diceButtons objectAtIndex:i] setEnabled:NO];
 		[[self.diceButtons objectAtIndex:i] setSelected:NO];
 		[[self.diceButtons objectAtIndex:i] setTitle:@""
                                             forState:UIControlStateNormal];
 	}
-    
+    */
     [self updateUI];
 }
 
@@ -286,8 +289,8 @@
 
 - (void)showDice {
     // move to farkle
-    Farkle *farkle = [Farkle sharedManager];
-	[farkle.dice removeAllObjects];
+//    Farkle *farkle = [Farkle sharedManager];
+//	[farkle.dice removeAllObjects];
     //
 	for (int i = 0; i <= 5; i++) {
 		[[_diceButtons objectAtIndex:i] setAlpha:1];
@@ -299,11 +302,11 @@
 }
 
 - (void)clearDice {
-    Farkle *farkle = [Farkle sharedManager];
-	[farkle.dice removeAllObjects];
+//    Farkle *farkle = [Farkle sharedManager];
+//	[farkle.dice removeAllObjects];
 	for (int i = 0; i <= 5; i++) {
 		[[_diceButtons objectAtIndex:i] setAlpha:1];
-		[[self.diceButtons objectAtIndex:i] setEnabled:YES];
+		[[self.diceButtons objectAtIndex:i] setEnabled:NO];
 		[[self.diceButtons objectAtIndex:i] setSelected:NO];
 		[[self.diceButtons objectAtIndex:i] setTitle:@""
                                             forState:UIControlStateNormal];
