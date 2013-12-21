@@ -411,6 +411,30 @@
                      completion:nil];
 }
 
+- (void)gameOver {
+	//self.scoreLabel.textColor = [UIColor whiteColor];
+	
+    //	[self.HUD setTitle:[NSString stringWithFormat:@"%d", self.score]
+    /*
+     for (int i = 0; i <= 5; i++) {
+     [[rolled objectAtIndex:i] setLocked:YES];
+     }
+     */
+	[self.rollButton setEnabled:NO];
+	[self.HUD setTitle:[NSString stringWithFormat:@"game over"]
+              forState:UIControlStateNormal];
+	[self deathScreen];
+	[NSTimer scheduledTimerWithTimeInterval:1.6
+                                     target:self
+                                   selector:@selector(enableHUD:)
+                                   userInfo:nil
+                                    repeats:NO];
+}
+
+- (void)enableHUD:(id)sender {
+	[self.HUD setEnabled:YES];
+}
+
 - (void)highScoreScreen {
 	[UIView animateWithDuration:0.4
                           delay:0.0
