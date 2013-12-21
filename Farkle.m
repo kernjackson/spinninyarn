@@ -126,13 +126,18 @@ NSInteger previousPoints;
             rolledPoints = [self scoreRolled];
             lockedPoints = [self scoreLocked];
             scoredPoints = [self scoreScored];
+            
+            scoredPoints += lockedPoints;
+            
+            passTitle = [NSNumber numberWithInteger:lockedPoints];
+            
             [self logPoints];
         
             [self didFarkle];
         }
     }
     
-    scoredPoints += lockedPoints;
+    
     // scoredDice += lockedDice
     // clear lockedDice
     //
@@ -336,13 +341,13 @@ NSInteger previousPoints;
 }
 
 - (BOOL)canRoll {
-    if (lockedPoints >= 300) { // NSDefaults minimumScore
+    if (lockedPoints >= 50) { // NSDefaults minimumScore
         return YES;
     } else return NO;
 }
 
 - (BOOL)canPass {
-    if (lockedPoints < 50) {
+    if (lockedPoints < 300) {
         return NO;
     } else return YES;
     // return YES;
