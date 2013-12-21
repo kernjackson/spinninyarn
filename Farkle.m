@@ -128,9 +128,6 @@ NSInteger previousPoints;
             scoredPoints = [self scoreScored];
             [self logPoints];
         
-            for (int i = 0; i < 6; i++) {
-                NSLog(@"rolledDice %@", rolledDice[i]);
-            }
             [self didFarkle];
         }
     }
