@@ -118,7 +118,7 @@
     
     NSLog(@"turns: %@", farkle.turns);
     
-    [self clearDice];
+    //[self clearDice];
     [self updateUI];
 }
 
@@ -474,11 +474,12 @@
         [self.navigationController setNavigationBarHidden:NO animated:YES];
     } else [self.navigationController setNavigationBarHidden:YES animated:YES];
 */
+    /*
     // toggle PassButton
     if ([farkle canPass]) {
         [self enablePassButton];
     } else [self disablePassButton];
-
+*/
     // toggle RollButton, is this backwards?
     
 

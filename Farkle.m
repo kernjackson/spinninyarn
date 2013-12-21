@@ -121,9 +121,10 @@ NSInteger previousPoints;
     if (self.isGameOver) {
         NSLog(@"isGameOver");
     } else {
-            previousPoints += totalPoints;
+            previousPoints = totalPoints;
+            scoredPoints += lockedPoints;
             rolledPoints = [self scoreRolled];
-            totalPoints = scoredPoints;
+            totalPoints = previousPoints + scoredPoints;
         
             [self logPoints];
         }
@@ -131,7 +132,7 @@ NSInteger previousPoints;
 
 - (void)passed {
     
-    totalPoints = (scoredPoints + lockedPoints);
+    totalPoints = (previousPoints + lockedPoints);
     scoreTitle = [NSNumber numberWithInteger:(totalPoints)];
     
     lockedPoints = [self scoreLocked];
@@ -145,7 +146,7 @@ NSInteger previousPoints;
     
     lockedPoints = [self scoreLocked];
 
-    totalPoints = lockedPoints;
+    totalPoints = previousPoints + lockedPoints;
     passTitle = [NSNumber numberWithInteger:totalPoints];
     
     [self logPoints];
