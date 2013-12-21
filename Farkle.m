@@ -121,231 +121,54 @@ NSInteger previousPoints;
     if (self.isGameOver) {
         NSLog(@"isGameOver");
     } else {
- //       if (self.didFarkle) {
-            // clear dice, and all points but those in scoreTitle
-            NSLog(@"FARKLED");
-//        } else {
-        
-        
-            //rolledDice = [self sort:dice];
-            //rolledPoints = [self score:rolledDice];
+            previousPoints += totalPoints;
             rolledPoints = [self scoreRolled];
-//            lockedPoints = [self scoreLocked];
-//            scoredPoints = [self scoreScored];
-            
-            //scoredPoints += lockedPoints;
-            
-            //passTitle = [NSNumber numberWithInteger:lockedPoints];
-            //totalPoints += lockedPoints;
-            totalPoints += scoredPoints;
-            [self logPoints];
+            totalPoints = scoredPoints;
         
-            //[self didFarkle];
+            [self logPoints];
         }
-//    }
-    
-    
-    // scoredDice += lockedDice
-    // clear lockedDice
-    //
 }
 
 - (void)passed {
     
-    //scoredPoints += lockedPoints;
-    //previousPoints = totalPoints;
-    totalPoints += (scoredPoints + lockedPoints);
+    totalPoints = (scoredPoints + lockedPoints);
     scoreTitle = [NSNumber numberWithInteger:(totalPoints)];
- //   lockedPoints = 0;
- //   scoredPoints = 0;
     
-    
-    
-//    rolledPoints = [self scoreRolled];
     lockedPoints = [self scoreLocked];
     scoredPoints = [self scoreScored];
+    
     [self logPoints];
     [self endTurn];
-///    [self clearArray:dice];
 }
 
-
-
 - (void)toggleDie {
-    // We set the dice to locked in the controller?
     
-    //lockedPoints = [self score:[self sort:lockedDice]];
-    //NSLog(@"lockedPoints: %ld", (long)lockedPoints);
- /*
     lockedPoints = [self scoreLocked];
-    NSLog(@"lockedPoints %ld", (long)lockedPoints);
-    
-    passTitle = [NSNumber numberWithInteger:(long)lockedPoints];
-    NSLog(@"toggleDie: %@", passTitle);
-    
-    
-    lockedDice = dice;
-*/
-    
-//    rolledPoints = [self scoreRolled];
-    lockedPoints = [self scoreLocked];
-//    scoredPoints = [self scoreScored];
-//    totalPoints = (scoredPoints + lockedPoints);
-    totalPoints += lockedPoints;
-    
-    //scoredPoints += lockedPoints;
+
+    totalPoints = lockedPoints;
     passTitle = [NSNumber numberWithInteger:totalPoints];
     
     [self logPoints];
-    
-}
-
-#pragma mark Game Loop
-
-- (void)newgameLoop {
-    if (isNewGame) { // can this go inside the next if?
-        dice = [self newDice];
-        isNewGame = NO;
-        NSLog(@"[self newGame]");
-    }
-    else if ([self isGameOver]) {
-        NSLog(@"[self gameOver]");
-        // this number is hardcoded for now, but should come from the Settings singleton
-        if (scoredPoints >= 10000) {
-            NSLog(@"Player Won");
-        } else NSLog(@"Player Lost");
-        [self newGame];
-    }
-    else {
-        [self clearArray:rolledDice];
-        for (int i = 0; i < 6; i++) {
-            // do we need to check for isLocked here or just for isScore?
-            if ((![[dice objectAtIndex:i] isLocked]) &&
-                (![[dice objectAtIndex:i] isScored]))
-            {
-                //[array replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:FALSE]];
-                [rolledDice replaceObjectAtIndex:i withObject:[[dice objectAtIndex:i] sideValue]];
-            } // else [unsorted insertObject:@0 atIndex:i];
-        }
-
-    }
-    
 }
 
 - (void)endTurn {
     
     // This is probably the only place we need to check for isGameOver
     
-    
     // decrement turns
     NSNumber *temp = [NSNumber numberWithInt:[self.turns intValue] -1];
     self.turns = temp;
+    rolledPoints = 0;
     scoredPoints = 0;
     lockedPoints = 0;
     totalPoints = 0;
+    previousPoints = 0;
     passTitle = @0;
     [self clearDice];
     if (self.isGameOver) {
         NSLog(@"GAMEOVER");
     }
     // clear dice here
-}
-
-- (void)yetAnother {
-    // if isNewGame?
-    // if isGameOver?
-    // else
-    // sort dice
-    // score diceRolled
-        // if int diceRolled == 0, didFarkle = YES
-        // else
-            // if (!dice.scored) && (dice.locked)
-                // setScored = YES
-            // if (
-}
-
-- (void)gameLoop {
-/*
-    NSInteger test = 0;
-    test = [rolledPoints integerValue];
-    NSLog(@"test: %ld", (long)test);
-    test += test;
-    NSLog(@"test: %ld", (long)test);
-*/
-
-    if (isNewGame) { // can this go inside the next if?
-        dice = [self newDice];
-        isNewGame = NO;
-        NSLog(@"[self newGame]");
-    }
-    else if ([self isGameOver]) {
-        NSLog(@"[self gameOver]");
-        // this number is hardcoded for now, but should come from the Settings singleton
-        if (scoredPoints >= 10000) {
-            NSLog(@"Player Won");
-        } else NSLog(@"Player Lost");
-        [self newGame];
-    }
-    else {
-        
-        // will this be depreciated?
-        previousPoints = lockedPoints;
-        NSLog(@"%ld", (long)previousPoints);
-        
-        /////////////////////////////////
-        // need to calculate the score for rolled, locked and ¿scored?
-        
-        NSMutableArray *unsorted = [[NSMutableArray alloc] init];
-        for (int i = 0; i < 6; i++) {
-            [unsorted insertObject:@0 atIndex:i];
-        }
-        // calculate score for rolled
-        for (int i = 0; i < 6; i++) {
-            // do we need to check for isLocked here or just for isScore?
-            if ((![[rolledDice objectAtIndex:i] isLocked]) &&
-                (![[rolledDice objectAtIndex:i] isScored]))
-            {
-                //[array replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:FALSE]];
-                [unsorted replaceObjectAtIndex:i withObject:[[rolledDice objectAtIndex:i] sideValue]];
-            } // else [unsorted insertObject:@0 atIndex:i];
-        }
-        
-       // NSNumber *temp = [NSNumber numberWithInt:[aNumber intValue] + 1];
-        
-        // increment this instead of overwriting it?
-        //NSInteger temp = [rolledPoints integerValue];
-        rolledPoints = [self score:[self sort:unsorted]];
-        //rolledPoints = [self score:[self sort:unsorted]];
-        NSLog(@"rolled: %ld", (long)rolledPoints);
-        /////////////////////////////////
-        // calculate score for locked
-        // do I need to clear the array to @0's here?
-        // need to set locked dice to score before doing this, but where?
-
-        for (int i = 0; i < 6; i++) {
-        
-            [unsorted replaceObjectAtIndex:i withObject:@0];
-        }
-        
-        for (int i = 0; i < 6; i++) {
-            if (( [[rolledDice objectAtIndex:i] isLocked]) &&
-                (![[rolledDice objectAtIndex:i] isScored]))
-            {
-                [unsorted replaceObjectAtIndex:i withObject:[[rolledDice objectAtIndex:i] sideValue]];
-                [lockedDice replaceObjectAtIndex:i withObject:[[rolledDice objectAtIndex:i] sideValue]];
-                //[unsorted insertObject:[[rolledDice objectAtIndex:i] sideValue] atIndex:i];
-            } // else [unsorted insertObject:@0 atIndex:i];
-        }
-        lockedPoints += [self score:[self sort:unsorted]]; // was +=
-        NSLog(@"locked: %ld", (long)lockedPoints);
-        /////////////////////////////////
-        
-        //NSLog(@"subtotal: %ld", (long)[self score:[self sort:rolledDice]]);
-        [self logLocked];
-        
-        canRoll = [self canRoll];
-        canPass = [self canPass];
-    }
 }
 
 #pragma mark Check Game State
