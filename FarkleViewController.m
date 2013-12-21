@@ -484,10 +484,10 @@
     } else [self disablePassButton];
     
     [self.scoreLabel setText:[NSString stringWithFormat:@"%@", [farkle scoreTitle]]];
-    NSLog(@"scoreTitle: %ld", (long)[farkle scoreTitle]);
+ //   NSLog(@"scoreTitle: %ld", (long)[farkle scoreTitle]);
     
     [self.passButton setTitle:[NSString stringWithFormat:@"%@", [farkle passTitle]] forState:UIControlStateNormal];
-    NSLog(@"passTitle: %@", [farkle passTitle]);
+//    NSLog(@"passTitle: %@", [farkle passTitle]);
     
 }
 /*

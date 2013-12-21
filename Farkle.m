@@ -352,7 +352,8 @@ NSInteger previousPoints;
 }
 
 - (BOOL)canPass {
-    if ((scoredPoints + lockedPoints) < 300) {
+    NSInteger temp = [passTitle integerValue];
+    if (temp < 300) {
         return NO;
     } else return YES;
 }
