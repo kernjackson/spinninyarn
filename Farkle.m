@@ -229,6 +229,10 @@ NSInteger previousPoints;
 }
 
 - (void)endTurn {
+    
+    // This is probably the only place we need to check for isGameOver
+    
+    
     // decrement turns
     NSNumber *temp = [NSNumber numberWithInt:[self.turns intValue] -1];
     self.turns = temp;

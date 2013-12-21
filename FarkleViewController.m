@@ -116,42 +116,11 @@
     
     Farkle *farkle = [Farkle sharedManager];
     
-//    [self disablePassButton];
-    // possible way to move more to the model
-    //farkle.canPass = NO;
-    // not sure where else to put this logic. Is it possible or even recommended to put it in the model?
-    //farkle.scoredPoints += farkle.lockedPoints;
-    //farkle.lockedPoints = 0;
-    
     [farkle passed];
-    
-    //[self endTurn]
-    
-    
-    /*
-     // decrement turns
-     NSNumber *temp = [NSNumber numberWithInt:[farkle.turns intValue] - 1];
-     farkle.turns = temp;
-     */
-    
-    // set passButton to @"0"
-    // disable passButton
-    // [farkle gameLoop:@"passed"];
-    
-    //[farkle gameLoop];
     
     NSLog(@"turns: %@", farkle.turns);
     
     [self clearDice];
- /*
-    for (int i = 0; i <= 5; i++) {
-		[[_diceButtons objectAtIndex:i] setAlpha:1];
-		[[self.diceButtons objectAtIndex:i] setEnabled:NO];
-		[[self.diceButtons objectAtIndex:i] setSelected:NO];
-		[[self.diceButtons objectAtIndex:i] setTitle:@""
-                                            forState:UIControlStateNormal];
-	}
-    */
     [self updateUI];
 }
 
@@ -423,8 +392,9 @@
 - (void)deathScreen {
 	[UIView animateWithDuration:1.6
                           delay:0.6
-                        options: UIViewAnimationOptionCurveEaseIn |
-     UIViewAnimationOptionAllowUserInteraction
+                        options: UIViewAnimationOptionCurveEaseIn
+     //  | UIViewAnimationOptionAllowUserInteraction
+
                      animations:^{
                          self.HUD.backgroundColor = [UIColor redColor];
                          self.HUD.alpha = 1.0;
