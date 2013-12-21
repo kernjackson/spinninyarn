@@ -673,6 +673,7 @@ NSInteger previousPoints;
     NSLog(@"rolledPoints %ld", (long)rolledPoints);
     NSLog(@"lockedPoints %ld", (long)lockedPoints);
     NSLog(@"scoredPoints %ld", (long)scoredPoints);
+    NSLog(@"totalPoints  %ld", (long)totalPoints);
     NSLog(@"=====================================");
 }
 
