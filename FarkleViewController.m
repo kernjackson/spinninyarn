@@ -193,32 +193,17 @@
 */
 #pragma mark Pass
 
-
-
 - (void)enablePassButton {
-    //Farkle *farkle = [Farkle sharedManager];
 	[self.passButton setEnabled:YES];
 	[self.passButton setAlpha:1.0];
     [self.passButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    //[self.passButton setTitle:[NSString stringWithFormat:@"+ %ld", (long)[farkle lockedPoints]]
-                     //forState:UIControlStateNormal];
-
-//	[self.passButton setTitle:[NSString stringWithFormat:@"+ %ld", (long)[farkle totalPoints]] // was %d
- //                    forState:UIControlStateNormal];
- //   NSLog(@"+ %ld", (long)[farkle totalPoints]);
 }
 
 - (void)disablePassButton {
-    //Farkle *farkle = [Farkle sharedManager];
 	[self.passButton setEnabled:NO];
     [self.passButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//	[self.passButton setTitle:[NSString stringWithFormat:@"%ld", (long)[farkle totalPoints]] // was %d
-//                     forState:UIControlStateNormal];
 	self.passButton.alpha = .4;
-//    NSLog(@"%ld", (long)[farkle totalPoints]);
 }
-
-
 
 - (IBAction)pressedButton:(id)sender {
     [UIView transitionWithView:sender
@@ -243,30 +228,23 @@
 #pragma mark Dice
 
 - (void)newDice {
-    // was called sixDice
     Farkle *farkle = [Farkle sharedManager];
     [farkle newDice];
     for (int i = 0; i <= 5; i++) {
         [self flipDiceButtons:i];
-        //        NSLog(@"flipping: %d", i);
     }
 }
 
 - (void)rollDice {
     Farkle *farkle = [Farkle sharedManager];
-    //[self newDice];
     [farkle rollDice];
 	for (int i = 0; i <= 5; i++) {
 		if ([[farkle.dice objectAtIndex:i] isLocked]) {
             [[self.diceButtons objectAtIndex:i] setAlpha:.1];
             [[self.diceButtons objectAtIndex:i] setEnabled:NO];
 			
-		} else {
-            [self flipDiceButtons:i];
-            //            NSLog(@"flipping: %d", i);
-		}
+		} else [self flipDiceButtons:i];
 	}
-    //	[self setFarkles: [self farkled]];
 }
 
 - (void)enableDie:(UIButton *)sender {
@@ -299,10 +277,6 @@
 }
 
 - (void)showDice {
-    // move to farkle
-//    Farkle *farkle = [Farkle sharedManager];
-//	[farkle.dice removeAllObjects];
-    //
 	for (int i = 0; i <= 5; i++) {
 		[[_diceButtons objectAtIndex:i] setAlpha:1];
 		[[self.diceButtons objectAtIndex:i] setEnabled:YES];
@@ -313,8 +287,6 @@
 }
 
 - (void)clearDice {
-//    Farkle *farkle = [Farkle sharedManager];
-//	[farkle.dice removeAllObjects];
 	for (int i = 0; i <= 5; i++) {
 		[[_diceButtons objectAtIndex:i] setAlpha:1];
 		[[self.diceButtons objectAtIndex:i] setEnabled:NO];
@@ -325,35 +297,28 @@
 	}
 }
 
-
-// possbily change this to flip just the labels. This should probably be a switch statement, but I plan on eventually replacing this anyway. Either flip just the labels, replace it with 3d cubes behind, etc...
+// replace this with 3d cubes behind, etc...
 - (void)flipDiceButtons:(int)index {
 	if (index == 0) {
-
         [UIView transitionWithView:[self.diceButtons objectAtIndex:index]
                           duration:0.25
                            options:UIViewAnimationOptionTransitionFlipFromBottom |
          UIViewAnimationOptionAllowUserInteraction animations:^{
          } completion:nil];
-        //NSLog(@"index: %d", index);
 	}
 	if (index == 1) {
-		
 		[UIView transitionWithView:[self.diceButtons objectAtIndex:index]
                           duration:0.25
                            options:UIViewAnimationOptionTransitionFlipFromTop |
 		 UIViewAnimationOptionAllowUserInteraction animations:^{
 		 } completion:nil];
-        //NSLog(@"index: %d", index);
 	}
 	if ((index == 2) || (index == 3)) {
-		
 		[UIView transitionWithView:[self.diceButtons objectAtIndex:index]
                           duration:0.25
                            options:UIViewAnimationOptionTransitionFlipFromLeft |
 		 UIViewAnimationOptionAllowUserInteraction animations:^{
 		 } completion:nil];
-        //NSLog(@"index: %d", index);
 	}
 	if ((index == 4) || (index == 5)) {
 		
@@ -363,8 +328,7 @@
 		 UIViewAnimationOptionAllowUserInteraction
                         animations:^{
                         } completion:nil];
-        //NSLog(@"index: %d", index);
-	} //else NSLog(@"flipDiceButtons: error %d", index);
+	} else NSLog(@"flipDiceButtons: error %d", index);
 }
 
 #pragma mark Roll
@@ -434,8 +398,6 @@
 	[UIView animateWithDuration:1.6
                           delay:0.6
                         options: UIViewAnimationOptionCurveEaseIn
-     //  | UIViewAnimationOptionAllowUserInteraction
-
                      animations:^{
                          self.HUD.backgroundColor = [UIColor redColor];
                          self.HUD.alpha = 1.0;
