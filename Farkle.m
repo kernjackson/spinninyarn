@@ -50,6 +50,7 @@ NSInteger finalPoints;
 @synthesize canPass;
 @synthesize canRoll;
 @synthesize hotDice;
+@synthesize nonScoring;
 
 @synthesize scoreTitle;
 @synthesize passTitle;
@@ -216,7 +217,15 @@ NSInteger finalPoints;
     // if all dice are scored return YES
     // else return false
     // how do we check to see if a non scoring die has been selected?
-    return NO;
+    NSInteger count = 0;
+    for (int i = 0; i <= 5; i++) {
+		if ( ([[dice objectAtIndex:i] isLocked]) || [[dice objectAtIndex:i] isScored]) {
+			count++;
+        }
+    }
+    if (count == 6) {
+        return YES;
+    } else return NO;
 }
 
 - (void)newGame {
@@ -241,7 +250,6 @@ NSInteger finalPoints;
       return NO;
 }
 
-
 #pragma mark Dice
 
 - (NSMutableArray *)newDice {
@@ -264,6 +272,10 @@ NSInteger finalPoints;
 - (void)rollDice {
     
     if (!dice) {
+        dice = [self newDice];
+    }
+    
+    if ( (self.areDiceHot) && (nonScoring) ){
         dice = [self newDice];
     }
     
@@ -454,6 +466,9 @@ NSInteger finalPoints;
                 scored += 50;
             }
             
+            // check for hotDice
+            // all dice must be selected, and all dice must be scoring
+            
             // Check for non-scoring dice. it's ugly, but it works
             else if (([unscored[1] intValue] == 1) ||
                      ([unscored[1] intValue] == 2) ||
@@ -465,14 +480,12 @@ NSInteger finalPoints;
                      ([unscored[5] intValue] == 2)
                
                      ) {
-                // set diceHot here
-                hotDice = YES;
-                NSLog(@"HOTDICE %hhd", hotDice);
+                nonScoring = YES;
+                NSLog(@"NON SCORING DICE");
             }
             else {
                 scored += 0;
-                hotDice = NO;
-                NSLog(@"HOTDICE %hhd", hotDice);
+                nonScoring =  NO;
             }
         }
     }

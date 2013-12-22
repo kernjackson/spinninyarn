@@ -25,6 +25,7 @@
 @property (nonatomic, assign) BOOL canPass;
 @property (nonatomic, assign) BOOL canRoll;
 @property (nonatomic, assign) BOOL hotDice;
+@property (nonatomic, assign) BOOL nonScoring;
 
 @property (nonatomic, retain) NSNumber *scoreTitle;
 @property (nonatomic, retain) NSNumber *passTitle;
