@@ -886,7 +886,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" tag="6" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="pass" contentHorizontalAlignment="right" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kl3-a5-J9G">
+                            <button opaque="NO" tag="6" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" restorationIdentifier="pass" contentHorizontalAlignment="right" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kl3-a5-J9G">
                                 <rect key="frame" x="20" y="83" width="286" height="73"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <bool key="isElement" value="NO"/>
@@ -897,14 +897,17 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" title="passing">
+                                <state key="highlighted">
                                     <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="passed:" destination="dWC-Zc-SpH" eventType="touchUpInside" id="Zca-jK-xxX"/>
+                                    <action selector="pressedButton:" destination="dWC-Zc-SpH" eventType="touchDown" id="rUz-ty-9za"/>
+                                    <action selector="releasedButton:" destination="dWC-Zc-SpH" eventType="touchDragInside" id="JiC-Vo-4uT"/>
+                                    <action selector="releasedButton:" destination="dWC-Zc-SpH" eventType="touchUpInside" id="WGQ-QS-QbF"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="7" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="roll" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iJ3-qO-gQM">
+                            <button opaque="NO" tag="7" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="roll" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iJ3-qO-gQM">
                                 <rect key="frame" x="0.0" y="391" width="320" height="89"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="90"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -913,10 +916,14 @@
                                     <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" title="rolling">
+                                <state key="highlighted">
                                     <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
+                                    <action selector="pressedRollButton:" destination="dWC-Zc-SpH" eventType="touchDragEnter" id="SUA-By-the"/>
+                                    <action selector="pressedRollButton:" destination="dWC-Zc-SpH" eventType="touchDown" id="Z0u-ra-RlE"/>
+                                    <action selector="releasedRollButton:" destination="dWC-Zc-SpH" eventType="touchUpInside" id="SZj-4D-WJk"/>
+                                    <action selector="releasedRollButton:" destination="dWC-Zc-SpH" eventType="touchDragOutside" id="kMC-dG-ymi"/>
                                     <action selector="rolled:" destination="dWC-Zc-SpH" eventType="touchUpInside" id="PbB-kx-kAg"/>
                                 </connections>
                             </button>
@@ -942,6 +949,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="iJ3-qO-gQM" secondAttribute="trailing" id="DUT-sy-eIb"/>
+                            <constraint firstItem="BUe-wS-xKt" firstAttribute="top" secondItem="iJ3-qO-gQM" secondAttribute="bottom" id="WcZ-Yh-6Wp"/>
+                            <constraint firstItem="Kl3-a5-J9G" firstAttribute="leading" secondItem="QiB-QM-i6c" secondAttribute="leading" constant="20" id="beX-nG-Pzv"/>
+                            <constraint firstItem="iJ3-qO-gQM" firstAttribute="leading" secondItem="QiB-QM-i6c" secondAttribute="leading" id="kHI-Dl-CVK"/>
+                            <constraint firstAttribute="trailing" secondItem="Kl3-a5-J9G" secondAttribute="trailing" constant="14" id="mBF-s0-5Ua"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="LXd-1y-8Ni">
                         <barButtonItem key="rightBarButtonItem" title="Rules" id="wJl-MH-khX">

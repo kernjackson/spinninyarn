@@ -218,16 +218,27 @@
 //    NSLog(@"%ld", (long)[farkle totalPoints]);
 }
 
-- (void)pressPassButton {
+
+
+- (IBAction)pressedButton:(id)sender {
+    [UIView transitionWithView:sender
+                      duration:0.2
+                       options:
+     UIViewAnimationOptionAllowUserInteraction animations:^{
+         [self.passButton setTransform:CGAffineTransformMakeScale(0.95, 0.95  )];
+     } completion:nil];
+
+}
+
+- (IBAction)releasedButton:(id)sender {
+    [UIView transitionWithView:sender
+                      duration:0.2
+                       options:
+     UIViewAnimationOptionAllowUserInteraction animations:^{
+         [self.passButton setTransform:CGAffineTransformMakeScale(1.0, 1.0  )];
+     } completion:nil];
     
-    [UIView transitionWithView:[self passButton]
-                          duration:0.25
-                           options:UIViewAnimationOptionCurveEaseIn |
-         UIViewAnimationOptionAllowUserInteraction animations:^{
-             [self.passButton setTransform:CGAffineTransformMakeScale(0.8, 0.8)];
-         } completion:nil];
-        //NSLog(@"index: %d", index);
-	}
+}
 
 #pragma mark Dice
 
@@ -368,6 +379,27 @@
 	
 	[self.rollButton setEnabled:YES];
 	[self.rollButton setAlpha:1.0];
+}
+
+
+- (IBAction)pressedRollButton:(id)sender {
+    [UIView transitionWithView:sender
+                      duration:0.2
+                       options:
+     UIViewAnimationOptionAllowUserInteraction animations:^{
+         [self.rollButton setTransform:CGAffineTransformMakeScale(0.95, 0.95  )];
+     } completion:nil];
+    
+}
+
+- (IBAction)releasedRollButton:(id)sender {
+    [UIView transitionWithView:sender
+                      duration:0.2
+                       options:
+     UIViewAnimationOptionAllowUserInteraction animations:^{
+         [self.rollButton setTransform:CGAffineTransformMakeScale(1.0, 1.0  )];
+     } completion:nil];
+    
 }
 
 #pragma mark HUD
@@ -520,7 +552,7 @@
     } else [self disablePassButton];
     
     NSLog(@"%hhd", [farkle canRoll]);
-    /*
+/*
     if (([farkle canRoll]) ||
         ([farkle isNewGame]))  {
         [self enableRollButton];
@@ -529,7 +561,7 @@
         [self disableRollButton];
         NSLog(@"disableRollButton");
     }
-     */
+*/
     
     [self.scoreLabel setText:[NSString stringWithFormat:@"%@", [farkle scoreTitle]]];
  //   NSLog(@"scoreTitle: %ld", (long)[farkle scoreTitle]);
