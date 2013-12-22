@@ -146,11 +146,6 @@
     [farkle newGame];
     
 	[self updateUI]; // hotDice causes a crash because there is nothing in the array
-    
-    //    [self.turnsProgress setProgress:1.0 animated:YES];
-    //    [self.navigationController setNavigationBarHidden:NO animated:YES];
-	
-	//[self setTurn:TURNS];
 }
 
 - (void)endTurn {
@@ -179,18 +174,7 @@
 - (void)didWin {
     // is score > 10,000?
 }
-/*
-- (void)isGameOver {
-    Farkle *farkle = [Farkle sharedManager];
-    if (([farkle.turns integerValue] < TURNS) &&
-        ([farkle.turns integerValue] > 0)) {
-        [self.navigationController setNavigationBarHidden:YES animated:YES];
-    } else {
-        // game over
-        [self newGame];
-    }
-}
-*/
+
 #pragma mark Pass
 
 - (void)enablePassButton {
@@ -453,45 +437,15 @@
 
     // update Dice
     for (int i = 0; i <= 5; i++) {
- /*       if ([[[farkle.dice objectAtIndex:i] sideValue] isEqual:@0]) {
-            NSLog(@"asdf");
-        }
-      */
         if (![[farkle.dice objectAtIndex:i] isLocked]) {
             [[self.diceButtons objectAtIndex:i] setTitle:[[farkle.dice objectAtIndex:i] sideUp]
                                                 forState:UIControlStateNormal];
         }
-        // move to farkle
-        /*
-        else if ([[farkle.dice objectAtIndex:i] isLocked]) {
-			[[farkle.dice objectAtIndex:i] setScored:YES];
-		}
-        */
     }
-
-    // update progress bar with number of turns left
-    
-    
-    
-
-/*
-    // toggle NavBar
-    if ([farkle isNewGame] || [farkle isGameOver]) {
-        [self.navigationController setNavigationBarHidden:NO animated:YES];
-    } else [self.navigationController setNavigationBarHidden:YES animated:YES];
-*/
-    /*
-    // toggle PassButton
-    if ([farkle canPass]) {
-        [self enablePassButton];
-    } else [self disablePassButton];
-*/
-    // toggle RollButton, is this backwards?
-    
 
     // is it a new game?
     if ([farkle isNewGame]) {
-        [self clearScreen];
+        [self clearScreen]; // I think this might be why the first farkle flash doesn't look right
     }
     
     if ([farkle didFarkle]) {
@@ -507,32 +461,19 @@
         [self hideDice];
         [self gameOver];
     }
-    
-    
-    
-    if ([farkle canPass]) {
-        [self enablePassButton];
-    } else [self disablePassButton];
+
+    [self togglePassButton];
+    [self toggleRollButton];
 
     NSLog(@"%hhd", [farkle canRoll]);
-/*
-    if (([farkle canRoll]) ||
-        ([farkle isNewGame]))  {
-        [self enableRollButton];
-        NSLog(@"enableRollButton");
-    } else {
-        [self disableRollButton];
-        NSLog(@"disableRollButton");
-    }
-*/
+
     // [self toggleNavBar]; // we want to do this after the deathScreen Animation fires
     
     [self.scoreLabel setText:[NSString stringWithFormat:@"%@", [farkle scoreTitle]]];
- //   NSLog(@"scoreTitle: %ld", (long)[farkle scoreTitle]);
     
     [self.passButton setTitle:[NSString stringWithFormat:@"%@", [farkle passTitle]] forState:UIControlStateNormal];
     [self.passButton setTitle:[NSString stringWithFormat:@"%@", [farkle passTitle]] forState:UIControlStateDisabled];
-//    NSLog(@"passTitle: %@", [farkle passTitle]);
+
     [self.turnsProgress setProgress:((float)([farkle.turns integerValue] ) / 10) animated:YES];
 }
 
@@ -546,7 +487,7 @@
         [self.navigationController setNavigationBarHidden:NO animated:YES];
     } else [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
-/*
+
 - (void)togglePassButton {
     
     Farkle *farkle = [Farkle sharedManager];
@@ -564,5 +505,5 @@
         [self disableRollButton];
     } else [self enableRollButton];
 }
-*/
+
 @end
