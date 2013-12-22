@@ -36,6 +36,8 @@ NSInteger finalPoints;
 
 @property (nonatomic, retain) NSMutableArray *oldDice;
 
+@property (nonatomic, assign) NSInteger nonScoringDice;
+
 @end
 
 @implementation Farkle
@@ -51,6 +53,7 @@ NSInteger finalPoints;
 @synthesize canRoll;
 @synthesize hotDice;
 @synthesize nonScoring;
+@synthesize nonScoringDice;
 
 @synthesize scoreTitle;
 @synthesize passTitle;
@@ -91,6 +94,7 @@ NSInteger finalPoints;
         
         isNewGame = YES;
         nonScoring = YES;
+        nonScoringDice = 0;
         
         farkles = @0;
         turns = @11; // +1 for roll, +1 for 10 through 1
@@ -211,7 +215,7 @@ NSInteger finalPoints;
 - (BOOL)canPass {
     // should also return NO if nonscoring
     NSInteger temp = [passTitle integerValue];
-    if ( (temp < 300) || (self.areDiceHot) )
+    if ( (temp < 300) || (self.areDiceHot) || !(nonScoring) )
     { // add a check for non-scoring dice
         return NO;
     } else return YES;
@@ -276,6 +280,8 @@ NSInteger finalPoints;
     
     if (!dice) {
         dice = [self newDice];
+        nonScoring = NO;
+        nonScoringDice = 0;
     }
     
     if ( (self.areDiceHot) && (nonScoring) ){
@@ -471,7 +477,7 @@ NSInteger finalPoints;
             // check for hotDice
             // all dice must be selected, and all dice must be scoring
             
-            // Check for non-scoring dice. it's ugly, but it works
+            // Check for non-scoring dice. it's ugly, but appears to work
             else if (([unscored[1] intValue] == 1) ||
                      ([unscored[1] intValue] == 2) ||
                      ([unscored[2] intValue] == 1) ||
@@ -482,12 +488,16 @@ NSInteger finalPoints;
                      ([unscored[5] intValue] == 2)
                
                      ) {
+                nonScoringDice++;
                 nonScoring = YES;
-                NSLog(@"NON SCORING DICE");
+                NSLog(@"NON-SCORING DICE: %d", nonScoringDice);
             }
             else {
+                // this never gets called?
                 scored += 0;
+                nonScoringDice--;
                 nonScoring =  NO;
+                NSLog(@"non-scoring dice: %d", nonScoringDice);
             }
         }
     }

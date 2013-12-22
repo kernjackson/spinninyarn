@@ -52,6 +52,8 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
 /*
     if (![defaults objectForKey:@"firstRun"])
         [defaults setObject:[NSDate date] forKey:@"firstRun"];
