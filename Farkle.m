@@ -181,10 +181,8 @@ NSInteger finalPoints;
     if ([turns  isEqual: @11]) {
         NSNumber *temp = [NSNumber numberWithInt:[turns intValue] -1];
         turns = temp;
-        
         return YES;
     } else return NO;
-   // return YES; // this should probably have it's own BOOL flag
 }
 
 - (BOOL)isGameOver {
