@@ -218,6 +218,17 @@
 //    NSLog(@"%ld", (long)[farkle totalPoints]);
 }
 
+- (void)pressPassButton {
+    
+    [UIView transitionWithView:[self passButton]
+                          duration:0.25
+                           options:UIViewAnimationOptionCurveEaseIn |
+         UIViewAnimationOptionAllowUserInteraction animations:^{
+             [self.passButton setTransform:CGAffineTransformMakeScale(0.8, 0.8)];
+         } completion:nil];
+        //NSLog(@"index: %d", index);
+	}
+
 #pragma mark Dice
 
 - (void)newDice {
