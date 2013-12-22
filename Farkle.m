@@ -265,7 +265,6 @@ NSInteger finalPoints;
     return newDice;
 }
 
-// Not sure what to do here? acutally set to nil, or just some value like @0 that will hide the die and not score it
 - (void)clearDice {
     Die *die = [[Die alloc] init];
     for (int i = 0; i <= 5; i++) {
@@ -284,9 +283,9 @@ NSInteger finalPoints;
     }
     
     // This should be in the inherited class Solitaire
-    if (isNewGame) {
-        dice = [self newDice];
-    }
+//    if (isNewGame) {
+//        dice = [self newDice];
+//    }
     
 	for (int i = 0; i <= 5; i++) {
 		if ([[dice objectAtIndex:i] isLocked]) {
@@ -297,15 +296,14 @@ NSInteger finalPoints;
 		}
 	}
     [self logRolled];
-    //	[self setFarkles: [self farkled]];
 }
-
+/*
 - (void)eraseArray:(NSMutableArray *)arrayToErase {
     for (int i = 0; i < 6; i++) {
         [arrayToErase replaceObjectAtIndex:i withObject:0]; // would cause a crash if it was expecting an NSNumber
     }
 }
-
+*/
 #pragma mark Sort & Score
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

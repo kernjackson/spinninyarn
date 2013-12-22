@@ -51,8 +51,6 @@
 - (void)rolled;
 - (void)toggleDie;
 
-- (void)gameLoop;
-
 - (BOOL)isNewGame;
 - (BOOL)isGameOver;
 - (BOOL)canRoll;

@@ -162,7 +162,7 @@
     NSNumber *temp = [NSNumber numberWithInt:[farkle.turns intValue] -1];
     farkle.turns = temp;
     
-    [farkle gameLoop];
+   // [farkle gameLoop];
     [self updateUI];
 }
 
@@ -196,7 +196,7 @@
 
 
 - (void)enablePassButton {
-    Farkle *farkle = [Farkle sharedManager];
+    //Farkle *farkle = [Farkle sharedManager];
 	[self.passButton setEnabled:YES];
 	[self.passButton setAlpha:1.0];
     [self.passButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
@@ -209,7 +209,7 @@
 }
 
 - (void)disablePassButton {
-    Farkle *farkle = [Farkle sharedManager];
+    //Farkle *farkle = [Farkle sharedManager];
 	[self.passButton setEnabled:NO];
     [self.passButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 //	[self.passButton setTitle:[NSString stringWithFormat:@"%ld", (long)[farkle totalPoints]] // was %d
@@ -447,6 +447,7 @@
 
 - (void)gameOver {
     
+    [[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];
 	[self.rollButton setEnabled:NO];
 	[self.HUD setTitle:[NSString stringWithFormat:@"game over"]
               forState:UIControlStateNormal];
@@ -562,6 +563,7 @@
         NSLog(@"disableRollButton");
     }
 */
+    // [self toggleNavBar]; // we want to do this after the deathScreen Animation fires
     
     [self.scoreLabel setText:[NSString stringWithFormat:@"%@", [farkle scoreTitle]]];
  //   NSLog(@"scoreTitle: %ld", (long)[farkle scoreTitle]);
@@ -571,7 +573,7 @@
 //    NSLog(@"passTitle: %@", [farkle passTitle]);
     [self.turnsProgress setProgress:((float)([farkle.turns integerValue] ) / 10) animated:YES];
 }
-/*
+
 #pragma mark Toggle Controls
 
 - (void)toggleNavBar {
@@ -582,7 +584,7 @@
         [self.navigationController setNavigationBarHidden:NO animated:YES];
     } else [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
-
+/*
 - (void)togglePassButton {
     
     Farkle *farkle = [Farkle sharedManager];
