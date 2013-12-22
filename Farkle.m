@@ -90,6 +90,7 @@ NSInteger finalPoints;
         lockedPoints = 0;
         
         isNewGame = YES;
+        nonScoring = YES;
         
         farkles = @0;
         turns = @11; // +1 for roll, +1 for 10 through 1
@@ -168,6 +169,7 @@ NSInteger finalPoints;
     totalPoints = 0;
     previousPoints = 0;
     passTitle = @0;
+    nonScoring = YES; // hmm...
     [self clearDice];
     if (self.isGameOver) {
         NSLog(@"GAMEOVER");
@@ -193,17 +195,21 @@ NSInteger finalPoints;
 }
 
 - (BOOL)canRoll { // add a check for non-scoring dice
-    NSInteger temp = [passTitle integerValue];
-    if ((lockedPoints >= 50) || (isNewGame) || (temp != 0)) { // NSDefaults minimumScore
+    // should also  return NO if nonscoring
+    //NSInteger temp = [passTitle integerValue];
+    if ( ( (lockedPoints >= 50) && (nonScoring)) || (isNewGame)) {
+       // && (nonScoring)) { // NSDefaults minimumScore
         NSLog(@"YES: %d", lockedPoints);
         return YES;
-    } else {
-        NSLog(@"NO: %d", lockedPoints);
-        return NO;
-    }
+    
+  //    if (nonScoring) {
+   //     NSLog(@"NO: %d", lockedPoints);
+   //     return NO;
+    } else return NO;
 }
 
 - (BOOL)canPass {
+    // should also return NO if nonscoring
     NSInteger temp = [passTitle integerValue];
     if ( (temp < 300) || (self.areDiceHot) )
     { // add a check for non-scoring dice
@@ -211,7 +217,7 @@ NSInteger finalPoints;
     } else return YES;
 }
 
-- (bool)areDiceHot {
+- (BOOL)areDiceHot {
     // if all dice are scored return YES
     // else return false
     // how do we check to see if a non scoring die has been selected?

@@ -550,7 +550,7 @@
     if ([farkle canPass]) {
         [self enablePassButton];
     } else [self disablePassButton];
-    
+
     NSLog(@"%hhd", [farkle canRoll]);
 /*
     if (([farkle canRoll]) ||
