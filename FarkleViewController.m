@@ -225,16 +225,24 @@
 }
 
 - (void)hideDice {
-    /*
+    
 	for (int i = 0; i <= 5; i++) {
 		[[_diceButtons objectAtIndex:i] setAlpha:0];
 		[[self.diceButtons objectAtIndex:i] setEnabled:NO];
 		[[self.diceButtons objectAtIndex:i] setSelected:NO];
-		[[self.diceButtons objectAtIndex:i] setTitle:@""
-                                            forState:UIControlStateNormal];
+		//[[self.diceButtons objectAtIndex:i] setTitle:@""
+        //                                    forState:UIControlStateNormal];
 	}
-     */
 }
+
+- (void)disableDice {
+    for (int i = 0; i <= 5; i++) {
+		[[_diceButtons objectAtIndex:i] setAlpha:.1];
+		[[self.diceButtons objectAtIndex:i] setEnabled:NO];
+		[[self.diceButtons objectAtIndex:i] setSelected:YES];
+    }
+}
+
 
 - (void)showDice {
     
@@ -422,15 +430,16 @@
                                                 forState:UIControlStateNormal];
         }
     }
-
+/*
     // is it a new game?
     if ([farkle isNewGame]) {
         //[self clearScreen]; // I think this might be why the first farkle flash doesn't look right
     }
-    
+*/
     if ([farkle didFarkle]) {
+        [self disableDice];
         [self flashScreen];
-        [self hideDice];
+ //       [self hideDice];
         // make dice unselecteable, but still visible
         // change subtotal to 0, which should disable the pass button
     }
@@ -438,7 +447,7 @@
     // is Game Over?
     if ([farkle isGameOver]) {
         
-        [self hideDice];
+ //       [self hideDice];
         [self gameOver];
     }
 
