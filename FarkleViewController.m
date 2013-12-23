@@ -227,7 +227,7 @@
 - (void)hideDice {
     
 	for (int i = 0; i <= 5; i++) {
-		[[_diceButtons objectAtIndex:i] setAlpha:0];
+		[[_diceButtons objectAtIndex:i] setAlpha:0.0];
 		[[self.diceButtons objectAtIndex:i] setEnabled:NO];
 		[[self.diceButtons objectAtIndex:i] setSelected:NO];
 		//[[self.diceButtons objectAtIndex:i] setTitle:@""
@@ -245,15 +245,16 @@
 
 
 - (void)showDice {
-    
+    Farkle *farkle = [Farkle sharedManager];
 	for (int i = 0; i <= 5; i++) {
-		[[_diceButtons objectAtIndex:i] setAlpha:1];
-		[[self.diceButtons objectAtIndex:i] setEnabled:YES];
-		[[self.diceButtons objectAtIndex:i] setSelected:NO];
-		[[self.diceButtons objectAtIndex:i] setTitle:@""
-                                            forState:UIControlStateNormal];
+        if (![[farkle.dice objectAtIndex:i] isLocked]) {
+            [[_diceButtons objectAtIndex:i] setAlpha:1];
+            [[self.diceButtons objectAtIndex:i] setEnabled:YES];
+            [[self.diceButtons objectAtIndex:i] setSelected:NO];
+            [[self.diceButtons objectAtIndex:i] setTitle:@"s"
+                                                forState:UIControlStateNormal];
+        }
 	}
-    
 }
 
 - (void)clearDice {
@@ -262,7 +263,7 @@
 		[[_diceButtons objectAtIndex:i] setAlpha:1];
 		[[self.diceButtons objectAtIndex:i] setEnabled:NO];
 		[[self.diceButtons objectAtIndex:i] setSelected:NO];
-		[[self.diceButtons objectAtIndex:i] setTitle:@""
+		[[self.diceButtons objectAtIndex:i] setTitle:@"c"
                                             forState:UIControlStateNormal];
 		[[self.diceButtons objectAtIndex:i] setEnabled:NO]; // ???
 	}
