@@ -138,6 +138,7 @@
 	[self.HUD setEnabled:NO];
 	[self.HUD setTitle:[NSString stringWithFormat:@""]
               forState:UIControlStateNormal];
+    [self.rollButton setSelected:NO];
 	[self.rollButton setEnabled:YES];
 	[self clearScreen];
 	self.scoreLabel.textColor = [UIColor blackColor];
@@ -146,33 +147,6 @@
     [farkle newGame];
     
 	[self updateUI]; // hotDice causes a crash because there is nothing in the array
-}
-
-- (void)endTurn {
-    Farkle *farkle = [Farkle sharedManager];
-    
-    // [Farkle score:rolled] here
-    
-    // decrement turns by 1
-    NSNumber *temp = [NSNumber numberWithInt:[farkle.turns intValue] -1];
-    farkle.turns = temp;
-    
-   // [farkle gameLoop];
-    [self updateUI];
-}
-
-- (void)farkled {
-    Farkle *farkle = [Farkle sharedManager];
-    
-    // Farkle.m will return 0 if player farkles
-    
-    // decrement turns by 1
-    NSNumber *temp = [NSNumber numberWithInt:[farkle.turns intValue] -1];
-    farkle.turns = temp;
-}
-
-- (void)didWin {
-    // is score > 10,000?
 }
 
 #pragma mark Pass
@@ -463,7 +437,7 @@
     }
 
     [self togglePassButton];
-    [self toggleRollButton];
+//    [self toggleRollButton];
 
     NSLog(@"%hhd", [farkle canRoll]);
 
