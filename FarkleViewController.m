@@ -225,6 +225,7 @@
 }
 
 - (void)hideDice {
+    /*
 	for (int i = 0; i <= 5; i++) {
 		[[_diceButtons objectAtIndex:i] setAlpha:0];
 		[[self.diceButtons objectAtIndex:i] setEnabled:NO];
@@ -232,9 +233,11 @@
 		[[self.diceButtons objectAtIndex:i] setTitle:@""
                                             forState:UIControlStateNormal];
 	}
+     */
 }
 
 - (void)showDice {
+    
 	for (int i = 0; i <= 5; i++) {
 		[[_diceButtons objectAtIndex:i] setAlpha:1];
 		[[self.diceButtons objectAtIndex:i] setEnabled:YES];
@@ -242,9 +245,11 @@
 		[[self.diceButtons objectAtIndex:i] setTitle:@""
                                             forState:UIControlStateNormal];
 	}
+    
 }
 
 - (void)clearDice {
+    
 	for (int i = 0; i <= 5; i++) {
 		[[_diceButtons objectAtIndex:i] setAlpha:1];
 		[[self.diceButtons objectAtIndex:i] setEnabled:NO];
@@ -253,6 +258,7 @@
                                             forState:UIControlStateNormal];
 		[[self.diceButtons objectAtIndex:i] setEnabled:NO]; // ???
 	}
+    
 }
 
 // replace this with 3d cubes behind, etc...
@@ -419,7 +425,7 @@
 
     // is it a new game?
     if ([farkle isNewGame]) {
-        [self clearScreen]; // I think this might be why the first farkle flash doesn't look right
+        //[self clearScreen]; // I think this might be why the first farkle flash doesn't look right
     }
     
     if ([farkle didFarkle]) {
