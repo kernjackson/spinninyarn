@@ -181,7 +181,7 @@ NSInteger finalPoints;
     // clear dice here
 }
 
-#pragma mark Check Game State
+#pragma mark State
 
 - (BOOL)isNewGame {
     if ([turns  isEqual: @11]) {
@@ -288,11 +288,6 @@ NSInteger finalPoints;
         dice = [self newDice];
     }
     
-    // This should be in the inherited class Solitaire
-//    if (isNewGame) {
-//        dice = [self newDice];
-//    }
-    
 	for (int i = 0; i <= 5; i++) {
 		if ([[dice objectAtIndex:i] isLocked]) {
 			[[dice objectAtIndex:i] setScored:YES];
@@ -303,16 +298,8 @@ NSInteger finalPoints;
 	}
     [self logRolled];
 }
-/*
-- (void)eraseArray:(NSMutableArray *)arrayToErase {
-    for (int i = 0; i < 6; i++) {
-        [arrayToErase replaceObjectAtIndex:i withObject:0]; // would cause a crash if it was expecting an NSNumber
-    }
-}
-*/
-#pragma mark Sort & Score
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark Score
 
 - (NSInteger)scoreRolled {
     // make a temporary array
@@ -370,9 +357,6 @@ NSInteger finalPoints;
     }
     return scoredPoints = [self score:[self sort:temp]];
 }
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // 121345 == 211110, 443564 == 001311, etc
 - (NSArray *)sort:(NSMutableArray *)unsorted {

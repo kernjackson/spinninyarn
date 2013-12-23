@@ -431,18 +431,10 @@
                                                 forState:UIControlStateNormal];
         }
     }
-/*
-    // is it a new game?
-    if ([farkle isNewGame]) {
-        //[self clearScreen]; // I think this might be why the first farkle flash doesn't look right
-    }
-*/
+
     if ([farkle didFarkle]) {
         [self disableDice];
         [self flashScreen];
- //       [self hideDice];
-        // make dice unselecteable, but still visible
-        // change subtotal to 0, which should disable the pass button
     }
     
     // is Game Over?
@@ -457,7 +449,7 @@
 
     NSLog(@"%hhd", [farkle canRoll]);
 
-    // [self toggleNavBar]; // we want to do this after the deathScreen Animation fires
+    //[self toggleNavBar]; // we want to do this after the deathScreen Animation fires
     
     [self.scoreLabel setText:[NSString stringWithFormat:@"%@", [farkle scoreTitle]]];
     
