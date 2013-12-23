@@ -51,7 +51,12 @@
     [mSwipeUpRecognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
     [[self view] addGestureRecognizer:mSwipeUpRecognizer];
     
-    //[[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];
+    
+//    self.navigationController.navigationBar.translucent = NO;
+//    [[UINavigationBar appearance] setTranslucent:NO];
+//    [[UINavigationBar appearance] setBarTintColor:[UIColor redColor]];
+//    [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -449,7 +454,7 @@
 
     NSLog(@"%hhd", [farkle canRoll]);
 
-    //[self toggleNavBar]; // we want to do this after the deathScreen Animation fires
+//    [self toggleNavBar]; // we want to do this after the deathScreen Animation fires
     
     [self.scoreLabel setText:[NSString stringWithFormat:@"%@", [farkle scoreTitle]]];
     

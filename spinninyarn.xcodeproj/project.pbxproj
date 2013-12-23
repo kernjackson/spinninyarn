@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		482F7D781867E77A007B4B11 /* redNavbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 482F7D771867E77A007B4B11 /* redNavbar.png */; };
 		48610A201854C38B001BF7FF /* FarkleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 48610A1F1854C38B001BF7FF /* FarkleViewController.m */; };
 		489185891843EA8900D66EE6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 489185881843EA8900D66EE6 /* Foundation.framework */; };
 		4891858B1843EA8900D66EE6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4891858A1843EA8900D66EE6 /* CoreGraphics.framework */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		482F7D771867E77A007B4B11 /* redNavbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redNavbar.png; sourceTree = "<group>"; };
 		48610A1E1854C38B001BF7FF /* FarkleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FarkleViewController.h; sourceTree = "<group>"; };
 		48610A1F1854C38B001BF7FF /* FarkleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FarkleViewController.m; sourceTree = "<group>"; };
 		489185851843EA8900D66EE6 /* spinninyarn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = spinninyarn.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,6 +106,7 @@
 		4891857C1843EA8900D66EE6 = {
 			isa = PBXGroup;
 			children = (
+				482F7D771867E77A007B4B11 /* redNavbar.png */,
 				489185D51843F3BD00D66EE6 /* Model */,
 				489185CA1843F11600D66EE6 /* Controllers */,
 				4891858E1843EA8900D66EE6 /* spinninyarn */,
@@ -279,6 +282,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				482F7D781867E77A007B4B11 /* redNavbar.png in Resources */,
 				4891859F1843EA8900D66EE6 /* Main_iPad.storyboard in Resources */,
 				489185A41843EA8900D66EE6 /* Images.xcassets in Resources */,
 				4891859C1843EA8900D66EE6 /* Main_iPhone.storyboard in Resources */,
