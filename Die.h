@@ -15,7 +15,6 @@
 @property (nonatomic) NSNumber *sideValue;
 @property (strong, nonatomic) NSString *sideUp;
 
-@property (nonatomic, getter = isPlayed) BOOL played;
 @property (nonatomic, getter = isLocked) BOOL locked;
 @property (nonatomic, getter = isScored) BOOL scored;
 
